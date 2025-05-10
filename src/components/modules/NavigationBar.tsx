@@ -39,7 +39,7 @@ const NavigationBar: React.FC = () => {
   const navbarHeight = 'h-20';
 
   // モバイルメニュー用のグラスモーフィズムスタイル (シンプルに)
-  const menuGlassmorphismStyle = 'bg-white/80 backdrop-filter backdrop-blur-xl shadow-xl border-t border-gray-200/30';
+  const menuGlassmorphismStyle = 'bg-white/10 backdrop-filter backdrop-blur-md shadow-xl border-t border-gray-200/30';
 
 
   useEffect(() => {

@@ -1,7 +1,6 @@
 // src/components/sections/HeroSection.tsx
 import React from 'react';
 import SectionHeading from '@/components/elements/SectionHeading';
-import Button from '@/components/elements/Button'; // Buttonコンポーネントのパスを確認してください
 // 背景コンポーネントを使う場合はインポート
 // import BalatroBackground from '@/components/backgrounds/BalatroBackground';
 
@@ -27,7 +26,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
       id={id}
       // 背景色を削除し、半透明色 + ぼかし + ボーダー を追加
       // シンプルなグラスモーフィズムスタイル
-      className={`relative w-full min-h-[80vh] md:min-h-screen lg:h-[100vh] flex items-center justify-center text-center px-6 py-20 md:py-32`}
+      className={`relative w-full min-h-screen lg:h-[100vh] flex items-center justify-center text-center px-6 py-20 md:py-32`}
     >
       {/* コンテンツラッパー */}
       <div className="relative z-10 max-w-3xl mx-auto"> {/* max-w と mx-auto で中央寄せ */}
@@ -43,28 +42,6 @@ const HeroSection: React.FC<HeroSectionProps> = ({
             textColor={heroTextColor}
             descriptionClassName={`text-base md:text-lg lg:text-xl ${descriptionTextColor} max-w-xl mx-auto`} // サイズ調整と中央寄せ
         />
-
-        {/* CTAボタン: グラスモーフィズム上で見やすいスタイル例 */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8 md:mt-10">
-          <Button
-            text="お問い合わせ"
-            // href="/contact" // href を削除し、onClickでモーダルを開くことを想定 (ModalContextを使用)
-            // onClick={openModal} // ModalContextから取得したopenModal関数を設定
-            size="lg"
-            // スタイルを調整: より目立つプライマリボタン風
-            className="bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg w-full sm:w-auto"
-            // noAnimation={true} // アニメーションはお好みで
-           />
-          <Button
-            text="サービス詳細"
-            href="#service" // ページ内リンクの例
-            size="lg"
-            // 修正点: variantプロパティを削除し、classNameでスタイルを定義
-            // セカンダリボタン風のスタイル
-            className="bg-white/20 hover:bg-white/30 border border-white/50 text-gray-900 backdrop-blur-sm w-full sm:w-auto"
-            // noAnimation={true}
-           />
-        </div>
       </div>
     </section>
   );
