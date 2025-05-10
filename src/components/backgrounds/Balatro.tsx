@@ -1,6 +1,8 @@
 // src/components/backgrounds/Balatro.tsx
 "use client";
 
+// 修正点: Triangle の未使用エラーを抑制するためにESLintのルールを一時的に無効化
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Renderer, Program, Mesh, Triangle } from "ogl";
 import { useEffect, useRef } from "react";
 
@@ -42,7 +44,7 @@ function hexToVec4(hex: string): [number, number, number, number] {
   return [r, g, b, a];
 }
 
-// Vertex Shader
+// Vertex Shader (defined outside component to ensure it's constant)
 const vertexShader = `
 attribute vec2 uv;
 attribute vec2 position;
@@ -53,7 +55,7 @@ void main() {
 }
 `;
 
-// Fragment Shader
+// Fragment Shader (defined outside component to ensure it's constant)
 const fragmentShader = `
 precision highp float;
 
@@ -96,7 +98,6 @@ vec4 effect(vec2 screenSize, vec2 screen_coords) {
     uv = (vec2(uv_len * cos(new_pixel_angle) + mid.x, uv_len * sin(new_pixel_angle) + mid.y) - mid);
     
     uv *= 30.0;
-    
     float basePatternSpeed = iTime * uSpinSpeed;
     float patternSpeed = basePatternSpeed + mouseInfluenceX * 2.0;
     
@@ -156,31 +157,14 @@ export default function Balatro({
     const gl = renderer.gl;
     gl.clearColor(0, 0, 0, 0);
 
-    // 修正点: let で宣言し、ESLintの prefer-const ルールをこの行だけ無効にする
-    // eslint-disable-next-line prefer-const
-    let program: Program; 
-
-    function resize() {
-      if (!container) return;
-      renderer.setSize(container.offsetWidth, container.offsetHeight);
-      if (program && program.uniforms.iResolution) {
-        program.uniforms.iResolution.value = [
-          gl.canvas.width,
-          gl.canvas.height,
-          gl.canvas.width / gl.canvas.height,
-        ];
-      }
-    }
-    window.addEventListener("resize", resize);
-    resize();
-
-    program = new Program(gl, { // ここで program に値が代入される
+    // program を const で宣言し、初期化をここで行う
+    const program = new Program(gl, { // Create OGL Program
       vertex: vertexShader,
       fragment: fragmentShader,
       uniforms: {
         iTime: { value: 0 },
         iResolution: {
-          value: [
+          value: [ // Initial resolution
             gl.canvas.width,
             gl.canvas.height,
             gl.canvas.width / gl.canvas.height,
@@ -202,21 +186,35 @@ export default function Balatro({
       },
     });
 
+    // Resize handler function
+    function resize() {
+      if (!container) return;
+      renderer.setSize(container.offsetWidth, container.offsetHeight);
+      program.uniforms.iResolution.value = [
+        gl.canvas.width,
+        gl.canvas.height,
+        gl.canvas.width / gl.canvas.height,
+      ];
+    }
+    window.addEventListener("resize", resize);
+    resize(); // programが初期化された後にresizeを呼び出す
+
+    const geometry = new Triangle(gl); // Triangle はここで使用されています
     const mesh = new Mesh(gl, { geometry, program });
+
     let animationFrameId: number;
 
     function update(time: number) {
       animationFrameId = requestAnimationFrame(update);
-      if (program && program.uniforms.iTime) {
-          program.uniforms.iTime.value = time * 0.001;
-      }
+      program.uniforms.iTime.value = time * 0.001;
       renderer.render({ scene: mesh });
     }
     animationFrameId = requestAnimationFrame(update);
+
     container.appendChild(gl.canvas);
 
     function handleMouseMove(e: MouseEvent) {
-      if (!mouseInteraction || !container || !program || !program.uniforms.uMouse) return;
+      if (!mouseInteraction || !container) return;
       const rect = container.getBoundingClientRect();
       const x = (e.clientX - rect.left) / rect.width;
       const y = 1.0 - (e.clientY - rect.top) / rect.height;
@@ -240,7 +238,7 @@ export default function Balatro({
         loseContextExt.loseContext();
       }
     };
-  }, [
+  }, [ // useEffect dependencies
     spinRotation,
     spinSpeed,
     offset,
@@ -254,6 +252,8 @@ export default function Balatro({
     spinEase,
     isRotate,
     mouseInteraction
+    // vertexShader と fragmentShader はコンポーネント外で定義されているため、
+    // propsやstateによって変化しない限り、依存配列に含める必要はありません。
   ]);
 
   return <div ref={containerRef} className="w-full h-full" />;
