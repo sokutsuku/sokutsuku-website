@@ -1,12 +1,7 @@
-// src/data/topPageData.tsx
 
-// --- 既存のインポート ---
-// CardData のインポート元を CardGridSection ではなく Card に修正 (より適切)
-// import { CardData } from '@/components/modules/CardGrid'; // ← 修正前？
-// CardProps (CardDataで使う) を Card からインポート
 import { CardProps } from '@/components/modules/Card';
 // アイコンのインポート
-import { BeakerIcon, LightBulbIcon, UserGroupIcon, ChartBarIcon, AdjustmentsHorizontalIcon, CircleStackIcon, MegaphoneIcon, CursorArrowRaysIcon } from "@heroicons/react/24/outline";
+import { BeakerIcon, UserGroupIcon, ChartBarIcon, AdjustmentsHorizontalIcon, MegaphoneIcon, CursorArrowRaysIcon } from "@heroicons/react/24/outline";
 import { AccordionItemData } from '@/components/modules/Accordion';
 import { ChatBubbleLeftRightIcon, MagnifyingGlassIcon, CommandLineIcon, CogIcon, PaintBrushIcon, ScaleIcon } from "@heroicons/react/24/outline";
 

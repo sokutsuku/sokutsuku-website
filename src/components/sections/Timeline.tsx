@@ -1,7 +1,7 @@
 import React from "react";
 import SectionHeading from "@/components/elements/SectionHeading";
 import TimelineItemCard from "@/components/modules/TimelineItemCard";
-import { timelineStepsData, TimelineStepData } from "@/data/topPageData";
+import { timelineStepsData } from "@/data/topPageData";
 
 const TimelineSection = () => {
   const sectionId = "timeline";

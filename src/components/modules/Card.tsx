@@ -21,7 +21,6 @@ const Card: React.FC<CardProps> = ({
   icon,
   title,
   content,
-  backgroundColor, // グラスモーフィズムを適用するため、このPropは直接の背景色としては使用されません。
   textColor,
   scrollText = 'scroll...',
   className = '',

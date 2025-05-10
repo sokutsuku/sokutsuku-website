@@ -6,7 +6,6 @@ import { FeatureItemData } from '@/components/modules/FeatureListItem';
 
 const WhySokutsukuSection = () => {
   const sectionId = "why-sokutsuku";
-  const sectionTitle = "Why Sokutsuku";
 
   return (
     <section id={sectionId} className="py-24 md:py-32 bg-white">

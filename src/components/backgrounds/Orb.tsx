@@ -1,3 +1,4 @@
+// src/components/backgrounds/Orb.tsx
 import { useEffect, useRef } from "react";
 import { Renderer, Program, Mesh, Triangle, Vec3 } from "ogl";
 
@@ -16,6 +17,7 @@ export default function Orb({
 }: OrbProps) {
   const ctnDom = useRef<HTMLDivElement>(null);
 
+  // Vertex Shader
   const vert = /* glsl */ `
     precision highp float;
     attribute vec2 position;
@@ -27,6 +29,7 @@ export default function Orb({
     }
   `;
 
+  // Fragment Shader
   const frag = /* glsl */ `
     precision highp float;
 
@@ -181,14 +184,14 @@ export default function Orb({
 
     const renderer = new Renderer({ alpha: true, premultipliedAlpha: false });
     const gl = renderer.gl;
-    gl.clearColor(0, 0, 0, 0);
-    container.appendChild(gl.canvas);
+    gl.clearColor(0, 0, 0, 0); // Set clear color to transparent
+    container.appendChild(gl.canvas); // Append canvas to the container
 
-    const geometry = new Triangle(gl);
+    // Create OGL Program
     const program = new Program(gl, {
-      vertex: vert,
-      fragment: frag,
-      uniforms: {
+      vertex: vert,     // Vertex shader source
+      fragment: frag,   // Fragment shader source
+      uniforms: {       // Uniforms to pass to shaders
         iTime: { value: 0 },
         iResolution: {
           value: new Vec3(
@@ -204,31 +207,36 @@ export default function Orb({
       },
     });
 
+    // Create a triangle mesh
+    const geometry = new Triangle(gl);
     const mesh = new Mesh(gl, { geometry, program });
 
+    // Resize handler
     function resize() {
       if (!container) return;
       const dpr = window.devicePixelRatio || 1;
       const width = container.clientWidth;
       const height = container.clientHeight;
-      renderer.setSize(width * dpr, height * dpr);
-      gl.canvas.style.width = width + "px";
+      renderer.setSize(width * dpr, height * dpr); // Set renderer size
+      gl.canvas.style.width = width + "px";       // Set canvas display size
       gl.canvas.style.height = height + "px";
-      program.uniforms.iResolution.value.set(
+      program.uniforms.iResolution.value.set(     // Update resolution uniform
         gl.canvas.width,
         gl.canvas.height,
         gl.canvas.width / gl.canvas.height
       );
     }
-    window.addEventListener("resize", resize);
-    resize();
+    window.addEventListener("resize", resize); // Attach resize listener
+    resize(); // Initial resize
 
-    let targetHover = 0;
-    let lastTime = 0;
-    let currentRot = 0;
-    const rotationSpeed = 0.3; // radians per second
+    let targetHover = 0; // Target hover state (0 or 1)
+    let lastTime = 0;    // For delta time calculation
+    let currentRot = 0;  // Current rotation angle
+    const rotationSpeed = 0.3; // Rotation speed in radians per second
 
+    // Mouse move handler
     const handleMouseMove = (e: MouseEvent) => {
+      if (!container) return;
       const rect = container.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
@@ -240,6 +248,7 @@ export default function Orb({
       const uvX = ((x - centerX) / size) * 2.0;
       const uvY = ((y - centerY) / size) * 2.0;
 
+      // Check if mouse is within a certain radius to trigger hover
       if (Math.sqrt(uvX * uvX + uvY * uvY) < 0.8) {
         targetHover = 1;
       } else {
@@ -247,43 +256,55 @@ export default function Orb({
       }
     };
 
+    // Mouse leave handler
     const handleMouseLeave = () => {
-      targetHover = 0;
+      targetHover = 0; // Reset hover state when mouse leaves
     };
 
-    container.addEventListener("mousemove", handleMouseMove);
-    container.addEventListener("mouseleave", handleMouseLeave);
+    container.addEventListener("mousemove", handleMouseMove); // Attach mousemove listener
+    container.addEventListener("mouseleave", handleMouseLeave); // Attach mouseleave listener
 
-    let rafId: number;
+    let rafId: number; // RequestAnimationFrame ID
+    // Animation loop
     const update = (t: number) => {
-      rafId = requestAnimationFrame(update);
-      const dt = (t - lastTime) * 0.001;
+      rafId = requestAnimationFrame(update); // Request next frame
+      const dt = (t - lastTime) * 0.001; // Calculate delta time in seconds
       lastTime = t;
-      program.uniforms.iTime.value = t * 0.001;
-      program.uniforms.hue.value = hue;
-      program.uniforms.hoverIntensity.value = hoverIntensity;
+      program.uniforms.iTime.value = t * 0.001; // Update time uniform
+      program.uniforms.hue.value = hue;         // Update hue uniform
+      program.uniforms.hoverIntensity.value = hoverIntensity; // Update hover intensity
 
+      // Determine effective hover state (forceHoverState overrides mouse hover)
       const effectiveHover = forceHoverState ? 1 : targetHover;
+      // Smoothly transition current hover uniform towards target hover
       program.uniforms.hover.value += (effectiveHover - program.uniforms.hover.value) * 0.1;
 
+      // Rotate if rotateOnHover is true and orb is effectively hovered
       if (rotateOnHover && effectiveHover > 0.5) {
         currentRot += dt * rotationSpeed;
       }
-      program.uniforms.rot.value = currentRot;
+      program.uniforms.rot.value = currentRot; // Update rotation uniform
 
-      renderer.render({ scene: mesh });
+      renderer.render({ scene: mesh }); // Render the scene
     };
-    rafId = requestAnimationFrame(update);
+    rafId = requestAnimationFrame(update); // Start animation loop
 
+    // Cleanup function
     return () => {
-      cancelAnimationFrame(rafId);
-      window.removeEventListener("resize", resize);
-      container.removeEventListener("mousemove", handleMouseMove);
-      container.removeEventListener("mouseleave", handleMouseLeave);
-      container.removeChild(gl.canvas);
+      cancelAnimationFrame(rafId); // Stop animation loop
+      window.removeEventListener("resize", resize); // Remove resize listener
+      if (container) { // Check if container still exists before removing listeners
+        container.removeEventListener("mousemove", handleMouseMove);
+        container.removeEventListener("mouseleave", handleMouseLeave);
+        if (gl.canvas && container.contains(gl.canvas)) { // Check if canvas is still a child
+            container.removeChild(gl.canvas);
+        }
+      }
+      // Attempt to lose WebGL context
       gl.getExtension("WEBGL_lose_context")?.loseContext();
     };
-  }, [hue, hoverIntensity, rotateOnHover, forceHoverState]);
+  // 修正点: useEffectの依存配列に vert と frag を追加
+  }, [hue, hoverIntensity, rotateOnHover, forceHoverState, vert, frag]);
 
   return <div ref={ctnDom} className="w-full h-full" />;
 }
