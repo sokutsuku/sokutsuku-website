@@ -2,7 +2,6 @@
 'use client';
 
 import NavigationBar from '@/components/modules/NavigationBar';
-import BalatroBackground from '@/components/backgrounds/Balatro';
 import OrbBackground from '@/components/backgrounds/Orb';
 import HeroSection from '@/components/sections/Hero';
 import ProblemSection from '@/components/sections/Problem'; // ★ ProblemSection をインポート

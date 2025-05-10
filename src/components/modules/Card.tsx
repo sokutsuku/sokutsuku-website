@@ -61,8 +61,8 @@ const Card: React.FC<CardProps> = ({
   // --- 5. レイアウト関連のスタイル決定 (変更なし) ---
   let contentAlignment = 'flex-col space-y-3';
   let padding = 'p-6'; // グラスモーフィズムに合わせて少しパディングを増やす例
-  let showTextContent = variant === 'default';
-  let showScrollPrompt = variant === 'scroll';
+  const showTextContent = variant === 'default';
+  const showScrollPrompt = variant === 'scroll';
   switch (variant) {
     case 'accent':
     case 'placeholder':
