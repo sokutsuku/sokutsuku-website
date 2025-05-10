@@ -1,0 +1,2 @@
+# sokutsuku-website
+sokutsukuサービスの公式ランディングページ兼サービス紹介サイトです。
