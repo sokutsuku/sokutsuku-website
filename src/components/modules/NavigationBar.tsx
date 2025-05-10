@@ -39,9 +39,7 @@ const NavigationBar: React.FC = () => {
   const navbarHeight = 'h-20';
 
   // グラスモーフィズムスタイル (よりシンプルに、色味をなくす)
-  // ナビゲーションバー本体: 透明度を少し上げ、境界線を細く
   const navbarGlassmorphismStyle = 'bg-white/10 backdrop-filter backdrop-blur-md border-b border-white/20';
-  // モバイルメニュー: 透明度とぼかしを調整
   const menuGlassmorphismStyle = 'bg-white/30 backdrop-filter backdrop-blur-xl shadow-xl';
 
 
@@ -155,7 +153,8 @@ const NavigationBar: React.FC = () => {
                   handleFreeConsultationClick();
                   closeMobileMenu();
                 }}
-                textSize={18}
+                // 修正点: textSizeをTextSizeKeyで許容されている値に変更 (例: 16 or 20)
+                textSize={16}
                 size="lg"
                 className="w-auto block text-center text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg px-8 py-3" // ボタンのスタイルは維持
                 noAnimation={true}

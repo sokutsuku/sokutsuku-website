@@ -5,7 +5,8 @@ interface TimelineItemCardProps {
   number: string;         // 番号 ("01", "02" など2桁の文字列を想定)
   title: string;
   description: string;
-  // numberColor Prop は各桁で色が決まるため削除
+  numberColor?: string;  // ★ numberColor プロパティをオプショナルで追加 (Tailwindのクラス名を想定)
+  isActive?: boolean;    // isActiveプロパティも追加（TimelineSectionで使われているため）
   className?: string;
 }
 
@@ -13,6 +14,8 @@ const TimelineItemCard: React.FC<TimelineItemCardProps> = ({
   number, // 例: "01"
   title,
   description,
+  numberColor, // ★ 受け取った numberColor を使用
+  isActive,    // ★ 受け取った isActive を使用 (現在はスタイルに直接影響させていませんが、将来的に利用可能)
   className = '',
 }) => {
 
@@ -20,19 +23,21 @@ const TimelineItemCard: React.FC<TimelineItemCardProps> = ({
   const firstDigit = number.length > 0 ? number[0] : '';  // "0"
   const secondDigit = number.length > 1 ? number[1] : ''; // "1"
 
+  // 数字の色を決定
+  // numberColorが指定されていればそれを使い、なければデフォルトの桁ごとの色分け
+  const digitOneColorClass = numberColor ? numberColor : 'text-gray-300';
+  const digitTwoColorClass = numberColor ? numberColor : 'text-[#1342F0]';
+
   return (
-    // カード全体: 白背景, 角丸なし, PC高70vh, パディング, Flex縦積み
-    <div className={`relative bg-white shadow-sm p-4 lg:h-[75vh] flex flex-col ${className}`}>
+    // カード全体: isActive状態に応じてスタイルを変更する例も追加
+    <div className={`relative bg-white dark:bg-gray-700 shadow-sm p-4 lg:h-[75vh] flex flex-col transition-all duration-300 ease-in-out ${isActive ? 'ring-2 ring-indigo-500 scale-105' : 'ring-1 ring-gray-200 dark:ring-gray-600'} ${className}`}>
 
         {/* === 上部: 番号表示エリア === */}
         <div className="flex-shrink-0 mb-4">
-           {/* ★ 数字の背景 div を削除 */}
-           {/* ★ h2 を Flex コンテナにして、中に span を 2つ配置 */}
            <h2 className="flex text-[6rem] md:text-[8rem] lg:text-[10rem] font-bold leading-none tracking-tighter">
-             {/* 1桁目 (グレー) */}
-             <span className="text-gray-300">{firstDigit}</span>
-             {/* 2桁目 (青) */}
-             <span className="text-[#1342F0]">{secondDigit}</span>
+             {/* ★ numberColorが指定されていればそれを適用、なければデフォルト */}
+             <span className={digitOneColorClass}>{firstDigit}</span>
+             <span className={digitTwoColorClass}>{secondDigit}</span>
            </h2>
         </div>
 
@@ -40,13 +45,14 @@ const TimelineItemCard: React.FC<TimelineItemCardProps> = ({
         <div className="flex-grow"></div>
 
         {/* === 下部: タイトル & 説明文 === */}
-        <div className={`relative lg:h-[14rem] flex flex-col ${className}`}>
+        {/* classNameが重複していたので修正 */}
+        <div className={`relative lg:h-[14rem] flex flex-col`}>
           {/* タイトル */}
-          <h3 className="text-xl font-semibold text-gray-900 mb-2">
+          <h3 className={`text-xl font-semibold mb-2 ${isActive ? 'text-indigo-700 dark:text-indigo-400' : 'text-gray-900 dark:text-white'}`}>
             {title}
           </h3>
           {/* 説明文 */}
-          <p className="text-sm text-gray-600 whitespace-pre-line">
+          <p className={`text-sm ${isActive ? 'text-gray-700 dark:text-gray-300' : 'text-gray-600 dark:text-gray-400'} whitespace-pre-line`}>
             {description}
           </p>
         </div>
