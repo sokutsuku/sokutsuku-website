@@ -9,7 +9,7 @@ export interface CardProps {
   icon?: React.ReactNode;
   title?: string;
   content?: string | React.ReactNode;
-  backgroundColor?: string; // グラスモーフィズム適用時は、この色は直接使われませんが、将来的な拡張のために残します
+  // backgroundColor?: string;
   textColor?: string;
   scrollText?: string;
   className?: string;
@@ -21,6 +21,7 @@ const Card: React.FC<CardProps> = ({
   icon,
   title,
   content,
+  // backgroundColor,
   textColor,
   scrollText = 'scroll...',
   className = '',
@@ -40,15 +41,6 @@ const Card: React.FC<CardProps> = ({
   let contentColorClass = textColor || 'text-slate-900'; // グラス上のデフォルト内容色
   let scrollPromptColorClass = textColor || 'text-slate-900'; // scroll variant の文字/アイコン色
 
-  // --- Variant に応じた色の調整 (グラスモーフィズム用に調整) ---
-  // variant による細かい色の変化は、グラスモーフィズムの見た目を損なう可能性があるため、
-  // textColor Prop での調整を優先します。
-  // ここでは、variant 固有の特別な色の調整は行わず、上記の汎用色を使用します。
-  // もし variant ごとにグラスモーフィズムの色調を変えたい場合は、ここや glassmorphismClasses を調整します。
-
-  // --- 4. textColor Prop があれば全て上書き (既存ロジックを尊重) ---
-  // 上記のデフォルト色設定で既に textColor を考慮していますが、
-  // より明示的に textColor が指定された場合の色を適用します。
   if (textColor) {
     iconColorClass = textColor;
     titleColorClass = textColor;

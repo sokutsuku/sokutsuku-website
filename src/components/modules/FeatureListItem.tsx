@@ -44,10 +44,6 @@ const useFeatureScrollAnimation = (itemCount: number): {
       // 各項目に対応するスクロール進行度の区切りを追加
       const progressPoint = i / itemCount;
       finalScrollPoints.push(progressPoint);
-
-      // その区切りで表示したい番号に対応するY座標を追加
-      // 最初のフィーチャー(i=1)では "00" がまだ表示されているため、Y座標は0%のまま
-      // 次のフィーチャー(i=2)から、前の番号分スクロールアップする
       const yPercentage = -((i - 1) * yStep);
       finalYTransforms.push(`${yPercentage}%`);
     }
@@ -74,12 +70,6 @@ const FeatureScrollSection: React.FC<FeatureScrollSectionProps> = ({
   const { ref: scrollRef, y: scrollY } = useFeatureScrollAnimation(validFeatures.length);
 
   const animatedNumbers = validFeatures.length > 0 ? ["00", ...validFeatures.map(f => f.number)] : ["00"]; // featuresが空でも "00" は表示
-
-  // validFeaturesが空でもセクション自体は表示する（背景や最小限の構造のため）
-  // もし完全に何も表示したくない場合は、ここでnullを返すなどの処理も可能
-  // if (validFeatures.length === 0) {
-  //   return null;
-  // }
 
   return (
     <section
