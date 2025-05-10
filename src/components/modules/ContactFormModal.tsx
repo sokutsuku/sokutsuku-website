@@ -72,7 +72,7 @@ const ContactFormModal: React.FC<ContactFormModalProps> = ({ isOpen, onClose }) 
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-md p-4 transition-opacity duration-300 ease-in-out"
+      className="fixed inset-0 z-500 flex items-center justify-center bg-black/70 backdrop-blur-md p-4 transition-opacity duration-300 ease-in-out"
       onClick={onClose}
       role="dialog"
       aria-modal="true"
