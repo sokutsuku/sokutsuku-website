@@ -22,7 +22,7 @@ const navLinks: NavLinkItem[] = [
 const NavigationBar: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { openModal } = useModal();
-  const menuRef = useRef<HTMLDivElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null); // モバイルメニューのコンテンツエリアへの参照
 
   const handleFreeConsultationClick = () => {
     openModal();
@@ -38,9 +38,8 @@ const NavigationBar: React.FC = () => {
 
   const navbarHeight = 'h-20';
 
-  // グラスモーフィズムスタイル (よりシンプルに、色味をなくす)
-  const navbarGlassmorphismStyle = 'bg-white/10 backdrop-filter backdrop-blur-md border-b border-white/20';
-  const menuGlassmorphismStyle = 'bg-white/30 backdrop-filter backdrop-blur-xl shadow-xl';
+  // モバイルメニュー用のグラスモーフィズムスタイル (シンプルに)
+  const menuGlassmorphismStyle = 'bg-white/80 backdrop-filter backdrop-blur-xl shadow-xl border-t border-gray-200/30';
 
 
   useEffect(() => {
@@ -58,7 +57,8 @@ const NavigationBar: React.FC = () => {
   return (
     <>
       {/* Navigation Bar Area */}
-      <nav className={`fixed w-full z-40 top-0 left-0 transition-colors duration-300 ease-in-out ${navbarHeight} ${isMobileMenuOpen ? 'bg-transparent border-transparent' : navbarGlassmorphismStyle}`}>
+      {/* 修正点: PCビューでは背景透明、ボーダーなし。モバイルメニュー表示時も透明のまま。 */}
+      <nav className={`fixed w-full z-40 top-0 left-0 transition-colors duration-300 ease-in-out ${navbarHeight} bg-transparent border-transparent`}>
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
           <div className="flex items-center justify-between h-full">
             {/* Logo */}
@@ -77,7 +77,7 @@ const NavigationBar: React.FC = () => {
                   href={link.href}
                   textSize={14}
                   size="sm"
-                  className="mx-1 hover:text-indigo-600 text-gray-900" // 文字色は黒
+                  className="mx-1 hover:text-indigo-600 text-gray-900"
                   noAnimation={true}
                 />
               ))}
@@ -90,7 +90,7 @@ const NavigationBar: React.FC = () => {
                 onClick={handleFreeConsultationClick}
                 textSize={14}
                 size="md"
-                className="ml-4 text-white bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 shadow-sm" // ボタンのスタイルは維持
+                className="ml-4 text-white bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 shadow-sm"
                 noAnimation={true}
               />
             </div>
@@ -100,7 +100,7 @@ const NavigationBar: React.FC = () => {
               <button
                 onClick={toggleMobileMenu}
                 type="button"
-                className="inline-flex items-center justify-center p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 relative w-8 h-8 text-gray-900 z-50" // 文字色は黒、Xボタンを最前面に
+                className="inline-flex items-center justify-center p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 relative w-8 h-8 text-gray-900 z-50" // Xボタンを最前面に
                 aria-controls="mobile-menu"
                 aria-expanded={isMobileMenuOpen}
               >
@@ -127,22 +127,23 @@ const NavigationBar: React.FC = () => {
       <div
         className={`md:hidden fixed inset-0 z-30 transition-transform duration-300 ease-in-out transform ${isMobileMenuOpen ? 'translate-y-0' : '-translate-y-full'} ${menuGlassmorphismStyle}`}
         id="mobile-menu"
-        onClick={closeMobileMenu}
+        onClick={closeMobileMenu} // 背景クリックでメニューを閉じる
       >
+        {/* メニューコンテンツエリア (ナビゲーションバーの高さ分だけ上にパディング) */}
         <div
-          ref={menuRef}
-          onClick={(e) => e.stopPropagation()}
-          className={`px-6 pt-24 pb-12 space-y-6 flex flex-col items-center justify-center min-h-full`}
+          ref={menuRef} // コンテンツエリアへの参照
+          onClick={(e) => e.stopPropagation()} // メニューコンテンツ内のクリックが背景クリックとして伝播しないようにする
+          className={`px-6 pt-24 pb-12 space-y-6 flex flex-col items-center justify-center min-h-full`} // min-h-full に変更
         >
             {navLinks.map((link) => (
               <Button
                 key={`mobile-${link.label}`}
                 text={link.label}
                 href={link.href}
-                onClick={closeMobileMenu}
+                onClick={closeMobileMenu} // リンククリックでもメニューを閉じる
                 textSize={20}
                 size="lg"
-                className="block w-auto text-center text-gray-900 hover:text-indigo-600 py-3" // 文字色は黒
+                className="block w-auto text-center text-gray-900 hover:text-indigo-600 py-3"
                 noAnimation={true}
               />
             ))}
@@ -151,12 +152,11 @@ const NavigationBar: React.FC = () => {
                 text="無料相談"
                 onClick={() => {
                   handleFreeConsultationClick();
-                  closeMobileMenu();
+                  closeMobileMenu(); // モーダルを開いたらメニューも閉じる
                 }}
-                // 修正点: textSizeをTextSizeKeyで許容されている値に変更 (例: 16 or 20)
-                textSize={16}
+                textSize={16} // ButtonコンポーネントのTextSizeKeyに合わせて16に変更
                 size="lg"
-                className="w-auto block text-center text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg px-8 py-3" // ボタンのスタイルは維持
+                className="w-auto block text-center text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg px-8 py-3"
                 noAnimation={true}
               />
             </div>

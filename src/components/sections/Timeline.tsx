@@ -4,37 +4,43 @@ import SectionHeading from "@/components/elements/SectionHeading";
 import TimelineItemCard from "@/components/modules/TimelineItemCard"; // TimelineItemCardのパス
 import { timelineStepsData } from "@/data/topPageData"; // データソースのパス
 
-const TimelineSection = () => {
+const TimelineSection: React.FC = () => {
   const sectionId = "timeline";
-  // activeStepIndex は現在固定値ですが、将来的には動的に変更することも可能です
-  const activeStepIndex = 2;
+  // activeStepIndex はデザインに合わせて、現在は特定のステップを強調しないため未使用にします。
+  // もし特定のステップを強調したい場合は、この値を調整し、TimelineItemCard側でisActiveに応じたスタイルを適用します。
+  // const activeStepIndex = -1; // どのステップもアクティブにしない例
 
   return (
     <section
       id={sectionId}
-      className="py-24 md:py-32 bg-gray-100 dark:bg-gray-800 relative" // ダークモード対応の背景色を追加
+      className="py-24 md:py-32 bg-gray-100 relative" // 背景を白に統一
     >
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"> {/* レスポンシブなパディングを追加 */}
+      <div className="relative z-10">
         <SectionHeading
           id={`${sectionId}-main-heading`}
           title="Timeline"
           align="center"
-          textColor="text-gray-900 dark:text-gray-100" // ダークモード対応の文字色
-          className="mb-6"
+          // 修正点: textColorを非常に薄いグレーに (例: text-gray-100 または text-gray-200)
+          // ただし、背景が白なので、ある程度の可読性は確保する必要あり。
+          // デザインに合わせて調整してください。ここでは text-gray-200 を仮に設定。
+          // もし画像のように背景に溶け込ませるなら、より薄い色か、
+          // SectionHeadingコンポーネントで背景色とのブレンドを考慮したスタイルが必要になるかもしれません。
+          textColor="text-gray-300"
+          className="mb-6" // マージンは維持
         />
-        <p className="text-center text-base md:text-lg text-gray-700 dark:text-gray-300 mb-16 md:mb-20 max-w-2xl mx-auto"> {/* 最大幅と中央寄せを追加 */}
+        <p className="text-center text-base md:text-lg text-gray-700 mb-16 md:mb-20 max-w-2xl mx-auto"> {/* 文字色を濃いグレーに */}
           ヒアリングから公開までの過程
         </p>
-        {/* グリッドのgapを調整し、アイテムが均等に配置されるように */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 md:gap-8 justify-center">
+        {/* グリッドのgapを調整 */}
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-x-2 gap-y-2 xl:max-w-7xl justify-center align-center mx-auto">
           {timelineStepsData.map((step, index) => (
             <TimelineItemCard
               key={`${step.number}-card`}
               number={step.number}
               title={step.title}
               description={step.description}
-              numberColor={step.numberColor} // このプロパティを TimelineItemCard が受け取れるようにする
-              isActive={index === activeStepIndex}
+              numberColor={step.numberColor} // データから数字の色を受け取る
+              // isActive={index === activeStepIndex} // 現在は特定のステップを強調しない
               // className="min-w-[200px]" // 必要に応じてカードの最小幅などを設定
             />
           ))}

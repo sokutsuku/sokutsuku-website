@@ -18,8 +18,8 @@ const HeroSection: React.FC<HeroSectionProps> = ({
 }) => {
 
   // グラスモーフィズムの上で見やすい文字色
-  const heroTextColor = "text-gray-900"; // 黒色に変更
-  const descriptionTextColor = "text-gray-900"; // 黒色に変更
+  const heroTextColor = "text-gray-900";
+  const descriptionTextColor = "text-gray-900";
 
   return (
     // ★★★ section にグラスモーフィズム用のクラスを追加 ★★★
@@ -27,7 +27,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
       id={id}
       // 背景色を削除し、半透明色 + ぼかし + ボーダー を追加
       // シンプルなグラスモーフィズムスタイル
-      className={`relative w-full min-h-[80vh] md:min-h-screen lg:h-[100vh] flex items-center justify-center text-center px-6 py-20 md:py-32 bg-white/10 backdrop-filter backdrop-blur-md border border-gray-300/50`}
+      className={`relative w-full min-h-[80vh] md:min-h-screen lg:h-[100vh] flex items-center justify-center text-center px-6 py-20 md:py-32`}
     >
       {/* コンテンツラッパー */}
       <div className="relative z-10 max-w-3xl mx-auto"> {/* max-w と mx-auto で中央寄せ */}
