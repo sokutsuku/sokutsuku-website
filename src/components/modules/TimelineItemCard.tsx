@@ -6,7 +6,7 @@ interface TimelineItemCardProps {
   title: string;
   description: string;
   numberColor?: string;  // 数字全体の色を指定 (Tailwindのクラス名を想定)
-  isActive?: boolean;    // 現在はスタイルに直接影響させませんが、将来的な拡張のため残します
+  // isActive?: boolean;    // 現在はスタイルに直接影響させませんが、将来的な拡張のため残します
   className?: string;
 }
 
@@ -15,7 +15,7 @@ const TimelineItemCard: React.FC<TimelineItemCardProps> = ({
   title,
   description,
   numberColor, // データから渡される色
-  isActive,    // 将来的にアクティブなステップを強調する場合に使用
+  // isActive,    // 将来的にアクティブなステップを強調する場合に使用
   className = '',
 }) => {
 

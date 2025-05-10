@@ -32,8 +32,8 @@ const TimelineSection: React.FC = () => {
           ヒアリングから公開までの過程
         </p>
         {/* グリッドのgapを調整 */}
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-x-2 gap-y-2 xl:max-w-7xl justify-center align-center mx-auto">
-          {timelineStepsData.map((step, index) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-x-2 gap-y-2 xl:max-w-7xl justify-center align-center mx-auto">
+          {timelineStepsData.map((step) => (
             <TimelineItemCard
               key={`${step.number}-card`}
               number={step.number}
