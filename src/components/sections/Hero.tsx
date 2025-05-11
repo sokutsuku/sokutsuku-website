@@ -1,8 +1,6 @@
 // src/components/sections/HeroSection.tsx
 import React from 'react';
 import SectionHeading from '@/components/elements/SectionHeading';
-// 背景コンポーネントを使う場合はインポート
-// import BalatroBackground from '@/components/backgrounds/BalatroBackground';
 
 interface HeroSectionProps {
   id?: string;
@@ -29,7 +27,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
       className={`relative w-full min-h-screen lg:h-[100vh] flex items-center justify-center text-center px-6 py-20 md:py-32`}
     >
       {/* コンテンツラッパー */}
-      <div className="relative z-10 max-w-3xl mx-auto"> {/* max-w と mx-auto で中央寄せ */}
+      <div className="relative z-10 mx-auto"> {/* max-w と mx-auto で中央寄せ */}
 
         {/* SectionHeading: 文字色を調整 */}
         <SectionHeading
@@ -40,7 +38,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
             align="center" // 中央寄せに変更
             className="!text-[2.5rem] sm:!text-[3rem] md:!text-[4rem] lg:!text-[5rem] !leading-tight mb-6 md:mb-8" // サイズ調整とレスポンシブ対応
             textColor={heroTextColor}
-            descriptionClassName={`text-base md:text-lg lg:text-xl ${descriptionTextColor} max-w-xl mx-auto`} // サイズ調整と中央寄せ
+            descriptionClassName={`text-base md:text-lg lg:text-xl ${descriptionTextColor} mx-auto`} // サイズ調整と中央寄せ
         />
       </div>
     </section>

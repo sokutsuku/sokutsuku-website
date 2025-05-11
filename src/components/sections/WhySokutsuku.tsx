@@ -2,7 +2,7 @@
 import React from 'react';
 import FeatureCard from '@/components/modules/FeatureCard';
 import { featureListData } from '@/data/topPageData';
-import { FeatureItemData } from '@/components/modules/FeatureListItem';
+import { FeatureItemData } from '@/data/topPageData'; // 型定義をインポート
 
 const WhySokutsukuSection = () => {
   const sectionId = "why-sokutsuku";

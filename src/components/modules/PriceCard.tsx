@@ -28,10 +28,10 @@ const PriceCard: React.FC<PriceCardProps> = ({
   planName,
   price,
   priceNote,
-  featuresHeader = "Includes:",
+  featuresHeader = "プラン内容",
   features,
   highlight = false,
-  className = '',
+  className = 'my-6',
 }) => {
 
   // --- スタイル決定 ---
@@ -89,13 +89,6 @@ const PriceCard: React.FC<PriceCardProps> = ({
           ))}
         </ul>
       </div>
-
-      {/* (任意) 下部: ボタンなど */}
-       <div className="mt-auto pt-6">
-         <button className={`w-full px-4 py-2 rounded text-sm font-medium transition-colors ${highlight ? 'bg-white text-[#1342F0] hover:bg-gray-100' : 'bg-gray-200 text-gray-800 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600'}`}>
-           このプランを選択 {/* ボタンテキスト例 */}
-         </button>
-       </div>
     </div>
   );
 };

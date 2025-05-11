@@ -44,7 +44,7 @@ export const featureListData: FeatureItemData[] = [
   { number: "01", title: "事業戦略から逆算して設計", description: "私たちのサービスは、生成AIを駆使して迅速かつ効率的にウェブサイトを構築します。これにより、コストを抑えつつ高い効果を実現します。", numberColor: "text-gray-300" },
   { number: "02", title: "価値にフォーカス", description: "ウェブサイトの公開後も、1ヶ月間の無料マーケティング支援を提供します。これにより、効果的なプロモーションが可能になります。", numberColor: "text-gray-300" },
   { number: "03", title: "効率化と低コスト化", description: "全てのプランでオリジナルデザインを実現し、競合他社と差別化します。これにより、ブランドの個性を際立たせることができます。", numberColor: "text-gray-300" },
-  { number: "04", title: "スピード", description: "全ての工程で生成AIを活用しています。それにより", numberColor: "text-gray-300" },
+  { number: "04", title: "スピード", description: "多くの工程で生成AIを活用することにより、従来よりも早く・正確に実装できるようになりました。", numberColor: "text-gray-300" },
 ];
 
 
@@ -209,8 +209,8 @@ export const focusCardItems: FocusCardItem[] = [
 
 // 他のトップページ関連データもこのファイルにまとめることができます
 export const topPageTexts = {
-  focusCardSectionTitle: "このような方におすすめ",
-  focusCardSectionSubtitle: "戦略的なウェブサイトで、ビジネスの成長を加速させたい方へ。\nソクツクでは主要な工程で生成AIを活用し、低価格でも戦略性を持ったウェブサイト構築を可能にしました。",
+  focusCardSectionTitle: "戦略的なウェブサイトで、ビジネスの成長を加速させたい方へ。",
+  focusCardSectionSubtitle: "ソクツクでは主要な工程で生成AIを活用し、低価格でも戦略性を持ったウェブサイト構築を可能にしました。",
 };
 
 // FAQデータ

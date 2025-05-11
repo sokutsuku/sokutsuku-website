@@ -17,7 +17,7 @@ const FaqSection: React.FC = () => {
           tag="h2"
           align="left"
           textColor="text-gray-300"
-          className="mb-10 md:mb-16 lg:!text-8xl"
+          className="mb-10 lg:!text-8xl"
         />
 
         {/* アコーディオン */}
