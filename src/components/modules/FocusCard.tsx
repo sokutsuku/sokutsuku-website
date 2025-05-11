@@ -30,16 +30,16 @@ const FocusCardSection = () => {
     <section id={sectionId} className="bg-white py-16 md:py-24"> {/* 背景色とパディング調整 */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-left mb-12 md:mb-16">
-          <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900">
+          <h2 className="text-2xl md:text-4xl font-extrabold text-gray-900">
             {topPageTexts.focusCardSectionTitle}
           </h2>
-          <p className="mt-4 text-lg md:text-xl text-gray-900 mx-auto whitespace-pre-line">
+          <p className="mt-4 text-base md:text-xl text-gray-900 mx-auto whitespace-pre-line">
             {topPageTexts.focusCardSectionSubtitle}
           </p>
         </div>
 
         {/* gap を調整 (例: gap-6 や gap-8) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
           {focusCardItems.map((card: FocusCardItem) => (
             <FocusCard
               key={card.id}

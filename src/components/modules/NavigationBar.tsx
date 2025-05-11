@@ -100,7 +100,7 @@ const NavigationBar: React.FC = () => {
               <button
                 onClick={toggleMobileMenu}
                 type="button"
-                className="inline-flex items-center justify-center p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 relative w-8 h-8 text-gray-900 z-50" // Xボタンを最前面に
+                className="inline-flex items-center justify-center p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 relative w-8 h-8 text-gray-900" // Xボタンを最前面に
                 aria-controls="mobile-menu"
                 aria-expanded={isMobileMenuOpen}
               >
@@ -156,7 +156,7 @@ const NavigationBar: React.FC = () => {
                 }}
                 textSize={16} // ButtonコンポーネントのTextSizeKeyに合わせて16に変更
                 size="lg"
-                className="w-auto block text-center text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg px-8 py-3"
+                className="w-auto text-center text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg px-8 py-3"
                 noAnimation={true}
               />
             </div>
