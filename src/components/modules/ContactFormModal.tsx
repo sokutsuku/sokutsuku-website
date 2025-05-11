@@ -5,6 +5,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 
+// ... (interface定義や他のコードは変更なし)
 interface ContactFormModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -19,12 +20,12 @@ interface FormData {
 }
 
 const ContactFormModal: React.FC<ContactFormModalProps> = ({ isOpen, onClose }) => {
+  // ... (フォームロジックや他のuseEffectフックは変更なし)
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors, isSubmitting },
-    // watch // ★ 未使用のため削除 (またはコメントアウト)
   } = useForm<FormData>({
     mode: 'onChange',
     defaultValues: {
@@ -61,10 +62,8 @@ const ContactFormModal: React.FC<ContactFormModalProps> = ({ isOpen, onClose }) 
       return;
     }
 
-    // let initialViewportHeight = visualViewport.height; // ★ 未使用のため削除
-
     const handleViewportResize = () => {
-      if (modalContentRef.current && visualViewport) { // visualViewport の存在確認を追加
+      if (modalContentRef.current && visualViewport) {
         const viewportHeight = visualViewport.height;
         const offsetTop = visualViewport.offsetTop;
         const keyboardHeight = window.innerHeight - viewportHeight - offsetTop;
@@ -89,7 +88,7 @@ const ContactFormModal: React.FC<ContactFormModalProps> = ({ isOpen, onClose }) 
     visualViewport.addEventListener('resize', handleViewportResize);
 
     return () => {
-      if (visualViewport) { // クリーンアップ時にも存在確認
+      if (visualViewport) {
         visualViewport.removeEventListener('resize', handleViewportResize);
       }
       setModalBottomPadding(0);
@@ -128,10 +127,9 @@ const ContactFormModal: React.FC<ContactFormModalProps> = ({ isOpen, onClose }) 
   }
 
   return (
-    // JSX部分は前回と同じなので省略します
-    // ... (前の回答のreturn以下のJSX) ...
     <div
-      className="fixed inset-0 z-500 flex items-end sm:items-center justify-center bg-black/70 backdrop-blur-md p-0 sm:p-4 transition-opacity duration-300 ease-in-out"
+      // ★★★ z-index の値をより大きな確実な値に変更 ★★★
+      className="fixed inset-0 z-[9999] flex items-end sm:items-center justify-center bg-black/70 backdrop-blur-md p-0 sm:p-4 transition-opacity duration-300 ease-in-out"
       onClick={onClose}
       role="dialog"
       aria-modal="true"
@@ -139,7 +137,7 @@ const ContactFormModal: React.FC<ContactFormModalProps> = ({ isOpen, onClose }) 
     >
       <div
         ref={modalContentRef}
-        className="relative w-full max-w-xl h-full sm:h-auto sm:max-h-[90vh] transform rounded-t-xl sm:rounded-xl bg-white dark:bg-gray-800 shadow-2xl transition-all duration-300 ease-in-out flex flex-col"
+        className="relative w-full max-w-xl h-full sm:h-auto sm:max-h-[90vh] transform md:rounded-t-xl bg-white dark:bg-gray-800 shadow-2xl transition-all duration-300 ease-in-out flex flex-col"
         style={{ paddingBottom: `${modalBottomPadding}px` }}
         onClick={(e) => e.stopPropagation()}
       >

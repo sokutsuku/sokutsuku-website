@@ -61,7 +61,7 @@ const Accordion: React.FC<AccordionProps> = ({
               >
                 <span className="flex items-center space-x-3">
                   {item.icon && (
-                    <span className="w-5 h-5 text-indigo-600 dark:text-indigo-400 flex-shrink-0">
+                    <span className="w-5 h-5 text-[#1342F0] flex-shrink-0">
                       {item.icon}
                     </span>
                   )}

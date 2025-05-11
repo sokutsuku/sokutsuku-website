@@ -120,8 +120,8 @@ export const pricingPlansData: PricingPlanData[] = [
     price: "¥ 99,000",
     priceNote: "¥ 90,000 (税抜)",
     features: [
-      "ウェブサイトデザイン",
-      "ページ数 (例: 5ページ)",
+      "セミオリジナルデザイン",
+      "1~2ページ",
       "スマホ対応",
       "問い合わせフォーム",
       "ドメイン取得代行",
@@ -136,8 +136,8 @@ export const pricingPlansData: PricingPlanData[] = [
     price: "¥ 198,000",
     priceNote: "¥ 180,000 (税抜)",
     features: [
-      "ウェブサイトデザイン",
-      "ページ数 (例: 10ページ)",
+      "セミオリジナルデザイン",
+      "1~5ページ",
       "顧客・競合・市場分析",
       "STP分析",
       "KGI / KPI設定",
@@ -159,8 +159,8 @@ export const pricingPlansData: PricingPlanData[] = [
     price: "¥ 594,000",
     priceNote: "¥ 540,000 (税抜)",
     features: [
-      "ウェブサイトデザイン",
-      "ページ数 (例: 15ページ以上)",
+      "セミオリジナルデザイン",
+      "1~5ページ",
       "顧客・競合・市場分析",
       "STP分析",
       "KGI / KPI設定",

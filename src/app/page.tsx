@@ -16,20 +16,6 @@ import ContactSection from '@/components/sections/Contact';
 export default function SandboxPage() { // または TopPage など
   return (
     <div className="relative w-screen min-h-screen flex flex-col">
-      {/* 背景 */}
-      {/* <div className="fixed inset-0 z-[-1]">
-        <BalatroBackground
-            isRotate={false}
-            mouseInteraction={true}
-            pixelFilter={2000}
-            color1="#F9FAFB"
-            color2="#2563EB"
-            color3="#F3F4F6"
-            contrast={4.0}
-            lighting={0.15}
-            spinAmount={0.3}
-         />
-      </div> */}
     <div className="fixed inset-0 z-[-10] bg-white">
       <OrbBackground
         hoverIntensity={0.5}
