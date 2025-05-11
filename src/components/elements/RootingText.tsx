@@ -15,18 +15,18 @@ import React, {
     type AnimationControls,
     type TargetAndTransition,
   } from "framer-motion";
-  
+
   function cn(...classes: (string | undefined | null | boolean)[]): string {
     return classes.filter(Boolean).join(" ");
   }
-  
+
   export interface RotatingTextRef {
     next: () => void;
     previous: () => void;
     jumpTo: (index: number) => void;
     reset: () => void;
   }
-  
+
   export interface RotatingTextProps
     extends Omit<
       React.ComponentPropsWithoutRef<typeof motion.span>,
@@ -50,7 +50,7 @@ import React, {
     splitLevelClassName?: string;
     elementLevelClassName?: string;
   }
-  
+
   const RotatingText = forwardRef<RotatingTextRef, RotatingTextProps>(
     (
       {
@@ -76,7 +76,7 @@ import React, {
       ref
     ) => {
       const [currentTextIndex, setCurrentTextIndex] = useState<number>(0);
-  
+
       const splitIntoCharacters = (text: string): string[] => {
         if (typeof Intl !== "undefined" && Intl.Segmenter) {
           const segmenter = new Intl.Segmenter("en", { granularity: "grapheme" });
@@ -87,7 +87,7 @@ import React, {
         }
         return Array.from(text);
       };
-  
+
       const elements = useMemo(() => {
         const currentText: string = texts[currentTextIndex];
         if (splitBy === "characters") {
@@ -109,13 +109,13 @@ import React, {
             needsSpace: i !== arr.length - 1,
           }));
         }
-  
+
         return currentText.split(splitBy).map((part, i, arr) => ({
           characters: [part],
           needsSpace: i !== arr.length - 1,
         }));
       }, [texts, currentTextIndex, splitBy]);
-  
+
       const getStaggerDelay = useCallback(
         (index: number, totalChars: number): number => {
           const total = totalChars;
@@ -134,7 +134,7 @@ import React, {
         },
         [staggerFrom, staggerDuration]
       );
-  
+
       const handleIndexChange = useCallback(
         (newIndex: number) => {
           setCurrentTextIndex(newIndex);
@@ -142,7 +142,7 @@ import React, {
         },
         [onNext]
       );
-  
+
       const next = useCallback(() => {
         const nextIndex =
           currentTextIndex === texts.length - 1
@@ -154,7 +154,7 @@ import React, {
           handleIndexChange(nextIndex);
         }
       }, [currentTextIndex, texts.length, loop, handleIndexChange]);
-  
+
       const previous = useCallback(() => {
         const prevIndex =
           currentTextIndex === 0
@@ -166,7 +166,7 @@ import React, {
           handleIndexChange(prevIndex);
         }
       }, [currentTextIndex, texts.length, loop, handleIndexChange]);
-  
+
       const jumpTo = useCallback(
         (index: number) => {
           const validIndex = Math.max(0, Math.min(index, texts.length - 1));
@@ -176,13 +176,13 @@ import React, {
         },
         [texts.length, currentTextIndex, handleIndexChange]
       );
-  
+
       const reset = useCallback(() => {
         if (currentTextIndex !== 0) {
           handleIndexChange(0);
         }
       }, [currentTextIndex, handleIndexChange]);
-  
+
       useImperativeHandle(
         ref,
         () => ({
@@ -193,13 +193,13 @@ import React, {
         }),
         [next, previous, jumpTo, reset]
       );
-  
+
       useEffect(() => {
         if (!auto) return;
         const intervalId = setInterval(next, rotationInterval);
         return () => clearInterval(intervalId);
       }, [next, rotationInterval, auto]);
-  
+
       return (
         <motion.span
           className={cn(
@@ -267,5 +267,8 @@ import React, {
       );
     }
   );
-  
+
+// ★★★ displayName の設定 ★★★
+RotatingText.displayName = "RotatingText";
+
 export default RotatingText;
