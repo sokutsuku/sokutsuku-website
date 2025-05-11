@@ -68,7 +68,7 @@ const Card: React.FC<CardProps> = ({
 
   // --- レイアウト関連のスタイル決定 ---
   let contentAlignment = 'flex-col space-y-3';
-  let padding = 'p-6';
+  let padding = 'p-4';
   const showTextContent = variant === 'default';
   const showScrollPrompt = variant === 'scroll';
   switch (variant) {
@@ -100,12 +100,12 @@ const Card: React.FC<CardProps> = ({
         {showTextContent && (
           <>
             {title && (
-              <h3 className={`text-xl font-semibold flex-shrink-0 ${icon ? 'mt-2' : ''} ${titleColorClass}`}>
+              <h3 className={`text-xl font-semibold flex-shrink-0 ${icon ? 'mt-1' : ''} ${titleColorClass}`}>
                 {title}
               </h3>
             )}
             {content && (
-              <div className={`text-sm mt-1.5 flex-grow min-h-0 ${contentColorClass}`}>
+              <div className={`text-sm mt-1 flex-grow min-h-0 ${contentColorClass}`}>
                 {content}
               </div>
             )}
@@ -113,7 +113,7 @@ const Card: React.FC<CardProps> = ({
         )}
          {showScrollPrompt && (
            <div className={`flex items-center space-x-2 ${scrollPromptColorClass}`}>
-             <span className="text-xl">{scrollText}</span>
+             <span className="text-lg">{scrollText}</span>
              <ArrowDownIcon className="w-6 h-6" />
            </div>
          )}

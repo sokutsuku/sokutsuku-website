@@ -75,9 +75,9 @@ const NavigationBar: React.FC = () => {
                   key={link.label}
                   text={link.label}
                   href={link.href}
-                  textSize={14}
+                  textSize={16}
                   size="sm"
-                  className="mx-1 hover:text-indigo-600 text-gray-900"
+                  className="mx-1 hover:text-[#1342F0] text-gray-900"
                   noAnimation={true}
                 />
               ))}
@@ -89,8 +89,8 @@ const NavigationBar: React.FC = () => {
                 text="無料相談"
                 onClick={handleFreeConsultationClick}
                 textSize={14}
-                size="md"
-                className="ml-4 text-white bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 shadow-sm"
+                size="lg"
+                className="ml-4 text-white bg-gray-300 hover:bg-[#1342F0] focus:ring-indigo-500 shadow-sm"
                 noAnimation={true}
               />
             </div>
@@ -156,7 +156,7 @@ const NavigationBar: React.FC = () => {
                 }}
                 textSize={16} // ButtonコンポーネントのTextSizeKeyに合わせて16に変更
                 size="lg"
-                className="w-auto text-center text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg px-8 py-3"
+                className="w-auto text-center text-white bg-gray-600 hover:bg-indigo-700 rounded-lg px-8 py-3"
                 noAnimation={true}
               />
             </div>

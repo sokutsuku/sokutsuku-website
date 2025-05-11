@@ -161,7 +161,7 @@ const ContactFormModal: React.FC<ContactFormModalProps> = ({ isOpen, onClose }) 
 
   return (
     <div
-      className={`fixed inset-0 z-[9999] flex items-end sm:items-center justify-center bg-black/70 backdrop-blur-md p-0 sm:p-4
+      className={`fixed inset-0 z-[999] flex items-end sm:items-center justify-center bg-black/70 backdrop-blur-md p-0 sm:p-4
                  transition-opacity duration-300 ease-in-out ${overlayOpacityClass} ${
                    isOpen ? "" : "pointer-events-none" // 閉じている間は操作不可に
                  }`}

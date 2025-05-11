@@ -30,7 +30,7 @@ const ContactSection: React.FC = () => {
               title="Contact us...?"
               tag="h2"
               align="center"
-              className="!text-gray-900 group-hover:!text-blue-600 !text-[3.5rem] transition-colors duration-300"
+              className="!text-gray-900 group-hover:!text-blue-600 !text-[3.5rem] md:!text-8xl lg:!text-[9rem] xl:!text-[12rem] transition-colors duration-300"
             />
           </div>
         </div>
