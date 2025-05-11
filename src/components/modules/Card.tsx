@@ -9,7 +9,6 @@ export interface CardProps {
   icon?: React.ReactNode;
   title?: string;
   content?: string | React.ReactNode;
-  // backgroundColor?: string;
   textColor?: string;
   scrollText?: string;
   className?: string;
@@ -21,37 +20,55 @@ const Card: React.FC<CardProps> = ({
   icon,
   title,
   content,
-  // backgroundColor,
   textColor,
   scrollText = 'scroll...',
   className = '',
   isSquare = false,
 }) => {
-  // --- グラスモーフィズム用のスタイルクラス ---
-  // 白をベースにした半透明の背景、背景ぼかし、境界線を設定します。
-  // 必要に応じて色味 (例: bg-slate-700/10) やぼかしの強さ (backdrop-blur-sm, backdrop-blur-2xl) を調整してください。
-  const glassmorphismClasses = 'bg-white/30 backdrop-blur-xl border border-white/30 shadow-lg';
-
-  // --- 各要素のデフォルト色を定義 (元の状態に戻す) ---
-  // グラスモーフィ_ズムの背景では、文字色に一定のコントラストが必要なため、
-  // variant による色の変化はtextColor Propで調整することを推奨します。
-  // ここでは、可読性を考慮した汎用的な色を設定します。
-  let iconColorClass = textColor || 'text-slate-900'; // グラス上のデフォルトアイコン色
-  let titleColorClass = textColor || 'text-slate-900';   // グラス上のデフォルトタイトル色
-  let contentColorClass = textColor || 'text-slate-900'; // グラス上のデフォルト内容色
-  let scrollPromptColorClass = textColor || 'text-slate-900'; // scroll variant の文字/アイコン色
-
-  if (textColor) {
-    iconColorClass = textColor;
-    titleColorClass = textColor;
-    contentColorClass = `${textColor} opacity-90`; // 内容は少し透明度を下げてみる例
-    scrollPromptColorClass = textColor;
+  // --- グラスモーフィズム用のスタイルクラスを variant に応じて決定 ---
+  let glassmorphismBaseClasses = '';
+  switch (variant) {
+    case 'accent':
+    case 'scroll':
+      // accent と scroll の時は #1342F0 ベースのグラスモーフィズム
+      // Tailwind JITモードでは任意の値を使えるので、bg-[#1342F0]/30 のように指定
+      glassmorphismBaseClasses = 'bg-[#1342F0]/60 backdrop-blur-xl border border-[#1342F0]/30 shadow-lg';
+      // 透明度を少し調整 (例: bg-[#1342F0]/20) して、色が強くなりすぎないようにするのも良いでしょう。
+      // ボーダーの色もベースカラーに合わせるか、白系のままにするかデザインによります。ここではベースカラーに合わせています。
+      break;
+    default:
+      // それ以外の時は白ベースのグラスモーフィズム
+      glassmorphismBaseClasses = 'bg-white/30 backdrop-blur-xl border border-white/30 shadow-lg';
+      break;
   }
 
+  // --- 各要素のデフォルト色を定義 ---
+  // textColor prop が指定されていればそれを優先する
+  // ベースのグラスモーフィズムの色が変わるため、デフォルトのテキスト色もvariantに応じて調整することを検討できます。
+  // ここでは、textColor propがなければ、variantに応じて基本的なコントラストを考慮した色を設定します。
 
-  // --- 5. レイアウト関連のスタイル決定 (変更なし) ---
+  let defaultIconColor = 'text-slate-900';
+  let defaultTitleColor = 'text-slate-900';
+  let defaultContentColor = 'text-slate-900';
+  let defaultScrollPromptColor = 'text-slate-900';
+
+  if (variant === 'accent' || variant === 'scroll') {
+    // 青ベースのグラスモーフィズムの場合、明るい色のテキストをデフォルトにする
+    defaultIconColor = 'text-white';
+    defaultTitleColor = 'text-white';
+    defaultContentColor = 'text-white/90'; // 少し透明度を持たせる
+    defaultScrollPromptColor = 'text-white';
+  }
+
+  const iconColorClass = textColor || defaultIconColor;
+  const titleColorClass = textColor || defaultTitleColor;
+  const contentColorClass = textColor || defaultContentColor;
+  const scrollPromptColorClass = textColor || defaultScrollPromptColor;
+
+
+  // --- レイアウト関連のスタイル決定 ---
   let contentAlignment = 'flex-col space-y-3';
-  let padding = 'p-6'; // グラスモーフィズムに合わせて少しパディングを増やす例
+  let padding = 'p-6';
   const showTextContent = variant === 'default';
   const showScrollPrompt = variant === 'scroll';
   switch (variant) {
@@ -59,7 +76,7 @@ const Card: React.FC<CardProps> = ({
     case 'placeholder':
       contentAlignment = 'items-center justify-center'; break;
     case 'scroll':
-      contentAlignment = 'items-end justify-end'; padding = 'p-4'; break; // scrollは元のpaddingを維持
+      contentAlignment = 'items-end justify-end'; padding = 'p-4'; break;
   }
   const isIconOnlyCenter = icon && !title && !content && variant !== 'scroll';
   if (isIconOnlyCenter && variant !== 'placeholder') {
@@ -71,20 +88,15 @@ const Card: React.FC<CardProps> = ({
     <div
       className={`relative overflow-hidden rounded-xl transition-all duration-300 ease-in-out
                  ${isSquare && variant !== 'scroll' ? 'aspect-square' : ''}
-                 ${glassmorphismClasses} // グラスモーフィズムスタイルを適用
-                 ${className}`} // 外部から追加のクラスをマージ
+                 ${glassmorphismBaseClasses} // ★ 動的に生成されたグラスモーフィズムスタイルを適用
+                 ${className}`}
     >
-      {/* パディングとレイアウトを適用 */}
       <div className={`h-full flex ${padding} ${contentAlignment} overflow-auto`}>
-
-        {/* アイコン: 指定された色を適用 */}
         {icon && !showScrollPrompt && (
           <div className={`w-8 h-8 ${isIconOnlyCenter ? '' : 'mb-2'} flex-shrink-0 ${iconColorClass}`}>
              {icon}
           </div>
         )}
-
-        {/* タイトルと内容: 指定された色を適用 */}
         {showTextContent && (
           <>
             {title && (
@@ -99,11 +111,9 @@ const Card: React.FC<CardProps> = ({
             )}
           </>
         )}
-
-         {/* スクロールプロンプト: 指定された色を適用 */}
          {showScrollPrompt && (
            <div className={`flex items-center space-x-2 ${scrollPromptColorClass}`}>
-             <span className="text-base">{scrollText}</span>
+             <span className="text-xl">{scrollText}</span>
              <ArrowDownIcon className="w-6 h-6" />
            </div>
          )}

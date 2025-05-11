@@ -1,9 +1,25 @@
 
 import { CardProps } from '@/components/modules/Card';
 // アイコンのインポート
-import { BeakerIcon, UserGroupIcon, ChartBarIcon, AdjustmentsHorizontalIcon, MegaphoneIcon, CursorArrowRaysIcon } from "@heroicons/react/24/outline";
+import {
+  BeakerIcon,
+  UserGroupIcon, // これは元々あったもの
+  ChartBarIcon,
+  AdjustmentsHorizontalIcon,
+  MegaphoneIcon,
+  CursorArrowRaysIcon,
+  ChatBubbleLeftRightIcon,
+  MagnifyingGlassIcon,
+  CommandLineIcon,
+  CogIcon,
+  PaintBrushIcon,
+  ScaleIcon,
+  // FocusCard 用のアイコン (もし上記リストになければ追加)
+  LightBulbIcon,
+  CurrencyDollarIcon,
+  UsersIcon, // UserGroupIcon とは異なるので注意
+} from "@heroicons/react/24/outline";
 import { AccordionItemData } from '@/components/modules/Accordion';
-import { ChatBubbleLeftRightIcon, MagnifyingGlassIcon, CommandLineIcon, CogIcon, PaintBrushIcon, ScaleIcon } from "@heroicons/react/24/outline";
 
 // --- CardData 型の再定義 (CardProps を Omit する形が望ましい) ---
 export type CardData = Omit<CardProps, 'isSquare' | 'className'> & { /* 他のフィールド */ };
@@ -173,35 +189,36 @@ export const pricingPlansData: PricingPlanData[] = [
 // src/data/topPageData.tsx (または適切なパス)
 
 export interface FocusCardItem {
-  id: number; // keyとして使用するためのユニークなID
-  iconPlaceholder: string;
+  id: number;
+  icon: React.ElementType; // 型はこれでOK
   title: string;
   description: string;
-  // icon?: any; // Font Awesomeなどのアイコンライブラリを使用する場合
 }
 
 export const focusCardItems: FocusCardItem[] = [
   {
     id: 1,
-    iconPlaceholder: "💡",
+    icon: LightBulbIcon, // インポートされていれば、このように名前で指定可能
     title: "ウェブサイトからの成果を改善したい方",
     description: "現状のウェブサイトの課題を分析し、具体的な改善策とともに成果向上に貢献します。",
   },
   {
     id: 2,
-    iconPlaceholder: "💰",
+    icon: CurrencyDollarIcon,
     title: "費用対効果を重視したい方",
     description: "最新技術の活用と効率的なプロセスで、高品質ながらもコストを抑えたウェブサイトを実現します。",
   },
   {
     id: 3,
-    iconPlaceholder: "📈",
+    icon: ChartBarIcon, // これは既存のインポートリストにありました
     title: "戦略的なウェブサイトを求めている方",
     description: "ビジネス目標達成のための戦略を策定し、ターゲット顧客に響くウェブサイトを構築します。",
   },
   {
     id: 4,
-    iconPlaceholder: "👥",
+    // UsersIcon を使うか、既存の UserGroupIcon を使うかによって指定が変わります。
+    // ここでは UsersIcon を使う想定で記述します。
+    icon: UsersIcon,
     title: "運用に十分な時間や人材を割けない方",
     description: "更新作業の負担を軽減するCMS導入や、運用サポートプランもご用意しています。",
   },
