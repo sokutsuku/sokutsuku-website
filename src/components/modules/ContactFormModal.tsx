@@ -5,7 +5,6 @@ import React, { useEffect, useState, useRef } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 
-// ... (interface定義や他のコードは変更なし)
 interface ContactFormModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -19,8 +18,9 @@ interface FormData {
   message?: string;
 }
 
+const TRANSITION_DURATION_MS = 3000; // CSSのduration-300と合わせる (ms)
+
 const ContactFormModal: React.FC<ContactFormModalProps> = ({ isOpen, onClose }) => {
-  // ... (フォームロジックや他のuseEffectフックは変更なし)
   const {
     register,
     handleSubmit,
@@ -42,32 +42,63 @@ const ContactFormModal: React.FC<ContactFormModalProps> = ({ isOpen, onClose }) 
   const modalContentRef = useRef<HTMLDivElement>(null);
   const activeInputRef = useRef<HTMLInputElement | HTMLTextAreaElement | null>(null);
 
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-      reset();
-      setSubmitStatus(null);
-    } else {
-      document.body.style.overflow = 'unset';
-      setModalBottomPadding(0);
-    }
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
-  }, [isOpen, reset]);
+  // モーダルのレンダリング状態とアニメーションクラスを管理
+  const [shouldRender, setShouldRender] = useState(false);
+  const [overlayOpacityClass, setOverlayOpacityClass] = useState('opacity-0');
+  // スマホ: 下からスライドアップ。PC: 中央でフェード＆スケール（初期状態は非表示）
+  const [contentTransformClass, setContentTransformClass] = useState('translate-y-full sm:translate-y-0 sm:opacity-0 sm:scale-95');
 
+  useEffect(() => {
+    let closingTimer: NodeJS.Timeout;
+
+    if (isOpen) {
+      setShouldRender(true); // まずレンダリング
+      document.body.style.overflow = 'hidden';
+      if (isSubmitting === false && submitStatus === null) { // 送信中や結果表示中でなければリセット
+        reset();
+      }
+      setSubmitStatus(null); // 新規オープン時は送信ステータスをリセット
+
+      // 次のフレームでアニメーションクラスを適用
+      requestAnimationFrame(() => {
+        setOverlayOpacityClass('opacity-100');
+        setContentTransformClass('translate-y-0 sm:translate-y-0 sm:opacity-100 sm:scale-100');
+      });
+    } else {
+      // isOpenがfalseになったら、閉じるアニメーションを開始
+      setOverlayOpacityClass('opacity-0');
+      setContentTransformClass('translate-y-full sm:translate-y-0 sm:opacity-0 sm:scale-95');
+
+      // アニメーション時間後にコンポーネントをアンマウント
+      closingTimer = setTimeout(() => {
+        setShouldRender(false);
+        document.body.style.overflow = 'unset';
+        setModalBottomPadding(0);
+      }, TRANSITION_DURATION_MS);
+    }
+
+    return () => {
+      clearTimeout(closingTimer);
+      // ページ遷移などでコンポーネントが予期せずアンマウントされた場合も考慮
+      if (document.body.style.overflow === 'hidden' && !isOpen) { // isOpenでない場合のみ解除（他のモーダルが開いている可能性）
+         // ただし、このコンポーネントがアンマウントされる＝モーダルは閉じているはずなので、基本的には解除してOK
+        document.body.style.overflow = 'unset';
+      }
+    };
+  }, [isOpen, reset, isSubmitting, submitStatus]);
+
+
+  // Visual Viewport API 関連のuseEffect (キーボード対応)
   useEffect(() => {
     const visualViewport = window.visualViewport;
-    if (!visualViewport || !isOpen) {
+    if (!visualViewport || !isOpen || !shouldRender) { // shouldRenderも条件に追加
       return;
     }
-
     const handleViewportResize = () => {
       if (modalContentRef.current && visualViewport) {
         const viewportHeight = visualViewport.height;
         const offsetTop = visualViewport.offsetTop;
         const keyboardHeight = window.innerHeight - viewportHeight - offsetTop;
-
         if (keyboardHeight > 50) {
           setModalBottomPadding(keyboardHeight);
           if (activeInputRef.current && modalContentRef.current) {
@@ -83,21 +114,23 @@ const ContactFormModal: React.FC<ContactFormModalProps> = ({ isOpen, onClose }) 
         }
       }
     };
-
-    setTimeout(handleViewportResize, 100);
+    // 初期表示時にもキーボード状態をチェックするため、少し遅延させて実行
+    const initialCheckTimer = setTimeout(handleViewportResize, 100);
     visualViewport.addEventListener('resize', handleViewportResize);
 
     return () => {
+      clearTimeout(initialCheckTimer);
       if (visualViewport) {
         visualViewport.removeEventListener('resize', handleViewportResize);
       }
-      setModalBottomPadding(0);
+      // キーボード対応のクリーンアップ時には modalBottomPadding はリセットしない
+      // (モーダルがまだ開いている可能性があるため)
     };
-  }, [isOpen]);
-
+  }, [isOpen, shouldRender]); // shouldRender を依存配列に追加
 
   const handleFocus = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     activeInputRef.current = e.target;
+    // フォーカス時にもキーボードの高さを再計算してパディングを適用
     if (window.visualViewport) {
        const visualViewport = window.visualViewport;
        const keyboardHeight = window.innerHeight - visualViewport.height - visualViewport.offsetTop;
@@ -110,10 +143,10 @@ const ContactFormModal: React.FC<ContactFormModalProps> = ({ isOpen, onClose }) 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     setSubmitStatus(null);
     console.log('Form Data Submitted (with RHF):', data);
-
-    await new Promise(resolve => setTimeout(resolve, 1500));
+    await new Promise(resolve => setTimeout(resolve, 1500)); // ダミー送信処理
     if (Math.random() > 0.3) {
       setSubmitStatus('success');
+      // 成功したら2秒後にモーダルを閉じる (onCloseが呼ばれ、isOpenがfalseになる)
       setTimeout(() => {
         onClose();
       }, 2000);
@@ -122,22 +155,27 @@ const ContactFormModal: React.FC<ContactFormModalProps> = ({ isOpen, onClose }) 
     }
   };
 
-  if (!isOpen) {
-    return null;
+  if (!shouldRender) {
+    return null; // 実際にDOMから取り除く
   }
 
   return (
     <div
-      // ★★★ z-index の値をより大きな確実な値に変更 ★★★
-      className="fixed inset-0 z-[9999] flex items-end sm:items-center justify-center bg-black/70 backdrop-blur-md p-0 sm:p-4 transition-opacity duration-300 ease-in-out"
-      onClick={onClose}
+      className={`fixed inset-0 z-[9999] flex items-end sm:items-center justify-center bg-black/70 backdrop-blur-md p-0 sm:p-4
+                 transition-opacity duration-300 ease-in-out ${overlayOpacityClass} ${
+                   isOpen ? "" : "pointer-events-none" // 閉じている間は操作不可に
+                 }`}
+      onClick={isOpen ? onClose : undefined} // 開いているときだけ背景クリックで閉じる
       role="dialog"
       aria-modal="true"
       aria-labelledby="contact-modal-title"
     >
       <div
         ref={modalContentRef}
-        className="relative w-full max-w-xl h-full sm:h-auto sm:max-h-[90vh] transform md:rounded-t-xl bg-white dark:bg-gray-800 shadow-2xl transition-all duration-300 ease-in-out flex flex-col"
+        className={`relative w-full max-w-xl h-full sm:h-auto sm:max-h-[90vh]
+                   bg-white dark:bg-gray-800 shadow-2xl flex flex-col
+                   transition-all duration-300 ease-in-out ${contentTransformClass}
+                   md:rounded-xl`} // スマホでは角丸なし、md以上で角丸
         style={{ paddingBottom: `${modalBottomPadding}px` }}
         onClick={(e) => e.stopPropagation()}
       >
@@ -160,9 +198,9 @@ const ContactFormModal: React.FC<ContactFormModalProps> = ({ isOpen, onClose }) 
         <div className="flex-grow overflow-y-auto p-4 md:p-6">
           {submitStatus === 'success' ? (
             <div className="py-10 text-center">
-            <svg className="w-16 h-16 text-green-500 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-            <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">送信完了</h3>
-            <p className="text-gray-600 dark:text-gray-300">お問い合わせありがとうございます。内容を確認後、担当者よりご連絡いたします。</p>
+              <svg className="w-16 h-16 text-green-500 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">送信完了</h3>
+              <p className="text-gray-600 dark:text-gray-300">お問い合わせありがとうございます。内容を確認後、担当者よりご連絡いたします。</p>
             </div>
           ) : (
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
