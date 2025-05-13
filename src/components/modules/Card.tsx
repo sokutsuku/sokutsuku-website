@@ -30,22 +30,13 @@ const Card: React.FC<CardProps> = ({
   switch (variant) {
     case 'accent':
     case 'scroll':
-      // accent と scroll の時は #1342F0 ベースのグラスモーフィズム
-      // Tailwind JITモードでは任意の値を使えるので、bg-[#1342F0]/30 のように指定
       glassmorphismBaseClasses = 'bg-[#1342F0]/60 backdrop-blur-xl border border-[#1342F0]/30 shadow-lg';
-      // 透明度を少し調整 (例: bg-[#1342F0]/20) して、色が強くなりすぎないようにするのも良いでしょう。
-      // ボーダーの色もベースカラーに合わせるか、白系のままにするかデザインによります。ここではベースカラーに合わせています。
       break;
     default:
       // それ以外の時は白ベースのグラスモーフィズム
       glassmorphismBaseClasses = 'bg-white/30 backdrop-blur-xl border border-white/30 shadow-lg';
       break;
   }
-
-  // --- 各要素のデフォルト色を定義 ---
-  // textColor prop が指定されていればそれを優先する
-  // ベースのグラスモーフィズムの色が変わるため、デフォルトのテキスト色もvariantに応じて調整することを検討できます。
-  // ここでは、textColor propがなければ、variantに応じて基本的なコントラストを考慮した色を設定します。
 
   let defaultIconColor = 'text-slate-900';
   let defaultTitleColor = 'text-slate-900';
@@ -86,7 +77,7 @@ const Card: React.FC<CardProps> = ({
 
   return (
     <div
-      className={`relative overflow-hidden rounded-xl transition-all duration-300 ease-in-out
+      className={`relative overflow-hidden rounded-md transition-all duration-300 ease-in-out
                  ${isSquare && variant !== 'scroll' ? 'aspect-square' : ''}
                  ${glassmorphismBaseClasses} // ★ 動的に生成されたグラスモーフィズムスタイルを適用
                  ${className}`}

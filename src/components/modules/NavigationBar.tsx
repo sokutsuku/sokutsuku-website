@@ -54,7 +54,7 @@ const NavigationBar: React.FC = () => {
     <>
       {/* Navigation Bar Area */}
       <nav className={`fixed w-full z-40 top-0 left-0 transition-colors duration-300 ease-in-out ${navbarHeight} bg-transparent border-transparent`}>
-        <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
+        <div className="max-w-screen-xl mx-auto px-4 h-full">
           <div className="flex items-center justify-between h-full">
             {/* Logo */}
             <div className="flex-shrink-0">
@@ -82,7 +82,7 @@ const NavigationBar: React.FC = () => {
             {/* Free Consultation Button (Desktop) */}
             <div className="hidden md:block">
               <Button
-                text="無料相談"
+                text="無料相談する"
                 onClick={handleFreeConsultationClick}
                 textSize={14}
                 size="lg" // こちらのサイズは元のままで良いか確認
@@ -96,7 +96,7 @@ const NavigationBar: React.FC = () => {
               <button
                 onClick={toggleMobileMenu}
                 type="button"
-                className="inline-flex items-center justify-center p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 relative w-8 h-8 text-gray-900 dark:text-white" // ダークモード対応
+                className="inline-flex items-center justify-center p-2 rounded-md focus:outline-none relative w-8 h-8 text-gray-900" // ダークモード対応
                 aria-controls="mobile-menu"
                 aria-expanded={isMobileMenuOpen}
               >
@@ -138,20 +138,20 @@ const NavigationBar: React.FC = () => {
                 onClick={closeMobileMenu}
                 textSize={20}
                 size="lg"
-                className="block w-auto text-center text-gray-900 dark:text-white hover:text-indigo-600 dark:hover:text-indigo-400 py-3" // ダークモード対応
+                className="block w-auto text-center text-gray-900 py-3" // ダークモード対応
                 noAnimation={true} // モバイルメニューのリンクはアニメーションなし
               />
             ))}
             <div className="mt-10">
               <Button
-                text="無料相談"
+                text="無料相談する"
                 onClick={() => {
                   handleFreeConsultationClick();
                   closeMobileMenu();
                 }}
-                textSize={16}
+                textSize={14}
                 size="lg"
-                className="w-auto text-center text-white bg-gray-600 hover:bg-indigo-700 rounded-lg px-8 py-3" // モバイルの無料相談ボタンの色を調整
+                className="w-auto text-gray-900 text-center bg-gray-300 hover:bg-indigo-700 rounded-base px-8 py-3" // モバイルの無料相談ボタンの色を調整
                 noAnimation={true}
               />
             </div>

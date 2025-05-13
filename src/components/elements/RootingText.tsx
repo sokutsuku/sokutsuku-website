@@ -1,3 +1,4 @@
+// src/components/elements/RotatingText.tsx
 import React, {
     forwardRef,
     useCallback,
@@ -33,7 +34,7 @@ import React, {
       "children" | "transition" | "initial" | "animate" | "exit"
     > {
     texts: string[];
-    transition?: Transition;
+    transition?: Transition; // ★ このトランジション設定がレイアウトアニメーションにも影響
     initial?: boolean | Target | VariantLabels;
     animate?: boolean | VariantLabels | AnimationControls | TargetAndTransition;
     exit?: Target | VariantLabels;
@@ -55,13 +56,14 @@ import React, {
     (
       {
         texts,
-        transition = { type: "spring", damping: 25, stiffness: 300 },
+        // ★ デフォルトのトランジション。これが layout アニメーションにも使われる
+        transition = { type: "spring", damping: 25, stiffness: 300, mass: 1 },
         initial = { y: "100%", opacity: 0 },
         animate = { y: 0, opacity: 1 },
         exit = { y: "-120%", opacity: 0 },
         animatePresenceMode = "wait",
         animatePresenceInitial = false,
-        rotationInterval = 2000,
+        rotationInterval = 4000, // 前回のtest.tsxに合わせて変更
         staggerDuration = 0,
         staggerFrom = "first",
         loop = true,
@@ -117,6 +119,7 @@ import React, {
       }, [texts, currentTextIndex, splitBy]);
 
       const getStaggerDelay = useCallback(
+        // ... (変更なし)
         (index: number, totalChars: number): number => {
           const total = totalChars;
           if (staggerFrom === "first") return index * staggerDuration;
@@ -136,6 +139,7 @@ import React, {
       );
 
       const handleIndexChange = useCallback(
+        // ... (変更なし)
         (newIndex: number) => {
           setCurrentTextIndex(newIndex);
           if (onNext) onNext(newIndex);
@@ -143,31 +147,40 @@ import React, {
         [onNext]
       );
 
-      const next = useCallback(() => {
-        const nextIndex =
-          currentTextIndex === texts.length - 1
-            ? loop
-              ? 0
-              : currentTextIndex
-            : currentTextIndex + 1;
-        if (nextIndex !== currentTextIndex) {
-          handleIndexChange(nextIndex);
-        }
-      }, [currentTextIndex, texts.length, loop, handleIndexChange]);
+      const next = useCallback(
+        // ... (変更なし)
+        () => {
+          const nextIndex =
+            currentTextIndex === texts.length - 1
+              ? loop
+                ? 0
+                : currentTextIndex
+              : currentTextIndex + 1;
+          if (nextIndex !== currentTextIndex) {
+            handleIndexChange(nextIndex);
+          }
+        },
+        [currentTextIndex, texts.length, loop, handleIndexChange]
+      );
 
-      const previous = useCallback(() => {
-        const prevIndex =
-          currentTextIndex === 0
-            ? loop
-              ? texts.length - 1
-              : currentTextIndex
-            : currentTextIndex - 1;
-        if (prevIndex !== currentTextIndex) {
-          handleIndexChange(prevIndex);
-        }
-      }, [currentTextIndex, texts.length, loop, handleIndexChange]);
+      const previous = useCallback(
+        // ... (変更なし)
+         () => {
+          const prevIndex =
+            currentTextIndex === 0
+              ? loop
+                ? texts.length - 1
+                : currentTextIndex
+              : currentTextIndex - 1;
+          if (prevIndex !== currentTextIndex) {
+            handleIndexChange(prevIndex);
+          }
+        },
+        [currentTextIndex, texts.length, loop, handleIndexChange]
+      );
 
       const jumpTo = useCallback(
+        // ... (変更なし)
         (index: number) => {
           const validIndex = Math.max(0, Math.min(index, texts.length - 1));
           if (validIndex !== currentTextIndex) {
@@ -177,13 +190,18 @@ import React, {
         [texts.length, currentTextIndex, handleIndexChange]
       );
 
-      const reset = useCallback(() => {
-        if (currentTextIndex !== 0) {
-          handleIndexChange(0);
-        }
-      }, [currentTextIndex, handleIndexChange]);
+      const reset = useCallback(
+        // ... (変更なし)
+        () => {
+          if (currentTextIndex !== 0) {
+            handleIndexChange(0);
+          }
+        },
+        [currentTextIndex, handleIndexChange]
+      );
 
       useImperativeHandle(
+        // ... (変更なし)
         ref,
         () => ({
           next,
@@ -195,6 +213,7 @@ import React, {
       );
 
       useEffect(() => {
+        // ... (変更なし)
         if (!auto) return;
         const intervalId = setInterval(next, rotationInterval);
         return () => clearInterval(intervalId);
@@ -203,26 +222,27 @@ import React, {
       return (
         <motion.span
           className={cn(
-            "flex flex-wrap whitespace-pre-wrap relative",
+            "inline-flex flex-wrap whitespace-pre-wrap relative", // ★ inline-flex を確認
             mainClassName
           )}
           {...rest}
-          layout
-          transition={transition}
+          layout // ★ layout プロパティがキー
+          transition={transition} // ★ このトランジションがレイアウト変更にも適用される
         >
           <span className="sr-only">{texts[currentTextIndex]}</span>
           <AnimatePresence
             mode={animatePresenceMode}
             initial={animatePresenceInitial}
+            // onExitComplete など、必要に応じて AnimatePresence のコールバックも利用可能
           >
             <motion.div
-              key={currentTextIndex}
+              key={currentTextIndex} // このキーが変わることで AnimatePresence がアニメーションをトリガー
               className={cn(
                 splitBy === "lines"
-                  ? "flex flex-col w-full"
+                  ? "flex flex-col w-full" // "lines" の場合は幅が固定されるので注意
                   : "flex flex-wrap whitespace-pre-wrap relative"
               )}
-              layout
+              // layout // (オプション) この div 自体のレイアウト変更もアニメーションさせたい場合。通常は親の layout で十分。
               aria-hidden="true"
             >
               {elements.map((wordObj, wordIndex, array) => {
@@ -241,7 +261,7 @@ import React, {
                         animate={animate}
                         exit={exit}
                         transition={{
-                          ...transition,
+                          ...transition, // ★ 各文字の出現アニメーションにも同じ系統のトランジションを適用
                           delay: getStaggerDelay(
                             previousCharsCount + charIndex,
                             array.reduce(
@@ -268,7 +288,6 @@ import React, {
     }
   );
 
-// ★★★ displayName の設定 ★★★
 RotatingText.displayName = "RotatingText";
 
 export default RotatingText;

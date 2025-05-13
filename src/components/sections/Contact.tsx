@@ -35,9 +35,6 @@ const ContactSection: React.FC = () => {
           </div>
         </div>
       </section>
-
-      {/* ContactFormModal の直接呼び出しを削除 */}
-      {/* <ContactFormModal isOpen={isModalOpen} onClose={closeModal} /> */}
     </>
   );
 };
