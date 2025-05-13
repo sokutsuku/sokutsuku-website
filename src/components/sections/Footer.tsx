@@ -1,6 +1,5 @@
 // src/components/layout/Footer.tsx
 import React from 'react';
-import Link from 'next/link'; // ロゴにはLinkを直接使うことも可能
 import Button from '@/components/elements/Button'; // Buttonコンポーネントをインポート
 
 interface FooterLinkItem {
