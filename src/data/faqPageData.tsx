@@ -11,8 +11,8 @@ export const pricingFaqItems: AccordionItemData[] = [
   },
   {
     id: 'pricing-faq-2',
-    title: '本当に66,000円でWebサイトを作れますか？',
-    content: '可能です。'
+    title: '最低価格はいくらですか？',
+    content: '99,000円（税込）からのプランをご用意しています。\nただし、オプションを追加することで価格は変動します。'
   },
   {
     id: 'pricing-faq-3',
@@ -70,7 +70,7 @@ export const contractPaymentFlowFaqItems: AccordionItemData[] = [
   {
     id: 'contract-flow-faq-1',
     title: '依頼から納品までの流れは？',
-    content: '以下のステップで進行します。1. 無料相談・ヒアリング（1～3日）2. ご契約 & 手付金お支払い（40%）（1日）3. デザイン・実装（最短1週間）4. 修正対応（2～5日）5. 実装完了後、残額60%支払い6. お支払い確認後、サイト公開 & 納品',
+    content: '以下のステップで進行します。\n1. 無料相談・ヒアリング（1～3日）\n2. ご契約 & 手付金お支払い（40%）（1日）\n3. デザイン・実装（最短1週間）\n4. 修正対応（2～5日）\n5. 実装完了後、残額60%支払い\n6. お支払い確認後、サイト公開 & 納品',
   },
   {
     id: 'contract-flow-faq-2',
@@ -85,7 +85,7 @@ export const contractPaymentFlowFaqItems: AccordionItemData[] = [
   {
     id: 'contract-flow-faq-4',
     title: '追加料金が発生するのはどんな場合ですか？',
-    content: 'オプションプランを選択しない限り、追加料金は発生しません。追加機能・修正をご希望の場合は、その都度お見積もりいたします。',
+    content: 'オプションプランを選択しない限り、追加料金は発生しません。\n追加機能・修正をご希望の場合は、その都度お見積もりいたします。',
   },
   {
     id: 'contract-flow-faq-5',
@@ -95,7 +95,7 @@ export const contractPaymentFlowFaqItems: AccordionItemData[] = [
   {
     id: 'contract-flow-faq-6',
     title: 'どのような契約方法になりますか？',
-    content: 'すべてオンラインでの契約となります。契約書のやり取りやお支払いもオンラインで完結可能です。',
+    content: 'すべてオンラインでの契約となります。\n契約書のやり取りやお支払いもオンラインで完結可能です。',
   },
   {
     id: 'contract-flow-faq-7',
@@ -110,7 +110,7 @@ export const revisionSupportFaqItems: AccordionItemData[] = [
   {
     id: 'revision-support-faq-1',
     title: '納品後に修正はできますか？',
-    content: '納品後、一週間以内であればテキスト・画像の変更など、軽微な修正は無償で対応いたします。大幅な修正や追加機能の開発については別途お見積もりとなります。',
+    content: '納品後、一週間以内であればテキスト・画像の変更など、軽微な修正は無償で対応いたします。\n大幅な修正や追加機能の開発については別途お見積もりとなります。',
   },
   {
     id: 'revision-support-faq-2',
@@ -120,7 +120,7 @@ export const revisionSupportFaqItems: AccordionItemData[] = [
   {
     id: 'revision-support-faq-3',
     title: ' Webサイトの運用について相談できますか？',
-    content: '可能です。更新やメンテナンス、SEO対策、マーケティング施策など運用に関するご相談は、お問い合わせフォームまたはLINEにて受け付けています。',
+    content: '可能です。\n更新やメンテナンス、SEO対策、マーケティング施策など運用に関するご相談は、お問い合わせフォームまたはLINEにて受け付けています。',
   },
   // ... 「修正・サポート」に関する他のQ&Aを追加 ...
 ];

@@ -92,7 +92,7 @@ const Accordion: React.FC<AccordionProps> = ({
                     open: { height: "auto", opacity: 1 },
                   }}
                   transition={{ duration: 0.3 }}
-                  className="overflow-hidden"
+                  className="overflow-hidden whitespace-pre-line"
                 >
                   <div className="px-5 py-4 pt-2 text-sm text-gray-800">
                     {item.content}
