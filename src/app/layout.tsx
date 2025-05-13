@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import {Noto_Sans_JP, Roboto } from "next/font/google"; // ★ Noto_Sans_JP をインポート
 import { ModalProvider } from '@/contexts/ModalContext';
 import NavigationBar from '@/components/modules/NavigationBar';
+import Footer from "@/components/sections/Footer";
 import "./globals.css";
 
 const notoSansJP = Noto_Sans_JP({
@@ -42,6 +43,7 @@ export default function RootLayout({
         <ModalProvider>
           <NavigationBar />
           <main>{children}</main>
+          <Footer />
         </ModalProvider>
       </body>
     </html>
