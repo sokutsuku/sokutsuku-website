@@ -1,28 +1,29 @@
 // src/app/layout.tsx
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google"; // Geistフォントのインポート
-import { ModalProvider } from '@/contexts/ModalContext'; // ModalProviderのインポートパスを確認
-import NavigationBar from '@/components/modules/NavigationBar'; // NavigationBarのインポートパスを確認
+import {Noto_Sans_JP, Roboto } from "next/font/google"; // ★ Noto_Sans_JP をインポート
+import { ModalProvider } from '@/contexts/ModalContext';
+import NavigationBar from '@/components/modules/NavigationBar';
 import "./globals.css";
 
-// Geistフォントの設定
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const notoSansJP = Noto_Sans_JP({
+  variable: "--font-noto-sans-jp",
+  weight: ['400', '500', '700', '900'],
   subsets: ["latin"],
+  display: 'swap',
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const roboto = Roboto({ // Roboto の設定
+  variable: "--font-roboto",
+  weight: ['400', '500', '700', '900'], // Robotoで使いたいウェイト
+  subsets: ["latin"], // 英数字のみなのでlatinで十分
+  display: 'swap',
 });
 
-// メタデータの設定
 export const metadata: Metadata = {
   title: "SOKUTSUKU",
   description: "生成AIをフル活用して早く高品質なウェブサイトを構築するサービスです。",
 };
 
-// RootLayoutコンポーネント
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -31,20 +32,16 @@ export default function RootLayout({
   return (
     <html lang="ja" className="scroll-smooth">
       <head>
-        {/* Adobe Fontsなどの外部フォントシートのリンク */}
-        {/* 注意: xxxxxxx の部分は実際のアカウントIDなどに置き換えてください */}
-        <link rel="stylesheet" href="https://use.typekit.net/xxxxxxx.css" />
+        {/* <link rel="stylesheet" href="https://use.typekit.net/xxxxxxx.css" /> */}
+        {/* Adobe FontsとGoogle Fontsを併用する場合、フォントの読み込み順や競合に注意 */}
+        {/* 一般的にはどちらか一方に統一するか、明確な使い分けが必要です */}
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`} // フォント変数とアンチエイリアスを適用
+       className={`${notoSansJP.variable} ${roboto.variable} antialiased`} // ★ Noto Sans JPの変数を追加
       >
-        {/* ModalProviderでアプリケーションの主要部分をラップ */}
         <ModalProvider>
-          {/* NavigationBarをModalProviderの内側に配置 */}
           <NavigationBar />
-          {/* page.tsxなどの子コンポーネントがここにレンダリングされる */}
           <main>{children}</main>
-          {/* Footerなどの他の共通レイアウトコンポーネントもModalProviderの内側に配置可能 */}
         </ModalProvider>
       </body>
     </html>

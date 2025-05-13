@@ -75,7 +75,7 @@ const NavigationBar: React.FC = () => {
                   key={link.label}
                   text={link.label}
                   href={link.href}
-                  textSize={16}
+                  textSize={14}
                   size="sm"
                   className="mx-1 hover:text-[#1342F0] text-gray-900"
                   noAnimation={true}

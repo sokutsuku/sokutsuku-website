@@ -14,31 +14,29 @@ const HeroSection: React.FC<HeroSectionProps> = ({
   id = "hero",
 }) => {
 
-  // グラスモーフィズムの上で見やすい文字色
-  const heroTextColor = "text-gray-900";
-  const descriptionTextColor = "text-gray-900";
+  const heroTextColor = "text-gray-900"; // 通常時のテキスト色
+  const descriptionTextColor = "text-gray-900"; // 通常時の説明文の色
+
+  // ★ Noto Sans JP を適用するためのTailwindクラス
+  const notoFontClass = "font-noto-sans-jp"; // tailwind.config.js または globals.css @theme で定義したクラス名
 
   return (
-    // ★★★ section にグラスモーフィズム用のクラスを追加 ★★★
     <section
       id={id}
-      // 背景色を削除し、半透明色 + ぼかし + ボーダー を追加
-      // シンプルなグラスモーフィズムスタイル
       className={`relative w-full min-h-screen lg:h-[100vh] flex items-center justify-center text-center px-6 py-20 md:py-32`}
     >
-      {/* コンテンツラッパー */}
-      <div className="relative z-10 mx-auto"> {/* max-w と mx-auto で中央寄せ */}
-
-        {/* SectionHeading: 文字色を調整 */}
+      <div className="relative z-10 mx-auto">
         <SectionHeading
             id={`${id}-heading`}
             tag="h1"
             title={mainTitle}
             description={description}
-            align="center" // 中央寄せに変更
-            className="!text-[2.5rem] sm:!text-[3rem] md:!text-[4rem] lg:!text-[5rem] !leading-tight mb-6 md:mb-8" // サイズ調整とレスポンシブ対応
+            align="center"
+            // ★ className に notoFontClass を追加してタイトルに Noto Sans JP を適用
+            className={`!text-[2.5rem] sm:!text-[3rem] md:!text-[4rem] lg:!text-[5rem] !leading-tight mb-6 md:mb-8 ${notoFontClass}`}
             textColor={heroTextColor}
-            descriptionClassName={`text-base md:text-lg lg:text-xl ${descriptionTextColor} mx-auto`} // サイズ調整と中央寄せ
+            // ★ descriptionClassName に notoFontClass を追加して説明文に Noto Sans JP を適用
+            descriptionClassName={`text-base md:text-lg lg:text-xl ${descriptionTextColor} mx-auto ${notoFontClass}`}
         />
       </div>
     </section>
