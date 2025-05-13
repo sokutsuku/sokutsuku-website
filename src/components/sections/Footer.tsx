@@ -10,7 +10,7 @@ interface FooterLinkItem {
 // フッター上部のナビゲーションリンク
 const mainNavLinks: FooterLinkItem[] = [
   { href: '/service', label: 'Service' },
-  { href: '/faq', label: 'Question' },
+  { href: '/faq', label: 'Faq' },
   { href: '/contact', label: 'Contact' },
   { href: '/blog', label: 'Blog' },
 ];

@@ -149,7 +149,7 @@ const NavigationBar: React.FC = () => {
                   handleFreeConsultationClick();
                   closeMobileMenu();
                 }}
-                textSize={14}
+                textSize={12}
                 size="lg"
                 className="w-auto text-gray-900 text-center bg-gray-300 hover:bg-indigo-700 rounded-base px-8 py-3" // モバイルの無料相談ボタンの色を調整
                 noAnimation={true}
