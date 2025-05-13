@@ -22,7 +22,7 @@ const navLinks: NavLinkItem[] = [
 const NavigationBar: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { openModal } = useModal();
-  const menuRef = useRef<HTMLDivElement>(null); // モバイルメニューのコンテンツエリアへの参照
+  const menuRef = useRef<HTMLDivElement>(null);
 
   const handleFreeConsultationClick = () => {
     openModal();
@@ -37,10 +37,7 @@ const NavigationBar: React.FC = () => {
   };
 
   const navbarHeight = 'h-20';
-
-  // モバイルメニュー用のグラスモーフィズムスタイル (シンプルに)
   const menuGlassmorphismStyle = 'bg-white/10 backdrop-filter backdrop-blur-md shadow-xl border-t border-gray-200/30';
-
 
   useEffect(() => {
     if (isMobileMenuOpen) {
@@ -53,22 +50,20 @@ const NavigationBar: React.FC = () => {
     };
   }, [isMobileMenuOpen]);
 
-
   return (
     <>
       {/* Navigation Bar Area */}
-      {/* 修正点: PCビューでは背景透明、ボーダーなし。モバイルメニュー表示時も透明のまま。 */}
       <nav className={`fixed w-full z-40 top-0 left-0 transition-colors duration-300 ease-in-out ${navbarHeight} bg-transparent border-transparent`}>
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
           <div className="flex items-center justify-between h-full">
             {/* Logo */}
             <div className="flex-shrink-0">
-              <Link href="/" className="text-xl font-extrabold tracking-tight hover:opacity-80 transition-opacity text-gray-900">
+              <Link href="/" className="text-lg font-extrabold hover:opacity-80 transition-opacity text-gray-900"> {/* ダークモード対応の文字色を追加 */}
                 SOKUTSUKU
               </Link>
             </div>
 
-            {/* Desktop Navigation Links */}
+            {/* Desktop Navigation Links - ★★★ 修正箇所 ★★★ */}
             <div className="hidden md:flex items-center space-x-1 lg:space-x-0">
               {navLinks.map((link) => (
                 <Button
@@ -76,9 +71,10 @@ const NavigationBar: React.FC = () => {
                   text={link.label}
                   href={link.href}
                   textSize={14}
-                  size="sm"
-                  className="mx-1 hover:text-[#1342F0] text-gray-900"
-                  noAnimation={true}
+                  size="sm" // パディングをsmに設定（Buttonコンポーネントのデフォルトはmd）
+                  // noAnimation={true} // ← これを削除するか false に設定
+                  className="mx-1 text-gray-900" // ホバー時の文字色変更を削除し、通常時の文字色を指定。下線は文字色に依存。
+                                                                 // Buttonコンポーネント側で relative が設定されているのでここでは不要。
                 />
               ))}
             </div>
@@ -89,9 +85,9 @@ const NavigationBar: React.FC = () => {
                 text="無料相談"
                 onClick={handleFreeConsultationClick}
                 textSize={14}
-                size="lg"
-                className="ml-4 text-white bg-gray-300 hover:bg-[#1342F0] focus:ring-indigo-500 shadow-sm"
-                noAnimation={true}
+                size="lg" // こちらのサイズは元のままで良いか確認
+                className="ml-4 text-white bg-gray-300 hover:bg-[#1342F0] focus:ring-indigo-500 shadow-sm" // このボタンのスタイルは元のまま
+                noAnimation={true} // このボタンは下線アニメーションなし
               />
             </div>
 
@@ -100,7 +96,7 @@ const NavigationBar: React.FC = () => {
               <button
                 onClick={toggleMobileMenu}
                 type="button"
-                className="inline-flex items-center justify-center p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 relative w-8 h-8 text-gray-900" // Xボタンを最前面に
+                className="inline-flex items-center justify-center p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 relative w-8 h-8 text-gray-900 dark:text-white" // ダークモード対応
                 aria-controls="mobile-menu"
                 aria-expanded={isMobileMenuOpen}
               >
@@ -127,24 +123,23 @@ const NavigationBar: React.FC = () => {
       <div
         className={`md:hidden fixed inset-0 z-30 transition-transform duration-300 ease-in-out transform ${isMobileMenuOpen ? 'translate-y-0' : '-translate-y-full'} ${menuGlassmorphismStyle}`}
         id="mobile-menu"
-        onClick={closeMobileMenu} // 背景クリックでメニューを閉じる
+        onClick={closeMobileMenu}
       >
-        {/* メニューコンテンツエリア (ナビゲーションバーの高さ分だけ上にパディング) */}
         <div
-          ref={menuRef} // コンテンツエリアへの参照
-          onClick={(e) => e.stopPropagation()} // メニューコンテンツ内のクリックが背景クリックとして伝播しないようにする
-          className={`px-6 pt-24 pb-12 space-y-6 flex flex-col items-center justify-center min-h-full`} // min-h-full に変更
+          ref={menuRef}
+          onClick={(e) => e.stopPropagation()}
+          className={`px-6 pt-24 pb-12 space-y-6 flex flex-col items-center justify-center min-h-full`}
         >
             {navLinks.map((link) => (
               <Button
                 key={`mobile-${link.label}`}
                 text={link.label}
                 href={link.href}
-                onClick={closeMobileMenu} // リンククリックでもメニューを閉じる
+                onClick={closeMobileMenu}
                 textSize={20}
                 size="lg"
-                className="block w-auto text-center text-gray-900 hover:text-indigo-600 py-3"
-                noAnimation={true}
+                className="block w-auto text-center text-gray-900 dark:text-white hover:text-indigo-600 dark:hover:text-indigo-400 py-3" // ダークモード対応
+                noAnimation={true} // モバイルメニューのリンクはアニメーションなし
               />
             ))}
             <div className="mt-10">
@@ -152,11 +147,11 @@ const NavigationBar: React.FC = () => {
                 text="無料相談"
                 onClick={() => {
                   handleFreeConsultationClick();
-                  closeMobileMenu(); // モーダルを開いたらメニューも閉じる
+                  closeMobileMenu();
                 }}
-                textSize={16} // ButtonコンポーネントのTextSizeKeyに合わせて16に変更
+                textSize={16}
                 size="lg"
-                className="w-auto text-center text-white bg-gray-600 hover:bg-indigo-700 rounded-lg px-8 py-3"
+                className="w-auto text-center text-white bg-gray-600 hover:bg-indigo-700 rounded-lg px-8 py-3" // モバイルの無料相談ボタンの色を調整
                 noAnimation={true}
               />
             </div>
