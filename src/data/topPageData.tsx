@@ -225,7 +225,7 @@ export const focusCardItems: FocusCardItem[] = [
 ];
 
 // 他のトップページ関連データもこのファイルにまとめることができます
-export const topPageTexts = {
+export const topPageFocusTexts = {
   focusCardSectionTitle: "戦略的なウェブサイトで、ビジネスの成長を加速させたい方へ。",
   focusCardSectionSubtitle: "ソクツクでは主要な工程で生成AIを活用し、低価格でも戦略性を持ったウェブサイト構築を可能にしました。",
 };
@@ -258,3 +258,9 @@ export const faqItems: AccordionItemData[] = [
     content: "まずは無料相談をお申し込みください。お客様のニーズをお伺いし、最適なプランをご提案します。お気軽にお問い合わせいただければと思います。"
   },
 ];
+
+// ★★★ ここからが追加・修正部分です ★★★
+// トップページで使用するテキスト情報をまとめたオブジェクト
+export const topPageFaqTexts = {
+  faqSectionTitle: "Any Questions?",
+};

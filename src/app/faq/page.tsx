@@ -1,14 +1,26 @@
-// src/app/contact/page.tsx
-import React from 'react';
+// src/app/faq/page.tsx
+"use client";
 
-const ContactPage: React.FC = () => {
+import React from 'react';
+import FaqSection from '@/components/sections/Faq'; // FaqSectionのパスを確認
+import { pricingFaqItems, pricingFaqTitle } from '@/data/faqPageData';
+
+const FAQPage: React.FC = () => {
   return (
-    <div className="flex items-center justify-center min-h-screen">
-      <h1 className="text-4xl font-bold">
-        faq
-      </h1>
-    </div>
+    <>
+      <main className="pt-20 bg-white"> {/* ヘッダー分の余白など */}
+        <FaqSection
+          id="pricing-faq" // セクションのID
+          title={pricingFaqTitle} // インポートしたタイトルを使用
+          items={pricingFaqItems} // インポートしたFAQアイテムを使用
+          headingAlign="left" // 例: FAQページではタイトルを中央揃え
+          headingClassName="!text-4xl !text-gray-300" // 例: タイトルを大きく、色を指定
+          accordionClassName="text-base" // 例: アコーディオン内の基本テキストサイズを 'text-base' (16px) に設定
+                                        // もし質問タイトルだけ変えたい場合は、Accordionコンポーネント側の改修が必要な場合があります。
+        />
+      </main>
+    </>
   );
 };
 
-export default ContactPage;
+export default FAQPage;

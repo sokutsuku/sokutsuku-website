@@ -1,27 +1,44 @@
-// components/sections/faq.tsx
-"use client"; // Accordion.tsx が "use client" のため、こちらもクライアントコンポーネントとします
+// components/sections/FaqSection.tsx
+"use client";
 
 import React from 'react';
-import SectionHeading from '@/components/elements/SectionHeading'; // SectionHeadingのパスを適切に設定してください
-import Accordion from '@/components/modules/Accordion'; // Accordionのパスを適切に設定してください
-import { faqItems } from '@/data/topPageData'; // FAQデータをインポート
+import SectionHeading from '@/components/elements/SectionHeading';
+import Accordion, { type AccordionItemData } from '@/components/modules/Accordion';
 
-const FaqSection: React.FC = () => {
+interface FaqSectionProps {
+  id?: string;
+  title: string;
+  items: AccordionItemData[];
+  className?: string;
+  headingClassName?: string; // ★ これで文字サイズや色を制御
+  accordionClassName?: string;
+  headingAlign?: 'left' | 'center' | 'right';
+  // headingTextColor?: string; // headingClassNameで色も指定するため、これは削除してもOK
+}
+
+const FaqSection: React.FC<FaqSectionProps> = ({
+  id = "faq",
+  title,
+  items,
+  className = "",
+  headingClassName = "", // デフォルトは空文字列
+  accordionClassName = "",
+  headingAlign = "left",
+  // headingTextColor, // headingClassNameで色を指定するため削除
+}) => {
   return (
-    <section id="faq" className="py-24 md:py-32 bg-white">
+    <section id={id} className={`py-24 md:py-32 bg-white ${className}`}> {/* ダークモード削除 */}
       <div className="max-w-7xl mx-auto px-3 lg:px-6">
-        {/* セクションヘッダー */}
         <SectionHeading
-          id="faq-heading"
-          title="Any Question ?"
+          id={`${id}-heading`}
+          title={title}
           tag="h2"
-          align="left"
-          textColor="text-gray-300"
-          className="mb-10 lg:!text-8xl"
+          align={headingAlign}
+          // textColor={headingTextColor} // ★ headingClassName で色も指定するため削除
+          // ★ className から固定の文字サイズ指定を削除し、headingClassName に委ねる
+          className={`mb-10 ${headingClassName}`}
         />
-
-        {/* アコーディオン */}
-        <Accordion items={faqItems} className="mx-auto" />
+        <Accordion items={items} className={`mx-auto ${accordionClassName}`} />
       </div>
     </section>
   );

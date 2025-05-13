@@ -1,7 +1,7 @@
 // src/components/sections/FocusCardSection.tsx (仮のパス)
 import React from 'react';
 // topPageData.tsx からデータをインポート
-import { focusCardItems, topPageTexts, FocusCardItem } from '@/data/topPageData';
+import { focusCardItems, topPageFocusTexts, FocusCardItem } from '@/data/topPageData';
 
 // FocusCardコンポーネントのProps型定義
 interface FocusCardProps {
@@ -31,10 +31,10 @@ const FocusCardSection = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-left mb-12 md:mb-16">
           <h2 className="text-2xl md:text-4xl font-extrabold text-gray-900">
-            {topPageTexts.focusCardSectionTitle}
+            {topPageFocusTexts.focusCardSectionTitle}
           </h2>
           <p className="mt-4 text-base md:text-xl text-gray-900 mx-auto whitespace-pre-line">
-            {topPageTexts.focusCardSectionSubtitle}
+            {topPageFocusTexts.focusCardSectionSubtitle}
           </p>
         </div>
 
