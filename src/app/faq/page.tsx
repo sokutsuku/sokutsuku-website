@@ -25,7 +25,7 @@ const FAQPage: React.FC = () => {
           title={pricingFaqTitle}
           items={pricingFaqItems}
           headingAlign="left"
-          headingClassName="sm:!text-2xl md:!text-4xl !text-gray-300" // 必要に応じて調整
+          headingClassName="!text-2xl md:!text-4xl !text-gray-300" // 必要に応じて調整
           accordionClassName="text-base"
           className="!pt-12 !pb-16"
         />
@@ -36,7 +36,7 @@ const FAQPage: React.FC = () => {
           title={deliveryFaqTitle}
           items={deliveryFaqItems}
           headingAlign="left"
-          headingClassName="sm:!text-2xl md:!text-4xl !text-gray-300"
+          headingClassName="!text-2xl md:!text-4xl !text-gray-300"
           accordionClassName="text-base"
           className="!pt-12 !pb-16"
         />
@@ -47,7 +47,7 @@ const FAQPage: React.FC = () => {
           title={contractPaymentFlowFaqTitle}
           items={contractPaymentFlowFaqItems}
           headingAlign="left"
-          headingClassName="sm:!text-2xl md:!text-4xl !text-gray-300"
+          headingClassName="!text-2xl md:!text-4xl !text-gray-300"
           accordionClassName="text-base"
           className="!pt-12 !pb-16"
         />
@@ -58,7 +58,7 @@ const FAQPage: React.FC = () => {
           title={revisionSupportFaqTitle}
           items={revisionSupportFaqItems}
           headingAlign="left"
-          headingClassName="sm:!text-2xl md:!text-4xl !text-gray-300"
+          headingClassName="!text-2xl md:!text-4xl !text-gray-300"
           accordionClassName="text-base"
           className="!pt-12 !pb-16"
         />

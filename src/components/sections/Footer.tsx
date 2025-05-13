@@ -50,7 +50,7 @@ const Footer: React.FC = () => {
                     textSize={14} // text-sm 相当
                     size="sm"     // パディングを小さめに
                     // noAnimation はデフォルトでfalseなので指定不要、または noAnimation={false}
-                    className="text-gray-700 dark:text-white dark:hover:text-white"
+                    className="text-gray-700 dark:hover:text-white"
                     // Buttonのafter:bg-currentがこの文字色を参照して下線の色になる
                   />
                 </li>
