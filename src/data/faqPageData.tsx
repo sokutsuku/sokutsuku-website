@@ -1,8 +1,9 @@
 // src/data/faqPageData.ts
 import { AccordionItemData } from '@/components/modules/Accordion';
 
-// FAQページに表示する「価格・お支払い関係」の質問と回答のリスト
+// --- 価格・お支払い関係のFAQデータ ---
 export const pricingFaqItems: AccordionItemData[] = [
+  // ... (既存の pricingFaqItems の内容) ...
   {
     id: 'pricing-faq-1',
     title: '支払いのタイミングはいつですか？',
@@ -34,6 +35,93 @@ export const pricingFaqItems: AccordionItemData[] = [
     content: '取得費用は含まれています。\nただし、維持費は御社でご負担頂きます。'
   },
 ];
-
-// FAQページの「価格・お支払い関係について」セクションのタイトル
 export const pricingFaqTitle = "価格・お支払い関係について";
+
+// --- 納期に関するFAQデータ --- (これは前回作成したもの)
+export const deliveryFaqItems: AccordionItemData[] = [
+  // ... (前回作成した deliveryFaqItems の内容、もしあれば) ...
+  // ご提供いただいたQ&A内容が価格と同一だったため、必要に応じて内容を修正してください。
+  // 例:
+  {
+    id: 'delivery-faq-1',
+    title: '最短でどれくらいの期間で納品できますか？',
+    content: 'ライトプラン：ヒアリング実施後、最短2週間で納品可能です。（テキスト・画像のご用意が完了している場合）スタンダードプラン：ヒアリング実施後、最短2週間で納品可能です。（テキスト・画像のご用意が完了している場合）プレミアムプラン：ヒアリング実施後、最短1ヶ月で納品可能です。（テキスト・画像のご用意が完了している場合'
+  },
+  {
+    id: 'delivery-faq-2',
+    title: '納期はどのように決まりますか？',
+    content: '制作するサイトのページ数によって変動いたします。また、クライアントさまからご提供頂く「画像・テキスト」の有無によっても変動いたします。'
+  },
+  {
+    id: 'delivery-faq-3',
+    title: '急ぎの依頼にも対応できますか？',
+    content: '可能です。'
+  },
+  {
+    id: 'delivery-faq-4',
+    title: '制作の進行状況を確認できますか？',
+    content: '可能です。'
+  },
+];
+export const deliveryFaqTitle = "納期について";
+
+// ★★★ 契約・支払いの流れに関するFAQデータ (新規追加) ★★★
+export const contractPaymentFlowFaqItems: AccordionItemData[] = [
+  {
+    id: 'contract-flow-faq-1',
+    title: '依頼から納品までの流れは？',
+    content: '以下のステップで進行します。1. 無料相談・ヒアリング（1～3日）2. ご契約 & 手付金お支払い（40%）（1日）3. デザイン・実装（最短1週間）4. 修正対応（2～5日）5. 実装完了後、残額60%支払い6. お支払い確認後、サイト公開 & 納品',
+  },
+  {
+    id: 'contract-flow-faq-2',
+    title: 'どのタイミングで支払いが発生しますか？',
+    content: '契約時に40%、実装完了後（公開前）に60%をお支払いいただきます。',
+  },
+  {
+    id: 'contract-flow-faq-3',
+    title: 'キャンセルはできますか？',
+    content: 'ご契約後のキャンセルはできません。',
+  },
+  {
+    id: 'contract-flow-faq-4',
+    title: '追加料金が発生するのはどんな場合ですか？',
+    content: 'オプションプランを選択しない限り、追加料金は発生しません。追加機能・修正をご希望の場合は、その都度お見積もりいたします。',
+  },
+  {
+    id: 'contract-flow-faq-5',
+    title: '法人・個人どちらでも依頼できますか？',
+    content: 'どちらでも依頼可能です。',
+  },
+  {
+    id: 'contract-flow-faq-6',
+    title: 'どのような契約方法になりますか？',
+    content: 'すべてオンラインでの契約となります。契約書のやり取りやお支払いもオンラインで完結可能です。',
+  },
+  {
+    id: 'contract-flow-faq-7',
+    title: '他社からの乗り換え（リニューアル）も対応可能ですか？',
+    content: '対応可能です。既存サイトのデータ移行やリニューアルもご相談ください。',
+  },
+];
+export const contractPaymentFlowFaqTitle = "契約・支払いについて";
+
+// ★★★ 修正・サポートに関するFAQデータ (新規追加) ★★★
+export const revisionSupportFaqItems: AccordionItemData[] = [
+  {
+    id: 'revision-support-faq-1',
+    title: '納品後に修正はできますか？',
+    content: '納品後、一週間以内であればテキスト・画像の変更など、軽微な修正は無償で対応いたします。大幅な修正や追加機能の開発については別途お見積もりとなります。',
+  },
+  {
+    id: 'revision-support-faq-2',
+    title: '更新やメンテナンスはどうすればいいですか？',
+    content: '基本的な運用（テキスト変更・画像差し替えなど）はご自身で行っていただけますが、必要に応じてサポートも可能です。 ',
+  },
+  {
+    id: 'revision-support-faq-3',
+    title: ' Webサイトの運用について相談できますか？',
+    content: '可能です。更新やメンテナンス、SEO対策、マーケティング施策など運用に関するご相談は、お問い合わせフォームまたはLINEにて受け付けています。',
+  },
+  // ... 「修正・サポート」に関する他のQ&Aを追加 ...
+];
+export const revisionSupportFaqTitle = "修正・サポート";

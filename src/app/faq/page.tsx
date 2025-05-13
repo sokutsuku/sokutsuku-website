@@ -2,21 +2,65 @@
 "use client";
 
 import React from 'react';
-import FaqSection from '@/components/sections/Faq'; // FaqSectionのパスを確認
-import { pricingFaqItems, pricingFaqTitle } from '@/data/faqPageData';
+import FaqSection from '@/components/sections/Faq';
+// ★ faqPageData.ts から必要なデータをすべてインポート
+import {
+  pricingFaqItems,
+  pricingFaqTitle,
+  deliveryFaqItems,
+  deliveryFaqTitle,
+  contractPaymentFlowFaqItems, // ★ 追加
+  contractPaymentFlowFaqTitle, // ★ 追加
+  revisionSupportFaqItems,     // ★ 追加
+  revisionSupportFaqTitle      // ★ 追加
+} from '@/data/faqPageData';
 
 const FAQPage: React.FC = () => {
   return (
     <>
-      <main className="pt-20 bg-white"> {/* ヘッダー分の余白など */}
+      <main className="pt-36 pb-72 bg-white">
+        {/* 価格・お支払い関係のFAQセクション */}
         <FaqSection
-          id="pricing-faq" // セクションのID
-          title={pricingFaqTitle} // インポートしたタイトルを使用
-          items={pricingFaqItems} // インポートしたFAQアイテムを使用
-          headingAlign="left" // 例: FAQページではタイトルを中央揃え
-          headingClassName="!text-4xl !text-gray-300" // 例: タイトルを大きく、色を指定
-          accordionClassName="text-base" // 例: アコーディオン内の基本テキストサイズを 'text-base' (16px) に設定
-                                        // もし質問タイトルだけ変えたい場合は、Accordionコンポーネント側の改修が必要な場合があります。
+          id="pricing-faq"
+          title={pricingFaqTitle}
+          items={pricingFaqItems}
+          headingAlign="left"
+          headingClassName="sm:!text-2xl md:!text-4xl !text-gray-300" // 必要に応じて調整
+          accordionClassName="text-base"
+          className="!pt-12 !pb-16"
+        />
+
+        {/* 納期についてのFAQセクション */}
+        <FaqSection
+          id="delivery-faq"
+          title={deliveryFaqTitle}
+          items={deliveryFaqItems}
+          headingAlign="left"
+          headingClassName="sm:!text-2xl md:!text-4xl !text-gray-300"
+          accordionClassName="text-base"
+          className="!pt-12 !pb-16"
+        />
+
+        {/* ★ 契約・支払いの流れについてのFAQセクション (新規追加) ★ */}
+        <FaqSection
+          id="contract-flow-faq"
+          title={contractPaymentFlowFaqTitle}
+          items={contractPaymentFlowFaqItems}
+          headingAlign="left"
+          headingClassName="sm:!text-2xl md:!text-4xl !text-gray-300"
+          accordionClassName="text-base"
+          className="!pt-12 !pb-16"
+        />
+
+        {/* ★ 修正・サポートについてのFAQセクション (新規追加) ★ */}
+        <FaqSection
+          id="revision-support-faq"
+          title={revisionSupportFaqTitle}
+          items={revisionSupportFaqItems}
+          headingAlign="left"
+          headingClassName="sm:!text-2xl md:!text-4xl !text-gray-300"
+          accordionClassName="text-base"
+          className="!pt-12 !pb-16"
         />
       </main>
     </>
