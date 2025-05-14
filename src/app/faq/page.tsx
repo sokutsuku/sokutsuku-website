@@ -9,17 +9,16 @@ import {
   pricingFaqTitle,
   deliveryFaqItems,
   deliveryFaqTitle,
-  contractPaymentFlowFaqItems, // ★ 追加
-  contractPaymentFlowFaqTitle, // ★ 追加
-  revisionSupportFaqItems,     // ★ 追加
-  revisionSupportFaqTitle      // ★ 追加
+  contractPaymentFlowFaqItems,
+  contractPaymentFlowFaqTitle,
+  revisionSupportFaqItems,
+  revisionSupportFaqTitle
 } from '@/data/faqPageData';
 
 const FAQPage: React.FC = () => {
   return (
     <>
-      <main className="pt-36 pb-72 bg-white">
-        {/* 価格・お支払い関係のFAQセクション */}
+      <main className="pt-36 pb-36 lg:pb-72 bg-white">
         <FaqSection
           id="pricing-faq"
           title={pricingFaqTitle}
@@ -30,7 +29,6 @@ const FAQPage: React.FC = () => {
           className="!pt-12 !pb-16"
         />
 
-        {/* 納期についてのFAQセクション */}
         <FaqSection
           id="delivery-faq"
           title={deliveryFaqTitle}
@@ -41,7 +39,6 @@ const FAQPage: React.FC = () => {
           className="!pt-12 !pb-16"
         />
 
-        {/* ★ 契約・支払いの流れについてのFAQセクション (新規追加) ★ */}
         <FaqSection
           id="contract-flow-faq"
           title={contractPaymentFlowFaqTitle}
@@ -52,7 +49,6 @@ const FAQPage: React.FC = () => {
           className="!pt-12 !pb-16"
         />
 
-        {/* ★ 修正・サポートについてのFAQセクション (新規追加) ★ */}
         <FaqSection
           id="revision-support-faq"
           title={revisionSupportFaqTitle}
