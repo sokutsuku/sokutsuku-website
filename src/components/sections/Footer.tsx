@@ -26,7 +26,7 @@ const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-white dark:bg-gray-300 text-gray-700 border-t border-gray-200 dark:border-gray-700">
+    <footer className="bg-white dark:bg-gray-200 text-gray-700 border-t border-gray-200 dark:border-gray-700">
       <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
         {/* 上部: ロゴとメインナビゲーション */}
         <div className="text-center mb-8 md:mb-10">
