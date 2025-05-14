@@ -40,7 +40,7 @@ const Footer: React.FC = () => {
             noAnimation={true} // 下線アニメーションはなし
           />
           <nav aria-label="フッターメインナビゲーション">
-            <ul className="flex flex-wrap justify-center items-center gap-x-4 sm:gap-x-6 gap-y-2"> {/* gapを少し調整 */}
+            <ul className="flex flex-wrap justify-center items-center gap-x-4 sm:gap-x-6 gap-y-2">
               {mainNavLinks.map((link) => (
                 <li key={link.label}>
                   {/* メインナビリンク: Buttonコンポーネントを使用し、下線アニメーションあり */}
@@ -49,9 +49,7 @@ const Footer: React.FC = () => {
                     href={link.href}
                     textSize={14} // text-sm 相当
                     size="sm"     // パディングを小さめに
-                    // noAnimation はデフォルトでfalseなので指定不要、または noAnimation={false}
                     className="text-gray-700 dark:hover:text-white"
-                    // Buttonのafter:bg-currentがこの文字色を参照して下線の色になる
                   />
                 </li>
               ))}
