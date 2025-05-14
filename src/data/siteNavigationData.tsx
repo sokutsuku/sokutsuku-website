@@ -9,7 +9,7 @@ export interface NavLink {
   export const commonSiteNavigationLinks: NavLink[] = [
     { href: '/service', label: 'Service', isPageLink: true },
     { href: '/faq', label: 'FAQ', isPageLink: true }, // ラベルをFAQで統一 (または必要なら使い分け)
-    { href: '/contact-page', label: 'Contact', isPageLink: true },
+    { href: '/contact', label: 'Contact', isPageLink: true },
     { href: '/blog', label: 'Blog', isPageLink: true },
   ];
 
