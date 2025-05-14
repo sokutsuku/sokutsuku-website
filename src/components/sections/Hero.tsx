@@ -9,7 +9,7 @@ interface HeroSectionProps {
 }
 
 const HeroSection: React.FC<HeroSectionProps> = ({
-  mainTitle = "売るための\nウェブサイト制作",
+  mainTitle = "成果にフォーカスした\nウェブサイト制作",
   description = "伝えたいことにフォーカスした、戦略性高いウェブサイト構築を生成AIと共に実現。",
   id = "hero",
 }) => {
