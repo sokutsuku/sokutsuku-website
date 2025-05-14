@@ -1,31 +1,24 @@
-// components/layout/NavigationBar.tsx
 "use client";
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import Button from '@/components/elements/Button'; // Buttonコンポーネントのパスを確認してください
-import { useModal } from '@/contexts/ModalContext'; // ModalContextからフックをインポート
-
-interface NavLinkItem {
-  href: string;
-  label: string;
-}
-
-const navLinks: NavLinkItem[] = [
-  { href: '#problem', label: 'Problem' },
-  { href: '#solution', label: 'Solution' },
-  { href: '#timeline', label: 'timeline' },
-  { href: '#pricing', label: 'pricing' },
-  { href: '#contact', label: 'contact' },
-];
+import Button from '@/components/elements/Button';
+import { useModal } from '@/contexts/ModalContext';
+import { usePathname } from 'next/navigation';
+import { headerTopPageScrollLinks } from '@/data/siteNavigationData';
 
 const NavigationBar: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { openModal } = useModal();
-  const menuRef = useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
+
+  const currentNavLinks = pathname === '/' ? headerTopPageScrollLinks : [];
 
   const handleFreeConsultationClick = () => {
     openModal();
+    if (isMobileMenuOpen) {
+      setIsMobileMenuOpen(false);
+    }
   };
 
   const toggleMobileMenu = () => {
@@ -35,9 +28,6 @@ const NavigationBar: React.FC = () => {
   const closeMobileMenu = () => {
     setIsMobileMenuOpen(false);
   };
-
-  const navbarHeight = 'h-20';
-  const menuGlassmorphismStyle = 'bg-white/10 backdrop-filter backdrop-blur-md shadow-xl border-t border-gray-200/30';
 
   useEffect(() => {
     if (isMobileMenuOpen) {
@@ -52,51 +42,45 @@ const NavigationBar: React.FC = () => {
 
   return (
     <>
-      {/* Navigation Bar Area */}
-      <nav className={`fixed w-full z-40 top-0 left-0 transition-colors duration-300 ease-in-out ${navbarHeight} bg-transparent border-transparent`}>
+      <nav className="fixed w-full z-40 top-0 left-0 transition-colors duration-300 ease-in-out h-20">
         <div className="max-w-screen-xl mx-auto px-4 h-full">
           <div className="flex items-center justify-between h-full">
-            {/* Logo */}
             <div className="flex-shrink-0">
-              <Link href="/" className="text-lg font-extrabold hover:opacity-80 transition-opacity text-gray-900"> {/* ダークモード対応の文字色を追加 */}
+              <Link href="/" onClick={closeMobileMenu} className="text-lg font-extrabold hover:text-[#1342F0] transition-colors duration-300 text-gray-900">
                 SOKUTSUKU
               </Link>
             </div>
 
-            {/* Desktop Navigation Links - ★★★ 修正箇所 ★★★ */}
             <div className="hidden md:flex items-center space-x-1 lg:space-x-0">
-              {navLinks.map((link) => (
+              {currentNavLinks.map((link) => (
                 <Button
                   key={link.label}
                   text={link.label}
                   href={link.href}
+                  onClick={closeMobileMenu}
                   textSize={14}
-                  size="sm" // パディングをsmに設定（Buttonコンポーネントのデフォルトはmd）
-                  // noAnimation={true} // ← これを削除するか false に設定
-                  className="mx-1 text-gray-900" // ホバー時の文字色変更を削除し、通常時の文字色を指定。下線は文字色に依存。
-                                                                 // Buttonコンポーネント側で relative が設定されているのでここでは不要。
+                  size="sm"
+                  className="mx-1 text-gray-900"
                 />
               ))}
             </div>
 
-            {/* Free Consultation Button (Desktop) */}
             <div className="hidden md:block">
               <Button
                 text="無料相談する"
                 onClick={handleFreeConsultationClick}
-                textSize={14}
-                size="lg" // こちらのサイズは元のままで良いか確認
-                className="ml-4 text-white bg-gray-300 hover:bg-[#1342F0] focus:ring-indigo-500 shadow-sm" // このボタンのスタイルは元のまま
-                noAnimation={true} // このボタンは下線アニメーションなし
+                textSize={12}
+                size="lg"
+                className="ml-4 text-white bg-gray-300 hover:bg-[#1342F0]"
+                noAnimation={true}
               />
             </div>
 
-            {/* Mobile Menu Button */}
             <div className="md:hidden flex items-center">
               <button
                 onClick={toggleMobileMenu}
                 type="button"
-                className="inline-flex items-center justify-center p-2 rounded-md focus:outline-none relative w-8 h-8 text-gray-900" // ダークモード対応
+                className="inline-flex items-center justify-center p-2 rounded-md focus:outline-none relative w-8 h-8 text-gray-900"
                 aria-controls="mobile-menu"
                 aria-expanded={isMobileMenuOpen}
               >
@@ -119,42 +103,37 @@ const NavigationBar: React.FC = () => {
         </div>
       </nav>
 
-      {/* Mobile Menu (Fullscreen, Slide down from top, Glassmorphism) */}
       <div
-        className={`md:hidden fixed inset-0 z-30 transition-transform duration-300 ease-in-out transform ${isMobileMenuOpen ? 'translate-y-0' : '-translate-y-full'} ${menuGlassmorphismStyle}`}
+        className={`md:hidden fixed inset-0 z-30 transition-transform duration-300 ease-in-out transform ${isMobileMenuOpen ? 'translate-y-0' : '-translate-y-full'} bg-white/10 backdrop-filter backdrop-blur-lg shadow-xl border-t border-gray-200/60`}
         id="mobile-menu"
         onClick={closeMobileMenu}
       >
         <div
-          ref={menuRef}
           onClick={(e) => e.stopPropagation()}
-          className={`px-6 pt-24 pb-12 space-y-6 flex flex-col items-center justify-center min-h-full`}
+          className="px-6 pt-24 pb-12 space-y-6 flex flex-col items-center justify-center min-h-full"
         >
-            {navLinks.map((link) => (
-              <Button
-                key={`mobile-${link.label}`}
-                text={link.label}
-                href={link.href}
-                onClick={closeMobileMenu}
-                textSize={20}
-                size="lg"
-                className="block w-auto text-center text-gray-900 py-3" // ダークモード対応
-                noAnimation={true} // モバイルメニューのリンクはアニメーションなし
-              />
-            ))}
-            <div className="mt-10">
-              <Button
-                text="無料相談する"
-                onClick={() => {
-                  handleFreeConsultationClick();
-                  closeMobileMenu();
-                }}
-                textSize={12}
-                size="lg"
-                className="w-auto text-gray-900 text-center bg-gray-300 hover:bg-indigo-700 rounded-base px-8 py-3" // モバイルの無料相談ボタンの色を調整
-                noAnimation={true}
-              />
-            </div>
+          {currentNavLinks.map((link) => (
+            <Button
+              key={`mobile-${link.label}`}
+              text={link.label}
+              href={link.href}
+              onClick={closeMobileMenu}
+              textSize={20}
+              size="lg"
+              className="block w-auto text-center text-gray-900 hover:text-indigo-600 py-3"
+              noAnimation={true}
+            />
+          ))}
+          <div className="mt-10">
+            <Button
+              text="無料相談する"
+              onClick={handleFreeConsultationClick}
+              textSize={14}
+              size="lg"
+              className="w-auto text-center text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg px-8 py-3"
+              noAnimation={true}
+            />
+          </div>
         </div>
       </div>
     </>
