@@ -1,13 +1,13 @@
-// src/components/modules/ContactForm.tsx (新規作成)
+// src/components/modules/ContactForm.tsx
 "use client";
 
-import React, { useState } from 'react'; // useRefはキーボード調整が不要なら削除可
-import { useForm, SubmitHandler } from 'react-hook-form';
+import React, { useState } from 'react';
+// ★ FieldErrors と UseFormReturn をインポート
+import { useForm, SubmitHandler, FieldErrors, UseFormReturn } from 'react-hook-form';
 import InputField from '@/components/elements/InputField';
 import TextareaField from '@/components/elements/TextareaField';
 import Button from '@/components/elements/Button';
 
-// フォームデータの型定義 (外部で共通化しても良い)
 export interface ContactFormData {
   lastName: string;
   firstName: string;
@@ -17,16 +17,16 @@ export interface ContactFormData {
   message?: string;
 }
 
-// ContactFormコンポーネントのProps型定義 (オプション)
 interface ContactFormProps {
-  onSubmitSuccess?: (data: ContactFormData) => void; // 送信成功時のコールバック
-  onSubmitError?: (errors: any) => void; // 送信失敗時のコールバック
-  className?: string; // フォーム全体への追加クラス
+  onSubmitSuccess?: (data: ContactFormData) => void;
+  // ★ onSubmitError の引数の型を FieldErrors<ContactFormData> に修正
+  onSubmitError?: (errors: FieldErrors<ContactFormData>) => void;
+  className?: string;
 }
 
 const ContactForm: React.FC<ContactFormProps> = ({
   onSubmitSuccess,
-  onSubmitError,
+  onSubmitError, // ★ この onSubmitError はバリデーションエラー時に呼ばれる
   className = '',
 }) => {
   const {
@@ -34,7 +34,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
     handleSubmit,
     reset,
     formState: { errors, isSubmitting },
-  } = useForm<ContactFormData>({
+  }: UseFormReturn<ContactFormData> = useForm<ContactFormData>({ // ★ UseFormReturn<ContactFormData> を明示
     mode: 'onChange',
     defaultValues: {
       lastName: '',
@@ -48,60 +48,61 @@ const ContactForm: React.FC<ContactFormProps> = ({
 
   const [submitStatus, setSubmitStatus] = useState<'success' | 'error' | null>(null);
 
-  // const activeInputRef = useRef<HTMLInputElement | HTMLTextAreaElement | null>(null);
-  // const handleInputFocus = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-  //   activeInputRef.current = e.target;
-  //   // 必要ならキーボード調整ロジック
-  // };
-
   const processForm: SubmitHandler<ContactFormData> = async (data) => {
     setSubmitStatus(null);
     console.log('Contact Form Submitted Data:', data);
 
-    // ここで実際のフォーム送信処理（APIへのPOSTなど）を行います
-    // 例:
-    // try {
-    //   const response = await fetch('/api/contact', { /* ... */ });
-    //   if (response.ok) {
-    //     setSubmitStatus('success');
-    //     reset();
-    //     if (onSubmitSuccess) onSubmitSuccess(data);
-    //   } else {
-    //     const errorData = await response.json();
-    //     setSubmitStatus('error');
-    //     if (onSubmitError) onSubmitError(errorData);
-    //   }
-    // } catch (error) {
-    //   console.error('Form submission error:', error);
-    //   setSubmitStatus('error');
-    //   if (onSubmitError) onSubmitError(error);
-    // }
-
-    // ダミーの送信処理
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    if (Math.random() > 0.3) {
-      setSubmitStatus('success');
-      reset();
-      if (onSubmitSuccess) onSubmitSuccess(data);
-    } else {
+    // ダミーのAPI送信処理
+    try {
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      if (Math.random() > 0.3) { // 成功したと仮定
+        setSubmitStatus('success');
+        reset();
+        if (onSubmitSuccess) onSubmitSuccess(data);
+      } else { // API送信自体が失敗したと仮定
+        throw new Error("Simulated API submission failure");
+      }
+    } catch (error) {
+      console.error('Form submission error (API level):', error);
       setSubmitStatus('error');
-      if (onSubmitError) onSubmitError(errors); // ここでは react-hook-form の errors を渡す例
+      // APIレベルのエラーの場合、RHFのerrorsオブジェクトとは異なる独自のエラー情報を
+      // onSubmitErrorコールバックに渡すか、あるいは汎用的なエラー処理を行う。
+      // ここでは、RHFのerrorsとは異なるエラーであることを示すために空のオブジェクトを渡すか、
+      // もしくは専用のエラーメッセージを渡す。
+      // RHFのバリデーションエラーは handleSubmit の第2引数で処理される。
+      if (onSubmitError) {
+        // この onSubmitError はページ側で定義したもので、API送信失敗時に呼びたいもの
+        // react-hook-form のバリデーションエラーとは別物として扱う
+        onSubmitError({} as FieldErrors<ContactFormData>); // API送信失敗を示す (空のエラーオブジェクトなど)
+      }
     }
   };
+
+  // ★ バリデーションエラー時の処理 (handleSubmitの第2引数に渡す)
+  const onValidationErrors = (validationErrors: FieldErrors<ContactFormData>) => {
+    console.log("Form validation errors:", validationErrors);
+    setSubmitStatus(null); // 送信試行はしたがバリデーションで失敗した
+    if (onSubmitError) {
+      onSubmitError(validationErrors); // ページ側のエラーハンドラにRHFのエラーを渡す
+    }
+  };
+
 
   if (submitStatus === 'success') {
     return (
       <div className="text-center py-8">
-        <svg className="w-16 h-16 text-green-500 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+        <svg className="w-16 h-16 text-green-500 mx-auto mb-4" /* ... */ >
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
         <h3 className="text-xl font-semibold text-gray-900 mb-2">送信完了</h3>
         <p className="text-gray-600">お問い合わせありがとうございます。内容を確認後、担当者よりご連絡いたします。</p>
-        {/* 必要であれば、フォームに戻るボタンなどを追加 */}
       </div>
     );
   }
 
   return (
-    <form onSubmit={handleSubmit(processForm)} className={`space-y-0 ${className}`}>
+    // ★ handleSubmit の第2引数にバリデーションエラー時のハンドラ onValidationErrors を渡す
+    <form onSubmit={handleSubmit(processForm, onValidationErrors)} className={`space-y-0 ${className}`}>
       <div className="grid grid-cols-1 sm:grid-cols-2 sm:gap-x-4">
         <InputField
           label="姓"
@@ -111,7 +112,6 @@ const ContactForm: React.FC<ContactFormProps> = ({
           isRequired={true}
           placeholder="例：山田"
           disabled={isSubmitting}
-          // onFocusCapture={handleInputFocus}
           autoComplete="family-name"
           containerClassName="mb-5 sm:mb-0"
         />
@@ -123,7 +123,6 @@ const ContactForm: React.FC<ContactFormProps> = ({
           isRequired={true}
           placeholder="例：太郎"
           disabled={isSubmitting}
-          // onFocusCapture={handleInputFocus}
           autoComplete="given-name"
           containerClassName="mb-5"
         />
@@ -137,7 +136,6 @@ const ContactForm: React.FC<ContactFormProps> = ({
         isRequired={true}
         placeholder="例：株式会社〇〇"
         disabled={isSubmitting}
-        // onFocusCapture={handleInputFocus}
         autoComplete="organization"
       />
       <InputField
@@ -152,7 +150,6 @@ const ContactForm: React.FC<ContactFormProps> = ({
         isRequired={true}
         placeholder="例：090-1234-5678"
         disabled={isSubmitting}
-        // onFocusCapture={handleInputFocus}
         autoComplete="tel"
       />
       <InputField
@@ -167,7 +164,6 @@ const ContactForm: React.FC<ContactFormProps> = ({
         isRequired={true}
         placeholder="例：your@email.com"
         disabled={isSubmitting}
-        // onFocusCapture={handleInputFocus}
         autoComplete="email"
       />
       <TextareaField
@@ -177,13 +173,12 @@ const ContactForm: React.FC<ContactFormProps> = ({
         error={errors.message}
         placeholder="ご質問、ご相談などお気軽にご記入ください。"
         disabled={isSubmitting}
-        // onFocusCapture={handleInputFocus}
         rows={5}
       />
 
-      {submitStatus === 'error' && (
+      {submitStatus === 'error' && ( // ★ このエラーは主にAPI送信失敗時のもの
         <p className="mt-4 text-sm text-red-600">
-          送信に失敗しました。お手数ですが、再度お試しください。
+          送信に失敗しました。お手数ですが、内容をご確認の上もう一度お試しいただくか、しばらく経ってから再度お試しください。
         </p>
       )}
 
