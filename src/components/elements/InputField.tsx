@@ -31,7 +31,7 @@ const InputField: React.FC<InputFieldProps> = ({
                            //    今回は、props名を register のままにし、呼び出し側で {...register("name")} のようにする想定に戻します。
   error,
   isRequired,
-  inputClassName = '',
+  inputClassName = '!text-gray-500',
   containerClassName = '',
   labelClassName = '',
   errorClassName = '',

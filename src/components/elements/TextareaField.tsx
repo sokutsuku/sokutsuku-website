@@ -26,7 +26,7 @@ const TextareaField: React.FC<TextareaFieldProps> = ({
   error,
   isRequired,
   rows = 5, // デフォルトの行数
-  textareaClassName = '',
+  textareaClassName = '!text-gray-500',
   containerClassName = '',
   labelClassName = '',
   errorClassName = '',
