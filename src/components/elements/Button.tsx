@@ -8,19 +8,22 @@ type TextSizeKey = 8 | 10 | 12 | 14 | 16 | 20 | 24;
 type SizeKey = 'sm' | 'md' | 'lg';
 
 type ButtonProps = {
-  text?: string; // オプショナルに変更 (children を使う場合のため)
-  children?: React.ReactNode; // children を受け取れるように
+  text?: string;
+  children?: React.ReactNode;
   textSize?: TextSizeKey;
   size?: SizeKey;
   href?: string;
   onClick?: (event: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => void;
   noAnimation?: boolean;
   className?: string;
-  type?: "button" | "submit" | "reset"; // ★ type プロパティを追加
-  disabled?: boolean; // ★ disabled プロパティを追加 (HTMLButtonElementの属性)
-  // 必要に応じて他のHTMLButtonElementやHTMLAnchorElementの属性も追加可能
-  // 例: aria-label, role など
-  [key: string]: any; // ★ その他の属性を受け付けるためにインデックスシグネチャを追加 (roleなどに対応)
+  type?: "button" | "submit" | "reset";
+  disabled?: boolean;
+  role?: string; // ★ role を明示的に追加
+  'aria-label'?: string; // ★ aria-label を明示的に追加 (ケバブケースなのでクォートで囲む)
+  // 他にもよく使うaria属性などがあればここに追加
+  // [key: string]: any; // ESLintエラーを避けるため、より具体的な型を検討するか、一旦コメントアウト
+  // もし本当に任意の属性を許可したい場合は、ESLintルールを部分的に無効化するか、unknown を使う
+  [key: string]: unknown; // ★ any の代わりに unknown を使用 (より型安全)
 };
 
 const textSizeClasses: Record<TextSizeKey, string> = {
@@ -44,9 +47,9 @@ export default function Button({
   onClick,
   noAnimation = false,
   className = '',
-  type = "button", // ★ type のデフォルト値を "button" に設定
-  disabled,      // ★ disabled を受け取る
-  ...rest        // ★ 残りのprops (roleなど) を受け取る
+  type = "button",
+  disabled,
+  ...rest // role, aria-label などがここに入る
 }: ButtonProps) {
 
   const animationClasses = noAnimation ? '' : `
@@ -86,7 +89,7 @@ export default function Button({
         className={buttonClass}
         onClick={onClick}
         {...(isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-        {...rest} // ★ Link にも残りのpropsを渡す (roleなど)
+        {...rest}
       >
         {content}
       </Link>
@@ -94,11 +97,11 @@ export default function Button({
   } else {
     return (
       <button
-        type={type} // ★ type プロパティを適用
+        type={type}
         className={buttonClass}
         onClick={onClick}
-        disabled={disabled} // ★ disabled属性を適用
-        {...rest} // ★ button にも残りのpropsを渡す
+        disabled={disabled}
+        {...rest}
       >
         {content}
       </button>
