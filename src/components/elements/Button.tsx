@@ -20,9 +20,6 @@ type ButtonProps = {
   disabled?: boolean;
   role?: string; // ★ role を明示的に追加
   'aria-label'?: string; // ★ aria-label を明示的に追加 (ケバブケースなのでクォートで囲む)
-  // 他にもよく使うaria属性などがあればここに追加
-  // [key: string]: any; // ESLintエラーを避けるため、より具体的な型を検討するか、一旦コメントアウト
-  // もし本当に任意の属性を許可したい場合は、ESLintルールを部分的に無効化するか、unknown を使う
   [key: string]: unknown; // ★ any の代わりに unknown を使用 (より型安全)
 };
 

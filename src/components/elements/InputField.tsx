@@ -5,9 +5,6 @@ import React from 'react';
 import { UseFormRegisterReturn, FieldError } from 'react-hook-form';
 import FormField from './FormField'; // ★ FormFieldをインポート
 
-// InputFieldコンポーネントのProps型定義
-// FormFieldに渡すprops (labelClassName, errorClassName, containerClassName) は
-// FormField側で受け取るため、ここでは input要素自体に適用する inputClassName のみ残す
 interface InputFieldProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'name'> {
   label: string;
   name: string;
@@ -25,10 +22,7 @@ const InputField: React.FC<InputFieldProps> = ({
   label,
   name,
   type = 'text',
-  register: registerProps, // ★ props名を register から registerProps に変更 (展開時に分かりやすくするため)
-                           //    または、呼び出し側で register={register("name")} のようにし、
-                           //    このコンポーネントでは register として受け取る
-                           //    今回は、props名を register のままにし、呼び出し側で {...register("name")} のようにする想定に戻します。
+  register: registerProps,
   error,
   isRequired,
   inputClassName = '!text-gray-500',
