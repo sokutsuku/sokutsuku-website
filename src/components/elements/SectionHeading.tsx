@@ -49,7 +49,7 @@ const SectionHeading: React.FC<SectionHeadingProps> = ({
         {title}
       </HeadingTag>
       {description && (
-        <p className={`mt-4 text-lg text-gray-900 max-w-3xl whitespace-pre-line ${alignmentClass === 'text-center' ? 'mx-auto' : ''} ${descriptionClassName}`}>
+        <p className={`mt-4 text-lg text-gray-900 max-w-7xl whitespace-pre-line ${alignmentClass === 'text-center' ? 'mx-auto' : ''} ${descriptionClassName}`}>
           {description}
         </p>
       )}

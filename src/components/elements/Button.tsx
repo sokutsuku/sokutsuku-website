@@ -1,51 +1,54 @@
-'use client'; // onClick を使うため Client Component
+// components/elements/Button.tsx
+'use client';
 
 import React from "react";
 import Link from "next/link";
 
-// --- 型定義 ---
-// Props で受け付ける具体的な値の型
 type TextSizeKey = 8 | 10 | 12 | 14 | 16 | 20 | 24;
 type SizeKey = 'sm' | 'md' | 'lg';
 
-// Button コンポーネントの Props の型定義
 type ButtonProps = {
-  text: string;
-  textSize?: TextSizeKey;     // 文字サイズ (個別指定用)
-  size?: SizeKey;             // パディングサイズ ('sm', 'md', 'lg')
-  href?: string;              // リンク先 URL
+  text?: string; // オプショナルに変更 (children を使う場合のため)
+  children?: React.ReactNode; // children を受け取れるように
+  textSize?: TextSizeKey;
+  size?: SizeKey;
+  href?: string;
   onClick?: (event: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => void;
-  noAnimation?: boolean;      // アニメーションを無効にするか (デフォルト: false)
-  className?: string;         // 外部から追加する CSS クラス (文字色などもここで指定)
+  noAnimation?: boolean;
+  className?: string;
+  type?: "button" | "submit" | "reset"; // ★ type プロパティを追加
+  disabled?: boolean; // ★ disabled プロパティを追加 (HTMLButtonElementの属性)
+  // 必要に応じて他のHTMLButtonElementやHTMLAnchorElementの属性も追加可能
+  // 例: aria-label, role など
+  [key: string]: any; // ★ その他の属性を受け付けるためにインデックスシグネチャを追加 (roleなどに対応)
 };
 
-// --- マッピング定義 ---
-// textSize Props の値に対応する Tailwind クラス
 const textSizeClasses: Record<TextSizeKey, string> = {
    8: 'text-[8px]', 10: 'text-[10px]', 12: 'text-xs',
   14: 'text-sm', 16: 'text-base', 20: 'text-xl',
   24: 'text-2xl',
 };
 
-// size Props の値に対応する Tailwind パディングクラス
 const sizePaddingClasses: Record<SizeKey, string> = {
-  sm: 'py-1 px-2', // 上下 4px, 左右 8px
-  md: 'py-2 px-4', // 上下 8px, 左右 16px
-  lg: 'py-3 px-6', // 上下 12px, 左右 24px
+  sm: 'py-1 px-2',
+  md: 'py-2 px-4',
+  lg: 'py-3 px-6',
 };
 
-// --- コンポーネント本体 ---
 export default function Button({
   text,
+  children,
   textSize = 16,
   size = 'md',
   href,
   onClick,
   noAnimation = false,
   className = '',
+  type = "button", // ★ type のデフォルト値を "button" に設定
+  disabled,      // ★ disabled を受け取る
+  ...rest        // ★ 残りのprops (roleなど) を受け取る
 }: ButtonProps) {
 
-  // アニメーション用のクラス (noAnimationがtrueなら空文字)
   const animationClasses = noAnimation ? '' : `
     after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5
     after:bg-current after:rounded-full
@@ -53,29 +56,28 @@ export default function Button({
     hover:after:w-full focus:after:w-full disabled:after:w-0
   `;
 
-  // 基本的なレイアウト、状態、フォーカス等のスタイル
   const baseStyles = `
-    flex items-center justify-center /* テキスト中央揃え */
-    rounded                         /* 角丸 */
-    font-semibold                 /* 文字太さ */
-    cursor-pointer                /* カーソル */
-    transition-colors duration-300 /* 文字色などの変化を滑らかに */
-    focus:outline-none            /* フォーカスアウトライン削除 */
-    disabled:opacity-50           /* disabled 時の見た目 */
-    disabled:cursor-not-allowed /* disabled 時のカーソル */
-    relative                      /* アニメーション有無に関わらず relative を基本にする */
+    flex items-center justify-center
+    rounded
+    font-semibold
+    cursor-pointer
+    transition-colors duration-300
+    focus:outline-none
+    disabled:opacity-50
+    disabled:cursor-not-allowed
+    relative
   `;
 
-  // スタイルクラスを全て結合
   const buttonClass = `
     ${baseStyles}
     ${textSizeClasses[textSize]}
-    ${sizePaddingClasses[size]}     {/* ← size="md" なら py-2 px-4 (上下8px) が適用 */}
-    ${animationClasses}           {/* ← アニメーションクラス (pb-1 は含まない) */}
+    ${sizePaddingClasses[size]}
+    ${animationClasses}
     ${className}
   `.replace(/\s+/g, ' ').trim();
 
-  // href の有無で Link か button かを決定
+  const content = children || text;
+
   if (href) {
     const isExternal = href.startsWith('http');
     return (
@@ -84,18 +86,21 @@ export default function Button({
         className={buttonClass}
         onClick={onClick}
         {...(isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+        {...rest} // ★ Link にも残りのpropsを渡す (roleなど)
       >
-        {text}
+        {content}
       </Link>
     );
   } else {
     return (
       <button
-        type="button"
+        type={type} // ★ type プロパティを適用
         className={buttonClass}
         onClick={onClick}
+        disabled={disabled} // ★ disabled属性を適用
+        {...rest} // ★ button にも残りのpropsを渡す
       >
-        {text}
+        {content}
       </button>
     );
   }
