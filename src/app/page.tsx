@@ -8,7 +8,6 @@ import ProblemSection from '@/components/sections/Problem';
 import SolutionSection from '@/components/sections/Solution';
 import WhySokutsukuSection from '@/components/sections/WhySokutsuku';
 import TimelineSection from '@/components/sections/Timeline';
-import PricingSection from '@/components/sections/Pricing';
 import FocusSection from '@/components/sections/Focus';
 import FaqSection from '@/components/sections/Faq'; // FaqSection のインポートパスを確認
 import ContactSection from '@/components/sections/Contact';
@@ -35,7 +34,6 @@ export default function HomePage() {
         <SolutionSection />
         <WhySokutsukuSection />
         <TimelineSection />
-        <PricingSection />
         <FocusSection />
         {/* ★ FaqSection の呼び出しに headingClassName を追加 */}
         <FaqSection

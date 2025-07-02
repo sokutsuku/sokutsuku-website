@@ -17,7 +17,7 @@ const ContactSection: React.FC = () => {
   return (
     <>
       <section id="contact" className="py-24 md:py-32 lg:py-40 h-[100vh] bg-gray-100 flex items-center justify-center">
-        <div className="mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div className="mx-auto px-4 sm:px-6 lg:px-8 text-left">
           <div
             onClick={handleOpenModal} // ★ 変更: useModal の openModal を呼び出す
             className="inline-block cursor-pointer group"
@@ -29,7 +29,7 @@ const ContactSection: React.FC = () => {
               id="contact-heading"
               title="Contact us...?"
               tag="h2"
-              align="center"
+              align="left"
               className="!text-gray-900 group-hover:!text-blue-600 !text-[3.5rem] md:!text-8xl lg:!text-[9rem] xl:!text-[12rem] transition-colors duration-300"
             />
           </div>

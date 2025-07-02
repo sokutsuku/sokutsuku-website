@@ -114,77 +114,7 @@ export interface PricingPlanData {
   highlight?: boolean;
 }
 
-export const pricingPlansData: PricingPlanData[] = [
-  {
-    planName: "ライトプラン",
-    price: "¥ 99,000",
-    priceNote: "¥ 90,000 (税抜)",
-    features: [
-      "セミオリジナルデザイン",
-      "1~2ページ",
-      "スマホ対応",
-      "問い合わせフォーム",
-      "ドメイン取得代行",
-      "サーバー契約代行",
-      "SSL証明書設定",
-      "SNSリンク設置",
-    ],
-    highlight: false,
-  },
-  {
-    planName: "スタンダードプラン",
-    price: "¥ 198,000",
-    priceNote: "¥ 180,000 (税抜)",
-    features: [
-      "セミオリジナルデザイン",
-      "1~5ページ",
-      "顧客・競合・市場分析",
-      "STP分析",
-      "KGI / KPI設定",
-      "スマホ対応",
-      "問い合わせフォーム",
-      "ドメイン取得代行",
-      "サーバー契約代行",
-      "SEO対策",
-      "MEO対策",
-      "SSL証明書設定",
-      "SNSリンク設置",
-      "WEB分析ツールとの連携",
-      "AIテキストコンテンツ生成 (一部)",
-    ],
-    highlight: true,
-  },
-  {
-    planName: "プレミアムプラン",
-    price: "¥ 594,000",
-    priceNote: "¥ 540,000 (税抜)",
-    features: [
-      "セミオリジナルデザイン",
-      "1~5ページ",
-      "顧客・競合・市場分析",
-      "STP分析",
-      "KGI / KPI設定",
-      "スマホ対応",
-      "問い合わせフォーム",
-      "ドメイン取得代行",
-      "サーバー契約代行",
-      "SEO対策",
-      "MEO対策",
-      "LLMO対策",
-      "SSL証明書設定",
-      "SNSリンク設置",
-      "WEB分析ツールとの連携",
-      "AIテキストコンテンツ生成",
-      "AI画像生成",
-      "アニメーション",
-      "デザイン決定前の修正 (例: 3回)",
-      "デザイン決定後の修正 (例: 1回)",
-      "納期 (例: 約2ヶ月〜)",
-      "運用サポート (例: 3ヶ月)",
-    ],
-    highlight: false,
-  },
-];
+export const pricingPlansData: PricingPlanData[] = [];
 
 // src/data/topPageData.tsx (または適切なパス)
 
