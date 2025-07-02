@@ -5,7 +5,7 @@ import React from 'react';
 import SectionHeading from '@/components/elements/SectionHeading';
 import ContactForm, { type ContactFormData } from '@/components/modules/ContactForm';
 import { type FieldErrors } from 'react-hook-form';
-import Image from 'next/image'; // Imageコンポーネントをインポート
+
 
 // 仮のメンバーデータ
 const teamMembers = [
