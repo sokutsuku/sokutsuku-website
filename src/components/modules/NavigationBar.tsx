@@ -5,14 +5,14 @@ import Link from 'next/link';
 import Button from '@/components/elements/Button';
 import { useModal } from '@/contexts/ModalContext';
 import { usePathname } from 'next/navigation';
-import { headerTopPageScrollLinks } from '@/data/siteNavigationData';
+import { headerTopPageScrollLinks, commonSiteNavigationLinks } from '@/data/siteNavigationData';
 
 const NavigationBar: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { openModal } = useModal();
   const pathname = usePathname();
 
-  const currentNavLinks = pathname === '/' ? headerTopPageScrollLinks : [];
+  const currentNavLinks = pathname === '/' ? headerTopPageScrollLinks : commonSiteNavigationLinks;
 
   const handleFreeConsultationClick = () => {
     openModal();

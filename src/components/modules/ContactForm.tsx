@@ -65,20 +65,12 @@ const ContactForm: React.FC<ContactFormProps> = ({
     } catch (error) {
       console.error('Form submission error (API level):', error);
       setSubmitStatus('error');
-      // APIレベルのエラーの場合、RHFのerrorsオブジェクトとは異なる独自のエラー情報を
-      // onSubmitErrorコールバックに渡すか、あるいは汎用的なエラー処理を行う。
-      // ここでは、RHFのerrorsとは異なるエラーであることを示すために空のオブジェクトを渡すか、
-      // もしくは専用のエラーメッセージを渡す。
-      // RHFのバリデーションエラーは handleSubmit の第2引数で処理される。
       if (onSubmitError) {
-        // この onSubmitError はページ側で定義したもので、API送信失敗時に呼びたいもの
-        // react-hook-form のバリデーションエラーとは別物として扱う
         onSubmitError({} as FieldErrors<ContactFormData>); // API送信失敗を示す (空のエラーオブジェクトなど)
       }
     }
   };
 
-  // ★ バリデーションエラー時の処理 (handleSubmitの第2引数に渡す)
   const onValidationErrors = (validationErrors: FieldErrors<ContactFormData>) => {
     console.log("Form validation errors:", validationErrors);
     setSubmitStatus(null); // 送信試行はしたがバリデーションで失敗した
