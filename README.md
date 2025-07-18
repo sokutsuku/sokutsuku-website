@@ -1,36 +1,67 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SOKUTSUKU（速創）
 
-## Getting Started
+**発想を、10倍速でかたちに**
 
-First, run the development server:
+SOKUTSUKUは、生成AIを活用した次世代の受託開発事業です。AI時代における開発パートナーとして、あなたのビジネスアイデアを最速で実現します。
+
+## 🚀 私たちのミッション
+
+ビジネスの勝敗が「時間」で決まる現代において、従来の開発プロセスは遅く、複雑で、高コストです。優れたアイデアも、市場に届く前にその価値を失ってしまいます。
+
+SOKUTSUKUは、**生成AIネイティブ**な開発チームとして、その「機会損失」というビジネス最大の敵と戦います。
+
+## 💡 コアコンセプト
+
+**「Less is More（最小の資源で、最大の価値を）」**
+
+AIを用いて、従来の開発プロセスに潜むあらゆる「無駄」を削ぎ落とし、お客様のビジネスの本質的な価値創造に集中します。
+
+## 🎯 提供サービス
+
+### 1. 成果を出す、ウェブサイト & LP制作
+- AIによるコンテンツ最適化（AIO）
+- 最新のSEO施策
+- 見つけられ、選ばれ、コンバージョンを生み出す「生きている」サイト
+- 従来の半分の時間で構築
+
+### 2. 業務プロセスを再設計する、システム & アプリ開発
+- AIを用いた知的業務の自動化
+- 「判断」や「予測」機能の実装
+- ビジネスを自律的に成長させる思考するエンジン
+
+## 🌟 最終ゴール
+
+単なる開発の高速化ではなく、あなたのビジネスに**「AIという名のエンジン」**を組み込み、自律的に成長し、未来を予測する組織への変革を支援します。
+
+---
+
+## 開発環境
+
+このプロジェクトは[Next.js](https://nextjs.org)を使用して構築されています。
+
+### 開発サーバーの起動
 
 ```bash
 npm run dev
-# or
+# または
 yarn dev
-# or
+# または
 pnpm dev
-# or
+# または
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+[http://localhost:3000](http://localhost:3000)をブラウザで開いて結果を確認してください。
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 技術スタック
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **フレームワーク**: Next.js
+- **フォント**: [Geist](https://vercel.com/font) (Vercel提供)
+- **開発言語**: TypeScript
+- **スタイリング**: CSS Modules / Tailwind CSS
 
-## Learn More
+## デプロイ
 
-To learn more about Next.js, take a look at the following resources:
+Vercel Platformを使用した簡単デプロイが可能です。
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+詳細は[Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying)をご確認ください。
