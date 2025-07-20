@@ -43,10 +43,7 @@ export default function Home() {
     }
   ];
 
-  const handleContactClick = () => {
-    // お問い合わせフォームを開く処理
-    console.log('お問い合わせフォームを開く')
-  };
+  
 
   const handleFaqClick = () => {
     router.push('/faq');

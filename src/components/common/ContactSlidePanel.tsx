@@ -81,11 +81,11 @@ export function ContactSlidePanel({ isOpen, onClose }: ContactSlidePanelProps) {
       
       {/* スライドパネル */}
       <div className={`
-        fixed bottom-0 left-0 right-0 z-50 
+        fixed inset-0 z-50 
         transition-transform duration-300 ease-out
         ${isOpen ? 'translate-y-0' : 'translate-y-full'}
       `}>
-        <Card className="rounded-t-2xl rounded-b-none max-h-[85vh] overflow-y-auto bg-white dark:bg-[#101411] border-0 shadow-2xl">
+        <Card className="h-screen overflow-y-auto bg-white dark:bg-[#101411] border-0">
           <CardHeader className="flex flex-row items-center justify-between pb-6 border-b border-neutral-light-200 dark:border-neutral-dark-700">
             <div>
               <CardTitle className="text-2xl font-bold text-foreground mb-2">
@@ -232,14 +232,24 @@ export function ContactSlidePanel({ isOpen, onClose }: ContactSlidePanelProps) {
                 </div>
               </div>
 
-              {/* 送信ボタン */}
+              {/* 送信・キャンセルボタン */}
               <div className="pt-6">
-                <Button 
-                  type="submit" 
-                  className="w-full h-14 bg-[#14532d] hover:bg-[#15803d] text-white font-semibold text-base rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-[1.02]"
-                >
-                  お問い合わせを送信する
-                </Button>
+                <div className="flex gap-3">
+                  <Button 
+                    type="button"
+                    variant="outline"
+                    onClick={onClose}
+                    className="flex-1 h-14 font-semibold text-base rounded-xl border-2 hover:bg-muted transition-all duration-200"
+                  >
+                    キャンセル
+                  </Button>
+                  <Button 
+                    type="submit" 
+                    className="flex-1 h-14 bg-[#14532d] hover:bg-[#15803d] text-white font-semibold text-base rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-[1.02]"
+                  >
+                    お問い合わせを送信する
+                  </Button>
+                </div>
                 <p className="text-xs text-muted-foreground text-center mt-3">
                   送信後、2営業日以内にご返信いたします
                 </p>

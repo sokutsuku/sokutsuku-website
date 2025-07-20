@@ -81,8 +81,8 @@ export function FAQSection({
 
         {/* CTA セクション */}
         {showCta && (
-          <div className="text-left space-y-6 pt-8 md:pt-12">
-            <div className="space-y-2">
+          <div className="text-left pt-4">
+            <div>
               <BlurText
                 text={ctaText}
                 delay={150}
@@ -90,7 +90,7 @@ export function FAQSection({
                 direction="top"
                 stepDuration={0.4}
                 startDelay={1000}
-                className="text-lg md:text-xl font-semibold text-foreground body-jp"
+                className="text-base font-semibold text-foreground body-jp mb-0"
               />
               
               {ctaDescription && (

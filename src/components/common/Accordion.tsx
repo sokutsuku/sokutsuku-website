@@ -40,7 +40,7 @@ export function AccordionItem({
           direction="top"
           stepDuration={0.4}
           startDelay={delay}
-          className="text-base md:text-lg font-semibold text-foreground body-jp pr-4"
+          className="text-base font-bold text-foreground pr-4"
         />
         <div className={cn(
           "flex-shrink-0 w-6 h-6 flex items-center justify-center transition-transform duration-300",
