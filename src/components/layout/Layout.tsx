@@ -13,7 +13,6 @@ interface LayoutProps {
 export function Layout({ children }: LayoutProps) {
   const [isContactPanelOpen, setIsContactPanelOpen] = useState(false)
 
-  const openContactPanel = () => setIsContactPanelOpen(true)
   const closeContactPanel = () => setIsContactPanelOpen(false)
   const toggleContactPanel = () => setIsContactPanelOpen(prev => !prev)
 

@@ -1,6 +1,5 @@
 'use client'
 
-import Link from 'next/link'
 import { AnimatedLink } from '@/components/common/AnimatedLink'
 
 export function Footer() {

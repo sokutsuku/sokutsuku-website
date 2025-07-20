@@ -13,7 +13,7 @@ interface AnimatedLinkProps {
 
 export function AnimatedLink({ href, children, className, onClick }: AnimatedLinkProps) {
   const router = useRouter()
-  const [isNavigating, setIsNavigating] = useState(false)
+  const [, setIsNavigating] = useState(false)
 
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault()

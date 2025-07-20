@@ -21,15 +21,6 @@ export function SingleSection({
   textAlign = 'left',
   maxWidth = 'lg'
 }: SingleSectionProps) {
-
-  const maxWidthClasses = {
-    sm: 'max-w-sm',
-    md: 'max-w-md',
-    lg: 'max-w-2xl',
-    xl: 'max-w-4xl',
-    full: 'max-w-full'
-  }
-
   const textAlignClasses = {
     left: 'text-left',
     center: 'text-center',
