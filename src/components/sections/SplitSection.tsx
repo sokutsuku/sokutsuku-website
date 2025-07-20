@@ -125,7 +125,7 @@ export function SplitSection({
                     stepDuration={0.6}
                     startDelay={400 + wordsInPreviousLines * 250}
                     noWrap={true}
-                    className={cn("hero-en leading-[0.6] text-foreground", englishCatchCopyFontSizeClass || "text-[56px] md:text-[80px] lg:text-[120px]")}
+                    className={cn("hero-en leading-[0.6] text-foreground", englishCatchCopyFontSizeClass || "text-[56px] md:text-[80px] lg:text-[160px]")}
                   />
                 </div>
               );

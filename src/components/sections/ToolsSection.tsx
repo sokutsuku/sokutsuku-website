@@ -22,7 +22,7 @@ export function ToolsSection({
             animateBy="words"
             direction="top"
             stepDuration={0.6}
-            className="text-[56px] md:text-[80px] lg:text-[120px] leading-none hero-en font-normal text-foreground text-center"
+            className="text-[56px] md:text-[80px] lg:text-[160px] leading-none hero-en font-normal text-foreground text-center"
           />
         </div>
 

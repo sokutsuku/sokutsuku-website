@@ -31,7 +31,7 @@ export function SingleSection({
     <section className={cn('w-full flex items-center px-4 md:px-8 xl:px-0 py-16 md:py-24', className)}>
       <div className={cn(
         'w-full',
-        maxWidth === 'full' ? 'max-w-full' : 'max-w-7xl', // タブレットビューで広いエリアを確保
+        maxWidth === 'full' ? 'max-w-full' : 'max-w-7xl lg:max-w-none', // ウェブビューで幅制限を解除
         textAlignClasses[textAlign]
       )}>
         {/* 英語キャッチコピー */}
@@ -52,7 +52,7 @@ export function SingleSection({
               return lines.map((line, index) => {
                 const processedLine = line.replace(
                   'NEW STANDARD',
-                  '<span style="color: #14532d;">NEW STANDARD</span>'
+                  '<span style="color: #14532d; white-space: nowrap;">NEW STANDARD</span>'
                 );
                 
                 const wordsInPreviousLines = lines.slice(0, index).reduce((total, prevLine) => {
@@ -98,7 +98,7 @@ export function SingleSection({
               return lines.map((line, index) => {
                 const processedLine = line.replace(
                   'NEW STANDARD',
-                  '<span style="color: #14532d;">NEW STANDARD</span>'
+                  '<span style="color: #14532d; white-space: nowrap;">NEW STANDARD</span>'
                 );
                 
                 const wordsInPreviousLines = lines.slice(0, index).reduce((total, prevLine) => {
@@ -138,7 +138,7 @@ export function SingleSection({
               isHTML={true}
               stepDuration={0.6}
               noWrap={true}
-              className="text-[56px] md:text-[80px] lg:text-[100px] xl:text-[120px] leading-none hero-en font-normal"
+              className="text-[56px] md:text-[80px] lg:text-[100px] xl:text-[160px] leading-none hero-en font-normal"
             />
           </div>
         </div>
