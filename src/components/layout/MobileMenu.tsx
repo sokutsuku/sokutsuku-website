@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
+import { AnimatedLink } from '@/components/common/AnimatedLink'
 
 interface MobileMenuProps {
   isOpen: boolean
@@ -13,44 +14,44 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
     <div 
       className={`
         lg:hidden fixed inset-0 z-[100] 
-        bg-[#FBFDFB] dark:bg-[#101411]
+        bg-[#101411]
         transition-transform duration-300 ease-out
         ${isOpen ? 'translate-y-0' : 'translate-y-full'}
       `}
     >
       <div className="flex flex-col items-center justify-center w-full h-full space-y-8 px-4 py-8">
-        <Link 
+        <AnimatedLink 
           href="/services" 
-          className="text-base font-bold ui-en hover:text-[#14532d] transition-colors"
+          className="text-base font-bold ui-en mobile-menu-text-color hover:text-[#14532d] transition-colors"
           onClick={onClose}
         >
           SERVICES
-        </Link>
-        <Link 
+        </AnimatedLink>
+        <AnimatedLink 
           href="/works" 
-          className="text-base font-bold ui-en hover:text-[#14532d] transition-colors"
+          className="text-base font-bold ui-en mobile-menu-text-color hover:text-[#14532d] transition-colors"
           onClick={onClose}
         >
           WORKS
-        </Link>
-        <Link 
+        </AnimatedLink>
+        <AnimatedLink 
           href="/about" 
-          className="text-base font-bold ui-en hover:text-[#14532d] transition-colors"
+          className="text-base font-bold ui-en mobile-menu-text-color hover:text-[#14532d] transition-colors"
           onClick={onClose}
         >
           ABOUT
-        </Link>
-        <Link 
+        </AnimatedLink>
+        <AnimatedLink 
           href="/faq" 
-          className="text-base font-bold ui-en hover:text-[#14532d] transition-colors"
+          className="text-base font-bold ui-en mobile-menu-text-color hover:text-[#14532d] transition-colors"
           onClick={onClose}
         >
           FAQ
-        </Link>
+        </AnimatedLink>
         <Button 
           size="lg" 
           variant="outline" 
-          className="ui-en mt-8"
+          className="ui-en mt-8 md:hidden mobile-menu-text-color"
           onClick={onClose}
         >
           CONTACT

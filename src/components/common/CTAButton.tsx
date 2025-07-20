@@ -5,7 +5,7 @@ import { type buttonVariants } from '@/components/ui/button'
 interface CTAButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode
   size?: VariantProps<typeof buttonVariants>['size']
-  variant?: 'default' | 'secondary'
+  variant?: VariantProps<typeof buttonVariants>['variant']
   className?: string
 }
 

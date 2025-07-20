@@ -161,6 +161,38 @@ text-sizes:
   '4xl': '2.25rem'  # 36px
 ```
 
+### 英語キャッチコピー（Bebas Neue）フォントサイズ規則
+```yaml
+english_catchcopy:
+  usage: "英語キャッチコピー（BEYOND AUTOMATION.、OUR 4 CORE SERVICES. など）"
+  font_family: "Bebas Neue"
+  
+  # ヒーローヘッダー専用（最大サイズ）
+  hero_header:
+    mobile: "text-[56px]"      # 56px
+    tablet: "sm:text-[100px]"  # 100px
+    desktop: "md:text-[120px] lg:text-[140px] xl:text-[160px]" # 120px → 140px → 160px
+    
+  # フッター専用（特大サイズ）
+  footer:
+    mobile: "text-[80px]"      # 80px
+    tablet: "sm:text-[120px]"  # 120px
+    desktop: "md:text-[160px] lg:text-[180px] xl:text-[200px]" # 160px → 180px → 200px
+    
+  # 一般セクション（標準サイズ）- ヒーローヘッダー・フッター以外全て
+  standard:
+    mobile: "text-[56px]"      # 56px
+    tablet: "md:text-[80px]"   # 80px
+    desktop: "lg:text-[120px]" # 120px
+    example: "SplitSection、CardGridSection、SingleSection など"
+    
+  # 実装例
+  implementation:
+    standard_class: "text-[56px] md:text-[80px] lg:text-[120px]"
+    hero_class: "text-[56px] sm:text-[100px] md:text-[120px] lg:text-[140px] xl:text-[160px]"
+    footer_class: "text-[80px] sm:text-[120px] md:text-[160px] lg:text-[180px] xl:text-[200px]"
+```
+
 ---
 
 ## 📐 スペーシング・レイアウト

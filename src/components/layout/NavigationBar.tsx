@@ -5,10 +5,15 @@ import { Button } from '@/components/ui/button'
 import { ThemeToggle } from '@/components/common/ThemeToggle'
 import { MobileMenuButton } from '@/components/layout/MobileMenuButton'
 import { MobileMenu } from '@/components/layout/MobileMenu'
+import { AnimatedLink } from '@/components/common/AnimatedLink'
 import { useTheme } from '@/components/ThemeProvider'
 import { useEffect, useState } from 'react'
 
-export function NavigationBar() {
+interface NavigationBarProps {
+  onContactClick?: () => void
+}
+
+export function NavigationBar({ onContactClick }: NavigationBarProps) {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const { theme } = useTheme()
@@ -79,30 +84,35 @@ export function NavigationBar() {
         <div className="px-4 md:px-6 py-4">
           <div className="flex items-center justify-between">
             {/* ロゴ */}
-            <Link href="/" className={`text-xl md:text-xl font-bold transition-colors ${getTextStyles()}`}>
+            <AnimatedLink href="/" className={`text-xl md:text-xl font-bold transition-colors ${getTextStyles()}`}>
               <span className="text-en tracking-wider">SOKUTSUKU</span>
-            </Link>
+            </AnimatedLink>
 
             {/* ナビゲーションメニュー（デスクトップ） */}
             <div className="hidden lg:flex items-center space-x-8 xl:space-x-12">
-              <Link href="/services" className={`text-sm transition-colors ui-en ${getTextSecondaryStyles()}`}>
+              <AnimatedLink href="/services" className={`text-sm transition-colors ui-en ${getTextSecondaryStyles()}`}>
                 SERVICES
-              </Link>
-              <Link href="/works" className={`text-sm transition-colors ui-en ${getTextSecondaryStyles()}`}>
+              </AnimatedLink>
+              <AnimatedLink href="/works" className={`text-sm transition-colors ui-en ${getTextSecondaryStyles()}`}>
                 WORKS
-              </Link>
-              <Link href="/about" className={`text-sm transition-colors ui-en ${getTextSecondaryStyles()}`}>
+              </AnimatedLink>
+              <AnimatedLink href="/about" className={`text-sm transition-colors ui-en ${getTextSecondaryStyles()}`}>
                 ABOUT
-              </Link>
-              <Link href="/faq" className={`text-sm transition-colors ui-en ${getTextSecondaryStyles()}`}>
+              </AnimatedLink>
+              <AnimatedLink href="/faq" className={`text-sm transition-colors ui-en ${getTextSecondaryStyles()}`}>
                 FAQ
-              </Link>
+              </AnimatedLink>
             </div>
 
             {/* 右側のアクション */}
             <div className="flex items-center space-x-4 md:space-x-4">
               <ThemeToggle />
-              <Button size="sm" variant="outline" className={`hidden md:flex ui-en ${getButtonStyles()}`}>
+              <Button 
+                size="sm" 
+                variant="outline" 
+                className={`hidden md:flex ui-en ${getButtonStyles()}`}
+                onClick={onContactClick}
+              >
                 CONTACT
               </Button>
               <MobileMenuButton 

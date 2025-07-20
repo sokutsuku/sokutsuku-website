@@ -1,78 +1,80 @@
+'use client'
+
 import Link from 'next/link'
+import { AnimatedLink } from '@/components/common/AnimatedLink'
 
 export function Footer() {
   return (
-    <footer className="border-t border-border bg-card">
-      <div className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          {/* 会社情報 */}
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold">SOKUTSUKU</h3>
-            <p className="text-sm text-muted-foreground">
-              発想を、10倍速でかたちに
-            </p>
-            <p className="text-sm text-muted-foreground">
-              生成AIを活用した次世代の受託開発事業
-            </p>
-          </div>
-
-          {/* サービス */}
-          <div className="space-y-4">
-            <h4 className="font-semibold">サービス</h4>
-            <ul className="space-y-2 text-sm text-muted-foreground">
-              <li>
-                <Link href="/services" className="hover:text-primary transition-colors">
-                  サービス一覧
-                </Link>
-              </li>
-              <li>
-                <Link href="/works" className="hover:text-primary transition-colors">
-                  実績紹介
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* 会社情報 */}
-          <div className="space-y-4">
-            <h4 className="font-semibold">会社情報</h4>
-            <ul className="space-y-2 text-sm text-muted-foreground">
-              <li>
-                <Link href="/about" className="hover:text-primary transition-colors">
-                  私たちについて
-                </Link>
-              </li>
-              <li>
-                <Link href="/faq" className="hover:text-primary transition-colors">
-                  よくある質問
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* 法的情報 */}
-          <div className="space-y-4">
-            <h4 className="font-semibold">法的情報</h4>
-            <ul className="space-y-2 text-sm text-muted-foreground">
-              <li>
-                <Link href="/privacy-policy" className="hover:text-primary transition-colors">
-                  プライバシーポリシー
-                </Link>
-              </li>
-              <li>
-                <Link href="/terms" className="hover:text-primary transition-colors">
-                  利用規約
-                </Link>
-              </li>
-            </ul>
-          </div>
+    <footer className="bg-background border-t border-border h-[70vh] flex flex-col justify-center overflow-hidden">
+      <div className="container mx-auto px-4 md:px-8 xl:px-0 max-w-7xl w-full">
+        {/* ナビゲーションリンク */}
+        <div className="flex flex-col md:flex-row items-start md:justify-start gap-4 md:gap-8 mb-12">
+          <AnimatedLink 
+            href="/" 
+            className="text-sm md:text-base text-muted-foreground hover:text-foreground transition-colors body-jp"
+          >
+            sokutsuku
+          </AnimatedLink>
+          <AnimatedLink 
+            href="/services" 
+            className="text-sm md:text-base text-muted-foreground hover:text-foreground transition-colors body-jp"
+          >
+            service
+          </AnimatedLink>
+          <AnimatedLink 
+            href="/works" 
+            className="text-sm md:text-base text-muted-foreground hover:text-foreground transition-colors body-jp"
+          >
+            works
+          </AnimatedLink>
+          <AnimatedLink 
+            href="/about" 
+            className="text-sm md:text-base text-muted-foreground hover:text-foreground transition-colors body-jp"
+          >
+            about
+          </AnimatedLink>
+          <AnimatedLink 
+            href="/faq" 
+            className="text-sm md:text-base text-muted-foreground hover:text-foreground transition-colors body-jp"
+          >
+            faq
+          </AnimatedLink>
         </div>
 
-        {/* コピーライト */}
-        <div className="border-t border-border mt-8 pt-8 text-center">
-          <p className="text-sm text-muted-foreground">
-            © 2024 SOKUTSUKU. All rights reserved.
-          </p>
+        {/* SOKUTSUKUロゴ */}
+        <div className="text-left mb-12 w-full overflow-hidden">
+          <h2 
+            className="text-[60px] sm:text-[80px] md:text-[120px] lg:text-[160px] xl:text-[200px] leading-none hero-en font-normal whitespace-nowrap" 
+            style={{ letterSpacing: '0.02em', color: '#14532d' }}
+          >
+            SOKUTSUKU
+          </h2>
+        </div>
+
+        {/* フッターリンクとコピーライト */}
+        <div className="flex flex-col md:flex-row justify-start items-start gap-4 md:gap-8 text-sm text-muted-foreground body-jp">
+          <AnimatedLink 
+            href="/privacy-policy" 
+            className="hover:text-foreground transition-colors"
+          >
+            プライバシーポリシー
+          </AnimatedLink>
+          <AnimatedLink 
+            href="/terms" 
+            className="hover:text-foreground transition-colors"
+          >
+            利用規約
+          </AnimatedLink>
+          <button 
+            type="button" 
+            className="hover:text-foreground transition-colors"
+            onClick={() => console.log('クッキー設定')}
+          >
+            クッキー設定
+          </button>
+          <span className="text-xs md:text-sm">
+            © 2025 Relume. 全著作権所有。
+          </span>
         </div>
       </div>
     </footer>

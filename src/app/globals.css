@@ -7,7 +7,7 @@
   --card-foreground: 0 0% 3.9%;
   --popover: 0 0% 100%;
   --popover-foreground: 0 0% 3.9%;
-  --primary: 142 72% 16%;
+  --primary: 149 80% 16%;
   --primary-foreground: 142 75% 96%;
   --secondary: 127 5% 74%;
   --secondary-foreground: 127 15% 26%;
@@ -36,7 +36,7 @@
   --popover: 127 15% 7%;
   --popover-foreground: 127 5% 88%;
   --primary: 142 75% 96%;
-  --primary-foreground: 142 72% 16%;
+  --primary-foreground: 149 80% 16%;
   --secondary: 127 15% 21%;
   --secondary-foreground: 127 5% 88%;
   --muted: 127 15% 21%;
@@ -126,4 +126,91 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-bebas-neue), sans-serif !important;
   font-weight: 400 !important;
   letter-spacing: 0.01rem !important;
+}
+
+/* <br>タグの改行間隔を狭くする */
+.hero-en br,
+.hero-en span br {
+  line-height: 0 !important;
+  margin: 0.3em 0 !important;
+  display: block !important;
+  height: 0.2em !important;
+  font-size: 0 !important;
+}
+
+/* h2要素全体の改行間隔制御 */
+.hero-en {
+  line-height: 0.9 !important;
+}
+
+/* モバイルメニューのフォント色を強制的にダークモードのフォアグラウンドカラーに設定 */
+.mobile-menu-text-color {
+  color: hsl(127 5% 88%) !important;
+}
+
+/* Blur textアニメーション */
+@keyframes fadeInBlur {
+  from {
+    filter: blur(4px);
+    opacity: 0;
+  }
+  to {
+    filter: blur(0);
+    opacity: 1;
+  }
+}
+
+/* 高度なBlur textアニメーション - 上から */
+@keyframes blur-fade-in-top {
+  0% {
+    filter: blur(10px);
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  50% {
+    filter: blur(5px);
+    opacity: 0.5;
+    transform: translateY(5px);
+  }
+  100% {
+    filter: blur(0px);
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 高度なBlur textアニメーション - 下から */
+@keyframes blur-fade-in-bottom {
+  0% {
+    filter: blur(10px);
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  50% {
+    filter: blur(5px);
+    opacity: 0.5;
+    transform: translateY(-5px);
+  }
+  100% {
+    filter: blur(0px);
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* アニメーションクラス */
+.blur-fade-in-top {
+  animation: blur-fade-in-top var(--animation-duration, 0.35s) ease-out forwards;
+  /* 初期状態を確実に非表示に */
+  filter: blur(10px);
+  opacity: 0;
+  transform: translateY(-50px);
+}
+
+.blur-fade-in-bottom {
+  animation: blur-fade-in-bottom var(--animation-duration, 0.35s) ease-out forwards;
+  /* 初期状態を確実に非表示に */
+  filter: blur(10px);
+  opacity: 0;
+  transform: translateY(50px);
 }
