@@ -6,6 +6,7 @@ import { SplitSection } from "@/components/sections/SplitSection";
 import { MemberSection } from "@/components/sections/MemberSection";
 import { LocationSection } from "@/components/sections/LocationSection";
 import { ContactSection } from "@/components/sections/ContactSection";
+import { ThemeImage } from "@/components/common/ThemeImage";
 
 export default function AboutPage() {
   return (
@@ -34,11 +35,19 @@ export default function AboutPage() {
 
 だからこそ、最速で価値を届けることが可能となります。`}
             visualContent={(
-              <div className="w-full h-96 bg-muted rounded-lg flex items-center justify-center">
-                <p className="text-muted-foreground">（ここに画像または動画）</p>
+              <div className="w-full">
+                <ThemeImage
+                  lightSrc="/images/about/light.png"
+                  darkSrc="/images/about/dark.png"
+                  alt="Less is More - 最小の資源で最大の価値を"
+                  width={600}
+                  height={400}
+                  className="rounded-lg shadow-lg w-full"
+                  priority={false}
+                />
               </div>
             )}
-            reverse={true}
+            reverse={false}
           />
 
           {/* Member Section */}

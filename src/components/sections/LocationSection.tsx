@@ -38,14 +38,6 @@ export function LocationSection({ className }: LocationSectionProps) {
             stepDuration={0.6}
             className="text-[56px] md:text-[80px] lg:text-[120px] 2xl:text-[160px] leading-none hero-en font-normal text-foreground text-center"
           />
-          <BlurText
-            text="私たちのオフィス"
-            delay={400}
-            animateBy="words"
-            direction="top"
-            stepDuration={0.4}
-            className="text-[18px] md:text-2xl font-semibold body-jp text-foreground"
-          />
         </div>
 
         {/* ロケーションカード */}
@@ -53,7 +45,7 @@ export function LocationSection({ className }: LocationSectionProps) {
           {locations.map((location, index) => (
             <div key={index} className="space-y-6">
               {/* Google Map */}
-              <div className="w-full h-64 bg-muted rounded-lg border-2 border-border flex items-center justify-center">
+              <div className="w-full aspect-square bg-muted rounded-lg border border-border flex items-center justify-center">
                 <div className="text-center text-muted-foreground">
                   <MapPin className="w-8 h-8 mx-auto mb-2" />
                   <p className="text-sm font-semibold body-jp">Google Map</p>

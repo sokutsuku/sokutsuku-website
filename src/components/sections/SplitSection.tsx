@@ -196,10 +196,10 @@ export function SplitSection({
       <div className={cn(
         'w-full max-w-content 2xl:max-w-content-wide grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center'
       )}>
-        <div className={cn('flex flex-col justify-center', { 'md:order-last': reverse })}>
+        <div className={cn('flex flex-col justify-center relative z-10', { 'md:order-last': reverse })}>
           {textContent}
         </div>
-        <div className={cn('flex items-center justify-center', { 'md:order-first': reverse })}>
+        <div className={cn('flex items-center justify-center relative z-0', { 'md:order-first': reverse })}>
           {visualContent}
         </div>
       </div>

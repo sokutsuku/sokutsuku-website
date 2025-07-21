@@ -3,19 +3,28 @@
 import { useRouter } from "next/navigation";
 import { Layout } from "@/components/layout/Layout";
 import { HeroHeader } from "@/components/sections/HeroHeader";
-import { SplitSection, FlexibleSection } from "@/components/sections/SplitSection";
+import { SplitSection } from "@/components/sections/SplitSection";
 import { SingleSection } from "@/components/sections/SingleSection";
 import { ToolsSection } from "@/components/sections/ToolsSection";
 import { ContactSection } from "@/components/sections/ContactSection";
 import { FAQSection } from "@/components/sections/FAQSection";
-import { BlurText } from "@/components/common/BlurText";
+import { ServicesSection } from "@/components/sections/ServicesSection";
+import { ThemeImage } from "@/components/common/ThemeImage";
 
 export default function Home() {
   const router = useRouter();
 
   const visualContent = (
-    <div className="w-full h-96 bg-muted rounded-lg flex items-center justify-center">
-      <p className="text-muted-foreground">（ここに画像または動画）</p>
+    <div className="w-full">
+      <ThemeImage
+        lightSrc="/images/about/light.png"
+        darkSrc="/images/about/dark.png"
+        alt="Less is More - 最小の資源で最大の価値を"
+        width={600}
+        height={400}
+        className="rounded-lg shadow-lg w-full"
+        priority={false}
+      />
     </div>
   );
 
@@ -80,49 +89,21 @@ export default function Home() {
       />
 
       {/* サービス説明セクション */}
-      <FlexibleSection
-        leftContent={
-          <div className="space-y-6">
-            <BlurText
-              text="ウェブサイト & LP制作"
-              delay={200}
-              animateBy="words"
-              direction="top"
-              stepDuration={0.6}
-              className="text-2xl md:text-3xl font-bold body-jp text-foreground"
-            />
-            <BlurText
-              text="従来の手作業によるコピーライティングやデザイン構成とは異なり、私たちはAIを用いてターゲットに最も響くメッセージとレイアウトをデータに基づいて導き出します。これにより、公開までの時間を劇的に短縮しコンバージョン率の高い「生きている」サイトを構築します。"
-              delay={400}
-              animateBy="words"
-              direction="top"
-              stepDuration={0.4}
-              className="text-sm md:text-base text-muted-foreground leading-relaxed body-jp"
-            />
-          </div>
-        }
-        rightContent={
-          <div className="space-y-6">
-            <BlurText
-              text="システム & アプリ開発"
-              delay={600}
-              animateBy="words"
-              direction="top"
-              stepDuration={0.6}
-              className="text-2xl md:text-3xl font-bold body-jp text-foreground"
-            />
-            <BlurText
-              text="従来の開発は、決められたルールを自動化するだけでした。私たちは、AIを用いて「判断」や「予測」といった知的業務までを自動化します。問い合わせ対応、データ分析、需要予測など、これまで人間にしかできなかった領域をシステムに組み込み、あなたのビジネスを自律的に成長させるエンジンを構築します。"
-              delay={800}
-              animateBy="words"
-              direction="top"
-              stepDuration={0.4}
-              className="text-sm md:text-base text-muted-foreground leading-relaxed body-jp"
-            />
-          </div>
-        }
-        gap="lg"
-        verticalAlign="start"
+      <ServicesSection
+        leftService={{
+          title: "ウェブサイト & LP制作",
+          description: "従来の手作業によるコピーライティングやデザイン構成とは異なり、私たちはAIを用いてターゲットに最も響くメッセージとレイアウトをデータに基づいて導き出します。これにより、公開までの時間を劇的に短縮しコンバージョン率の高い「生きている」サイトを構築します。",
+          lightImageSrc: "/images/about/website-lp-light.jpeg",
+          darkImageSrc: "/images/about/website-lp-dark.jpeg",
+          imageAlt: "ウェブサイト & LP制作のイメージ"
+        }}
+        rightService={{
+          title: "システム & アプリ開発",
+          description: "従来の開発は、決められたルールを自動化するだけでした。私たちは、AIを用いて「判断」や「予測」といった知的業務までを自動化します。問い合わせ対応、データ分析、需要予測など、これまで人間にしかできなかった領域をシステムに組み込み、あなたのビジネスを自律的に成長させるエンジンを構築します。",
+          lightImageSrc: "/images/about/system-app-light.jpeg",
+          darkImageSrc: "/images/about/system-app-dark.jpeg",
+          imageAlt: "システム & アプリ開発のイメージ"
+        }}
       />
 
       {/* ToolsSection */}
