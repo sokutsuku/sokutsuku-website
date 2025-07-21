@@ -134,8 +134,16 @@ RAG（検索拡張生成）などの最新アーキテクチャを前提とし�
         japaneseDescription={`私たちは単なるサービス提供者ではありません。
 ビジネスが直面する課題をAIを活用して解決し、持続可能な価値を創造します。`}
         visualContent={(
-          <div className="w-full h-96 bg-muted rounded-lg flex items-center justify-center">
-            <p className="text-muted-foreground">（ここに画像または動画）</p>
+          <div className="w-full">
+            <ThemeImage
+              lightSrc="/images/about/challenge-to-value-light.jpg"
+              darkSrc="/images/about/challenge-to-value-dark.jpg"
+              alt="FROM CHALLENGE TO VALUE"
+              width={600}
+              height={400}
+              className="rounded-lg shadow-lg w-full"
+              priority={false}
+            />
           </div>
         )}
         reverse={true}
