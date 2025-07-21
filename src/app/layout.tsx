@@ -22,8 +22,8 @@ const notoSansJP = Noto_Sans_JP({
 });
 
 export const metadata: Metadata = {
-  title: "SOKUTSUKU（速創）",
-  description: "発想を、10倍速でかたちに - 生成AIを活用した次世代の受託開発事業",
+  title: "SOKUTSUKU",
+  description: "アイデアを10倍速で実装しビジネスを加速させる生成AIフル活用の次世代受託開発事業",
 };
 
 export default function RootLayout({

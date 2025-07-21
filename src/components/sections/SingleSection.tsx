@@ -28,10 +28,10 @@ export function SingleSection({
   }
 
   return (
-    <section className={cn('w-full flex items-center px-4 md:px-8 xl:px-0 py-16 md:py-24', className)}>
+    <section className={cn('w-full flex items-center py-16 md:py-24', maxWidth === 'full' ? 'px-2 md:px-4 xl:px-8 2xl:px-0' : 'px-4 md:px-8 xl:px-0', className)}>
       <div className={cn(
         'w-full',
-        maxWidth === 'full' ? 'max-w-full' : 'max-w-7xl lg:max-w-none', // ウェブビューで幅制限を解除
+        maxWidth === 'full' ? 'max-w-full' : 'max-w-content 2xl:max-w-content-wide lg:max-w-none', // ウェブビューで幅制限を解除
         textAlignClasses[textAlign]
       )}>
         {/* 英語キャッチコピー */}
@@ -52,7 +52,7 @@ export function SingleSection({
               return lines.map((line, index) => {
                 const processedLine = line.replace(
                   'NEW STANDARD',
-                  '<span style="color: #14532d; white-space: nowrap;">NEW STANDARD</span>'
+                  '<span style="color: #14532d; white-space: nowrap !important;">NEW STANDARD</span>'
                 );
                 
                 const wordsInPreviousLines = lines.slice(0, index).reduce((total, prevLine) => {
@@ -70,7 +70,7 @@ export function SingleSection({
                       stepDuration={0.6}
                       startDelay={200 + wordsInPreviousLines * 250}
                       noWrap={true}
-                      className="text-[56px] leading-none hero-en font-normal"
+                      className="text-[56px] md:text-[80px] lg:text-[120px] 2xl:text-[160px] leading-none hero-en font-normal"
                     />
                   </div>
                 )
@@ -98,7 +98,7 @@ export function SingleSection({
               return lines.map((line, index) => {
                 const processedLine = line.replace(
                   'NEW STANDARD',
-                  '<span style="color: #14532d; white-space: nowrap;">NEW STANDARD</span>'
+                  '<span style="color: #14532d; white-space: nowrap !important;">NEW STANDARD</span>'
                 );
                 
                 const wordsInPreviousLines = lines.slice(0, index).reduce((total, prevLine) => {
@@ -116,7 +116,7 @@ export function SingleSection({
                       stepDuration={0.6}
                       startDelay={200 + wordsInPreviousLines * 250}
                       noWrap={true}
-                      className="text-[56px] leading-none hero-en font-normal"
+                      className="text-[56px] md:text-[80px] lg:text-[120px] 2xl:text-[160px] leading-none hero-en font-normal"
                     />
                   </div>
                 )
@@ -130,7 +130,7 @@ export function SingleSection({
               text={englishCatchCopy
                 .replace(/\n/g, ' ')
                 .replace(/\\n/g, ' ')
-                .replace('NEW STANDARD', '<span style="color: #14532d;">NEW STANDARD</span>')
+                .replace('NEW STANDARD', '<span style="color: #14532d; white-space: nowrap !important;">NEW STANDARD</span>')
               }
               delay={200}
               animateBy="words"
@@ -138,7 +138,7 @@ export function SingleSection({
               isHTML={true}
               stepDuration={0.6}
               noWrap={true}
-              className="text-[56px] md:text-[80px] lg:text-[100px] xl:text-[160px] leading-none hero-en font-normal"
+              className="text-[56px] md:text-[80px] lg:text-[120px] 2xl:text-[160px] leading-none hero-en font-normal"
             />
           </div>
         </div>

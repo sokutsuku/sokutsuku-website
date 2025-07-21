@@ -1,8 +1,8 @@
 'use client'
 
-import { Button } from '@/components/ui/button'
 import { CTAButton } from '@/components/common/CTAButton'
 import { BlurText } from '@/components/common/BlurText'
+import { AnimatedLink } from '@/components/common/AnimatedLink'
 
 interface HeroHeaderProps {
   variant: 'home' | 'services' | 'works' | 'about'
@@ -10,6 +10,7 @@ interface HeroHeaderProps {
   subtitle?: string
   description: string
   showActions?: boolean
+  onContactClick?: () => void
 }
 
 export function HeroHeader({ 
@@ -17,47 +18,40 @@ export function HeroHeader({
   title, 
   subtitle, 
   description, 
-  showActions = true 
+  showActions = true,
+  onContactClick
 }: HeroHeaderProps) {
-  const handleContactClick = () => {
-    console.log("お問い合わせクリック")
-    // TODO: ContactSlidePanelを開く処理
-  }
-
-  const handleServiceClick = () => {
-    console.log("サービス詳細クリック")
-    // TODO: サービスページへのナビゲーション
-  }
 
   // variant別のアクションボタン設定
   const getActionButtons = () => {
     switch (variant) {
       case 'home':
         return (
-          <Button
-            variant="outline"
-            size="lg"
-            onClick={handleServiceClick}
-            className="body-jp"
-          >
-            サービス詳細
-          </Button>
+          <AnimatedLink href="/services">
+            <CTAButton
+              variant="outline" 
+              size="lg"
+              className="body-jp"
+            >
+              サービス詳細
+            </CTAButton>
+          </AnimatedLink>
         )
       case 'services':
         return (
-          <CTAButton onClick={handleContactClick} size="lg" variant="outline" className="body-jp">
+          <CTAButton onClick={onContactClick} size="lg" variant="outline" className="body-jp">
             お問い合わせ
           </CTAButton>
         )
       case 'works':
         return (
-          <CTAButton onClick={handleContactClick} size="lg" variant="outline" className="body-jp">
+          <CTAButton onClick={onContactClick} size="lg" variant="outline" className="body-jp">
             お問い合わせ
           </CTAButton>
         )
       case 'about':
         return (
-          <CTAButton onClick={handleContactClick} size="lg" variant="outline" className="body-jp">
+          <CTAButton onClick={onContactClick} size="lg" variant="outline" className="body-jp">
             お問い合わせ
           </CTAButton>
         )
@@ -68,7 +62,7 @@ export function HeroHeader({
 
   return (
     <section className="pb-8 md:pb-16 flex items-center justify-center min-h-screen px-4 md:px-8 xl:px-0">
-      <div className="space-y-6 md:space-y-8 text-left w-full max-w-7xl">
+      <div className="space-y-6 md:space-y-8 text-left w-full max-w-content 2xl:max-w-content-wide">
         {/* メインタイトル */}
         <div className="space-y-3 md:space-y-4">
           <h1 className="space-y-1 md:space-y-2">

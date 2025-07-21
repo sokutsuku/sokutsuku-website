@@ -102,7 +102,7 @@ export function BlurText({
     return (
       <div
         ref={ref}
-        className={cn(noWrap ? 'flex flex-nowrap' : 'flex flex-wrap', className)}
+        className={cn(noWrap ? 'flex flex-nowrap overflow-visible' : 'flex flex-wrap', className)}
         style={style}
       >
         {htmlWords.map((word, index) => (
@@ -116,7 +116,7 @@ export function BlurText({
               animationDelay: `${startDelay + index * delay}ms`,
               animationDuration: `${stepDuration}s`,
               animationFillMode: 'forwards',
-              marginRight: '0.15em'  // より狭いスペース
+              marginRight: index === htmlWords.length - 1 ? '0' : '0.15em'  // 最後の要素にはmarginを適用しない
             }}
             dangerouslySetInnerHTML={{ __html: word }}
           />
@@ -151,7 +151,7 @@ export function BlurText({
   return (
     <div
       ref={ref}
-      className={cn(noWrap ? 'flex flex-nowrap' : 'flex flex-wrap', className)}
+      className={cn(noWrap ? 'flex flex-nowrap overflow-visible' : 'flex flex-wrap', className)}
       style={style}
     >
       {elements.map((segment, index) => (
@@ -165,7 +165,7 @@ export function BlurText({
             animationDelay: `${startDelay + index * delay}ms`,
             animationDuration: `${stepDuration}s`,
             animationFillMode: 'forwards',
-            marginRight: animateBy === 'words' ? '0.15em' : '0'
+            marginRight: animateBy === 'words' ? (index === elements.length - 1 ? '0' : '0.15em') : '0'
           }}
         >
           {segment === ' ' ? '\u00A0' : segment}

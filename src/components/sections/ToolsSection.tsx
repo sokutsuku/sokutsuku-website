@@ -13,7 +13,7 @@ export function ToolsSection({
 }: ToolsSectionProps) {
   return (
     <section className={cn('w-full min-h-screen flex items-center justify-center px-4 md:px-8 xl:px-0 py-16 md:py-24', className)}>
-      <div className="flex flex-col items-center justify-center text-center max-w-4xl mx-auto space-y-8">
+      <div className="flex flex-col items-center justify-center text-center mx-auto space-y-8">
         {/* 英語キャッチコピー */}
         <div className="flex items-center justify-center">
           <BlurText
@@ -22,7 +22,7 @@ export function ToolsSection({
             animateBy="words"
             direction="top"
             stepDuration={0.6}
-            className="text-[56px] md:text-[80px] lg:text-[160px] leading-none hero-en font-normal text-foreground text-center"
+            className="text-[56px] md:text-[80px] lg:text-[120px] 2xl:text-[160px] leading-none hero-en font-normal text-foreground text-center"
           />
         </div>
 

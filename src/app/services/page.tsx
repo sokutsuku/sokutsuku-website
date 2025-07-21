@@ -93,6 +93,7 @@ export default function ServicesPage() {
 ACCELERATED BY AI."
         subtitle="ビジネスをAIで再加速する。"
         description={"美しいウェブサイト、便利なシステム。\nそれだけでは、もう勝てない時代です。\n私たちはあなたのビジネスのあらゆるプロセスにAIを統合し、競合が追いつけないほどの「速度」と「知性」を実装します。"}
+        onContactClick={toggleContactPanel}
       />
       {/* 新しいSplitSection */}
       <SplitSection

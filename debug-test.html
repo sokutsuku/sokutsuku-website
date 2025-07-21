@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug Test</title>
+    <style>
+        .test-container {
+            width: 375px;
+            background: #f0f0f0;
+            padding: 20px;
+            margin: 20px 0;
+            border: 1px solid #ccc;
+        }
+        .flex-nowrap {
+            display: flex;
+            flex-wrap: nowrap;
+        }
+        .inline-block {
+            display: inline-block;
+        }
+        .text-large {
+            font-size: 56px;
+            line-height: 1;
+            font-family: 'Arial', sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <h1>Debug Test for "NEW STANDARD" Line Breaking</h1>
+    
+    <div class="test-container">
+        <h2>Test 1: Normal text with white-space: nowrap</h2>
+        <div class="text-large">
+            <span style="white-space: nowrap;">NEW STANDARD</span>
+        </div>
+    </div>
+    
+    <div class="test-container">
+        <h2>Test 2: Flex nowrap container</h2>
+        <div class="flex-nowrap text-large">
+            <span class="inline-block" style="margin-right: 0.15em;">NEW</span>
+            <span class="inline-block">STANDARD</span>
+        </div>
+    </div>
+    
+    <div class="test-container">
+        <h2>Test 3: Single span with white-space nowrap</h2>
+        <div class="flex-nowrap text-large">
+            <span class="inline-block" style="white-space: nowrap;">NEW STANDARD</span>
+        </div>
+    </div>
+    
+    <div class="test-container">
+        <h2>Test 4: HTML as processed by BlurText</h2>
+        <div class="flex-nowrap text-large">
+            <span class="inline-block" style="margin-right: 0.15em;">THE</span>
+            <span class="inline-block" style="margin-right: 0.15em;">&lt;span style="color: #14532d; white-space: nowrap;"&gt;NEW</span>
+            <span class="inline-block">STANDARD&lt;/span&gt;</span>
+        </div>
+    </div>
+    
+    <div class="test-container">
+        <h2>Test 5: Actual HTML parsing issue</h2>
+        <div class="flex-nowrap text-large">
+            <span class="inline-block" style="margin-right: 0.15em;">THE</span>
+            <span class="inline-block" style="margin-right: 0.15em; color: #14532d; white-space: nowrap;">NEW STANDARD</span>
+        </div>
+    </div>
+    
+    <script>
+        // Debug HTML parsing similar to BlurText
+        const text = 'THE <span style="color: #14532d; white-space: nowrap;">NEW STANDARD</span>';
+        console.log('Original text:', text);
+        
+        // Current parsing logic from BlurText
+        const parseHTMLWords = (htmlText) => {
+            const parts = htmlText.split(/(<[^>]+\/?>[^<]*(?:<\/[^>]+>)?|<[^>]+\/>)/g).filter(part => part.trim());
+            const words = [];
+            
+            parts.forEach(part => {
+                if (part.startsWith('<')) {
+                    words.push(part);
+                } else {
+                    const textWords = part.split(' ').filter(word => word.trim());
+                    words.push(...textWords);
+                }
+            });
+            
+            return words;
+        };
+        
+        const words = parseHTMLWords(text);
+        console.log('Parsed words:', words);
+        
+        // Expected: ['THE', '<span style="color: #14532d; white-space: nowrap;">NEW STANDARD</span>']
+        // Actual: likely ['THE', '<span style="color: #14532d; white-space: nowrap;">NEW', 'STANDARD</span>']
+    </script>
+</body>
+</html>

@@ -49,7 +49,7 @@ export function FlexibleSection({
   return (
     <section className={cn('w-full min-h-screen flex items-center justify-center px-4 md:px-8 xl:px-0 py-16 md:py-24', className)}>
       <div className={cn(
-        'w-full max-w-7xl grid grid-cols-1 md:grid-cols-2',
+        'w-full max-w-content 2xl:max-w-content-wide grid grid-cols-1 md:grid-cols-2',
         gapClasses[gap],
         alignClasses[verticalAlign]
       )}>
@@ -125,7 +125,7 @@ export function SplitSection({
                     stepDuration={0.6}
                     startDelay={400 + wordsInPreviousLines * 250}
                     noWrap={true}
-                    className={cn("hero-en leading-[0.6] text-foreground", englishCatchCopyFontSizeClass || "text-[56px] md:text-[80px] lg:text-[160px]")}
+                    className={cn("hero-en leading-[0.6] text-foreground", englishCatchCopyFontSizeClass || "text-[56px] md:text-[80px] lg:text-[120px] 2xl:text-[160px]")}
                   />
                 </div>
               );
@@ -155,7 +155,7 @@ export function SplitSection({
                 direction="top"
                 stepDuration={0.4}
                 startDelay={1200 + index * 200}
-                className="font-noto-jp text-[12px] md:text-base text-muted-foreground"
+                className="font-noto-jp text-base text-muted-foreground"
               />
             </div>
           ))}
@@ -174,7 +174,7 @@ export function SplitSection({
     <section className={cn('w-full min-h-screen flex flex-col items-center justify-center px-4 md:px-8 xl:px-0 py-16 md:py-24', className)}>
       {/* セクションタイトル（2分割の影響を受けない独立エリア） */}
       {sectionTitle && (
-        <div className={cn('w-full max-w-7xl mb-12 md:mb-16', alignClasses[sectionTitleAlign])}>
+        <div className={cn('w-full max-w-content 2xl:max-w-content-wide mb-12 md:mb-16', alignClasses[sectionTitleAlign])}>
           <BlurText
             text={sectionTitle}
             delay={100}
@@ -182,7 +182,7 @@ export function SplitSection({
             direction="top"
             stepDuration={0.6}
             className={cn(
-              "text-[56px] md:text-[80px] lg:text-[120px] leading-none hero-en font-normal",
+              "text-[56px] md:text-[80px] lg:text-[120px] 2xl:text-[160px] leading-none hero-en font-normal",
               sectionTitleAlign === 'center' && 'justify-center',
               sectionTitleAlign === 'right' && 'justify-end',
               sectionTitleAlign === 'left' && 'justify-start'
@@ -194,7 +194,7 @@ export function SplitSection({
 
       {/* 2分割コンテンツエリア */}
       <div className={cn(
-        'w-full max-w-7xl grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center'
+        'w-full max-w-content 2xl:max-w-content-wide grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center'
       )}>
         <div className={cn('flex flex-col justify-center', { 'md:order-last': reverse })}>
           {textContent}

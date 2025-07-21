@@ -27,7 +27,7 @@ export function LocationSection({ className }: LocationSectionProps) {
 
   return (
     <section className={cn('w-full py-16 md:py-24 px-4 md:px-8 xl:px-0', className)}>
-      <div className="w-full max-w-7xl mx-auto">
+      <div className="w-full max-w-content 2xl:max-w-content-wide mx-auto">
         {/* セクションタイトル */}
         <div className="text-center mb-16">
           <BlurText
@@ -36,8 +36,7 @@ export function LocationSection({ className }: LocationSectionProps) {
             animateBy="words"
             direction="top"
             stepDuration={0.6}
-            className="text-[56px] md:text-[80px] lg:text-[160px] leading-none hero-en font-normal"
-            style={{ color: '#14532d' }}
+            className="text-[56px] md:text-[80px] lg:text-[120px] 2xl:text-[160px] leading-none hero-en font-normal text-foreground text-center"
           />
           <BlurText
             text="私たちのオフィス"
@@ -54,7 +53,7 @@ export function LocationSection({ className }: LocationSectionProps) {
           {locations.map((location, index) => (
             <div key={index} className="space-y-6">
               {/* Google Map */}
-              <div className="w-full h-64 bg-muted rounded-lg flex items-center justify-center">
+              <div className="w-full h-64 bg-muted rounded-lg border-2 border-border flex items-center justify-center">
                 <div className="text-center text-muted-foreground">
                   <MapPin className="w-8 h-8 mx-auto mb-2" />
                   <p className="text-sm font-semibold body-jp">Google Map</p>
@@ -71,13 +70,13 @@ export function LocationSection({ className }: LocationSectionProps) {
 
               {/* 住所 */}
               <div className="text-center space-y-2">
-                <p className="text-lg body-jp text-foreground font-medium">
+                <p className="text-lg body-jp text-foreground font-medium text-center">
                   {location.address}
                 </p>
-                <p className="text-base body-jp text-foreground">
+                <p className="text-base body-jp text-foreground text-center">
                   {location.building}
                 </p>
-                <p className="text-sm text-muted-foreground body-jp">
+                <p className="text-sm text-muted-foreground body-jp text-center">
                   {location.nearestStation}
                 </p>
               </div>

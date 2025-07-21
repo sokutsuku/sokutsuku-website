@@ -24,10 +24,14 @@ const config: Config = {
         md: '768px',
         lg: '1024px',
         xl: '1280px',
-        '2xl': '1120px',   // max-width from design rule
+        '2xl': '1440px',   // new breakpoint for wide content
       },
     },
     extend: {
+      maxWidth: {
+        'content': '1120px',        // <1440px
+        'content-wide': '1240px',   // ≥1440px (2xl)
+      },
       colors: {
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',

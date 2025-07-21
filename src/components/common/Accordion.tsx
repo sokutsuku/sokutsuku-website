@@ -40,7 +40,7 @@ export function AccordionItem({
           direction="top"
           stepDuration={0.4}
           startDelay={delay}
-          className="text-base font-bold text-foreground pr-4"
+          className="text-sm md:text-base font-bold text-foreground pr-4"
         />
         <div className={cn(
           "flex-shrink-0 w-6 h-6 flex items-center justify-center transition-transform duration-300",
@@ -77,7 +77,7 @@ export function AccordionItem({
             direction="top"
             stepDuration={0.3}
             startDelay={isOpen ? 200 : 0}
-            className="text-sm md:text-base text-muted-foreground leading-relaxed body-jp"
+            className="text-xs md:text-sm text-muted-foreground leading-relaxed body-jp"
           />
         </div>
       </div>
@@ -93,7 +93,7 @@ export function Accordion({ items, className }: AccordionProps) {
   }
 
   return (
-    <div className={cn("w-full max-w-7xl mx-auto space-y-2", className)}>
+    <div className={cn("w-full max-w-content 2xl:max-w-content-wide mx-auto space-y-2", className)}>
       {items.map((item, index) => (
         <AccordionItem
           key={index}

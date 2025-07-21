@@ -57,7 +57,7 @@ export function FAQSection({
             animateBy="words"
             direction="top"
             stepDuration={0.6}
-            className="text-[56px] md:text-[80px] lg:text-[120px] leading-none hero-en font-normal"
+            className="text-[56px] md:text-[80px] lg:text-[120px] 2xl:text-[160px] leading-none hero-en font-normal"
             style={{ color: '#14532d' }}
           />
           

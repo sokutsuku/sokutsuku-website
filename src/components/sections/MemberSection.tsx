@@ -48,7 +48,7 @@ export function MemberSection({ className }: MemberSectionProps) {
 
   return (
     <section className={cn('w-full py-16 md:py-24 px-4 md:px-8 xl:px-0', className)}>
-      <div className="w-full max-w-7xl mx-auto">
+      <div className="w-full max-w-content 2xl:max-w-content-wide mx-auto">
         {/* セクションタイトル */}
         <div className="text-center mb-16">
           <BlurText
@@ -57,8 +57,7 @@ export function MemberSection({ className }: MemberSectionProps) {
             animateBy="words"
             direction="top"
             stepDuration={0.6}
-            className="text-[56px] md:text-[80px] lg:text-[160px] leading-none hero-en font-normal"
-            style={{ color: '#14532d' }}
+            className="text-[56px] md:text-[80px] lg:text-[120px] 2xl:text-[160px] leading-none hero-en font-normal text-foreground"
           />
           <BlurText
             text="さまざまな専門性を持つチーム"
