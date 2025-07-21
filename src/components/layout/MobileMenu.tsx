@@ -6,9 +6,10 @@ import { AnimatedLink } from '@/components/common/AnimatedLink'
 interface MobileMenuProps {
   isOpen: boolean
   onClose: () => void
+  onContactClick?: () => void
 }
 
-export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
+export function MobileMenu({ isOpen, onClose, onContactClick }: MobileMenuProps) {
   return (
     <div 
       className={`
@@ -51,7 +52,10 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
           size="lg" 
           variant="outline" 
           className="ui-en mt-8 md:hidden mobile-menu-text-color"
-          onClick={onClose}
+          onClick={() => {
+            onContactClick?.()
+            onClose()
+          }}
         >
           CONTACT
         </Button>

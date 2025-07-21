@@ -126,6 +126,7 @@ export function NavigationBar({ onContactClick }: NavigationBarProps) {
       <MobileMenu 
         isOpen={isMobileMenuOpen}
         onClose={() => setIsMobileMenuOpen(false)}
+        onContactClick={onContactClick}
       />
     </>
   )
