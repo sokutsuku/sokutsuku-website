@@ -6,6 +6,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { X, ArrowLeft, ArrowRight, Check } from 'lucide-react'
+import { useTheme } from '@/components/ThemeProvider'
 
 interface ContactSlidePanelProps {
   isOpen: boolean
@@ -26,6 +27,7 @@ type Step = 1 | 2 | 3 | 4
 const TOTAL_STEPS = 4
 
 export function ContactSlidePanel({ isOpen, onClose }: ContactSlidePanelProps) {
+  const { theme } = useTheme()
   const [currentStep, setCurrentStep] = useState<Step>(1)
   const [formData, setFormData] = useState<FormData>({
     companyName: '',
@@ -53,7 +55,7 @@ export function ContactSlidePanel({ isOpen, onClose }: ContactSlidePanelProps) {
       if (saved) {
         try {
           setFormData(JSON.parse(saved))
-        } catch (e) {
+        } catch (_) {
           console.error('Failed to parse saved form data')
         }
       }
@@ -135,6 +137,26 @@ export function ContactSlidePanel({ isOpen, onClose }: ContactSlidePanelProps) {
     }
   }
 
+  // テーマに応じた背景色を取得する関数
+  const getBgColor = () => {
+    return theme === 'dark' ? '#101411' : '#FBFDFB' // neutral-dark-950 : neutral-light-50
+  }
+
+  // テーマに応じたボーダー色を取得する関数
+  const getBorderColor = () => {
+    return theme === 'dark' ? '#1C2A20' : '#E9EFEA' // neutral-dark-800 : neutral-light-300
+  }
+
+  // テーマに応じたテキスト色を取得する関数
+  const getTextColor = () => {
+    return theme === 'dark' ? '#A4C8A8' : '#224F36' // neutral-dark-200 : neutral-light-950
+  }
+
+  // テーマに応じたミューテッドテキスト色を取得する関数
+  const getMutedTextColor = () => {
+    return theme === 'dark' ? '#678A6F' : '#99B2A3' // neutral-dark-400 : neutral-light-600
+  }
+
   const renderProgressBar = () => (
     <div className="flex items-center justify-center px-2">
       <div className="flex items-center space-x-2">
@@ -145,22 +167,31 @@ export function ContactSlidePanel({ isOpen, onClose }: ContactSlidePanelProps) {
           
           return (
             <div key={step} className="flex items-center">
-              <div className={`
-                w-10 h-10 rounded-full flex items-center justify-center text-sm font-semibold transition-all duration-300 border-2
-                ${isActive 
-                  ? 'bg-[#14532d] text-white border-[#14532d] shadow-lg scale-110 shadow-[#14532d]/20' 
-                  : isCompleted 
-                    ? 'bg-[#14532d] text-white border-[#14532d] shadow-md' 
-                    : 'bg-white dark:bg-[#101411] text-muted-foreground border-muted-foreground/30'
-                }
-              `}>
+              <div 
+                className={`
+                  w-10 h-10 rounded-full flex items-center justify-center text-sm font-semibold transition-all duration-300 border-2
+                  ${isActive 
+                    ? 'bg-[#14532d] text-white border-[#14532d] shadow-lg scale-110 shadow-[#14532d]/20' 
+                    : isCompleted 
+                      ? 'bg-[#14532d] text-white border-[#14532d] shadow-md' 
+                      : `border-[${getMutedTextColor()}]/30`
+                  }
+                `}
+                style={{
+                  backgroundColor: isActive || isCompleted ? '#14532d' : getBgColor(),
+                  color: isActive || isCompleted ? 'white' : getMutedTextColor(),
+                  borderColor: isActive || isCompleted ? '#14532d' : `${getMutedTextColor()}30`
+                }}
+              >
                 {isCompleted ? <Check className="w-4 h-4" /> : step}
               </div>
               {step < TOTAL_STEPS && (
-                <div className={`
-                  w-8 h-0.5 mx-2 rounded-full transition-all duration-300
-                  ${step < currentStep ? 'bg-[#14532d]' : 'bg-muted-foreground/30'}
-                `} />
+                <div 
+                  className={`w-8 h-0.5 mx-2 rounded-full transition-all duration-300`}
+                  style={{
+                    backgroundColor: step < currentStep ? '#14532d' : `${getMutedTextColor()}30`
+                  }}
+                />
               )}
             </div>
           )
@@ -170,19 +201,23 @@ export function ContactSlidePanel({ isOpen, onClose }: ContactSlidePanelProps) {
   )
 
   const renderStep = () => {
+    const labelColorClass = theme === 'dark' ? 'text-[#A4C8A8]' : 'text-[#224F36]'
+    const inputBorderClass = theme === 'dark' ? 'border-[#2B4031]' : 'border-[#E9EFEA]'
+    const inputBgClass = theme === 'dark' ? 'bg-[#101411]' : 'bg-[#F8FAF8]'
+
     switch (currentStep) {
       case 1:
         return (
           <div className="space-y-4 sm:space-y-6">
             <div className="space-y-2 sm:space-y-3">
-              <Label htmlFor="companyName" className="text-sm sm:text-base font-medium text-[#224F36] dark:text-[#A4C8A8]">
+              <Label htmlFor="companyName" className={`text-sm sm:text-base font-medium ${labelColorClass}`}>
                 会社名 <span className="text-red-500">*</span>
               </Label>
               <Input
                 id="companyName"
                 value={formData.companyName}
                 onChange={(e) => handleInputChange('companyName', e.target.value)}
-                className={`h-12 text-base sm:text-base text-[16px] ${errors.companyName ? 'border-red-500 focus:ring-red-500/20' : 'border-neutral-light-300 dark:border-neutral-dark-600'} focus:ring-2 focus:ring-[#14532d]/20 focus:border-[#14532d] transition-all duration-200 rounded-lg`}
+                className={`h-12 text-base sm:text-base text-[16px] ${errors.companyName ? 'border-red-500 focus:ring-red-500/20' : inputBorderClass} focus:ring-2 focus:ring-[#14532d]/20 focus:border-[#14532d] transition-all duration-200 rounded-lg ${inputBgClass}`}
                 placeholder="株式会社○○"
                 autoFocus
               />
@@ -192,14 +227,14 @@ export function ContactSlidePanel({ isOpen, onClose }: ContactSlidePanelProps) {
             </div>
 
             <div className="space-y-2 sm:space-y-3">
-              <Label htmlFor="name" className="text-sm sm:text-base font-medium text-[#224F36] dark:text-[#A4C8A8]">
+              <Label htmlFor="name" className={`text-sm sm:text-base font-medium ${labelColorClass}`}>
                 お名前 <span className="text-red-500">*</span>
               </Label>
               <Input
                 id="name"
                 value={formData.name}
                 onChange={(e) => handleInputChange('name', e.target.value)}
-                className={`h-12 text-base sm:text-base text-[16px] ${errors.name ? 'border-red-500 focus:ring-red-500/20' : 'border-neutral-light-300 dark:border-neutral-dark-600'} focus:ring-2 focus:ring-[#14532d]/20 focus:border-[#14532d] transition-all duration-200 rounded-lg`}
+                className={`h-12 text-base sm:text-base text-[16px] ${errors.name ? 'border-red-500 focus:ring-red-500/20' : inputBorderClass} focus:ring-2 focus:ring-[#14532d]/20 focus:border-[#14532d] transition-all duration-200 rounded-lg ${inputBgClass}`}
                 placeholder="田中 太郎"
               />
               {errors.name && (
@@ -213,7 +248,7 @@ export function ContactSlidePanel({ isOpen, onClose }: ContactSlidePanelProps) {
         return (
           <div className="space-y-4 sm:space-y-6">
             <div className="space-y-2 sm:space-y-3">
-              <Label htmlFor="phone" className="text-sm sm:text-base font-medium text-[#224F36] dark:text-[#A4C8A8]">
+              <Label htmlFor="phone" className={`text-sm sm:text-base font-medium ${labelColorClass}`}>
                 電話番号 <span className="text-red-500">*</span>
               </Label>
               <Input
@@ -221,7 +256,7 @@ export function ContactSlidePanel({ isOpen, onClose }: ContactSlidePanelProps) {
                 type="tel"
                 value={formData.phone}
                 onChange={(e) => handleInputChange('phone', e.target.value)}
-                className={`h-12 text-base sm:text-base text-[16px] ${errors.phone ? 'border-red-500 focus:ring-red-500/20' : 'border-neutral-light-300 dark:border-neutral-dark-600'} focus:ring-2 focus:ring-[#14532d]/20 focus:border-[#14532d] transition-all duration-200 rounded-lg`}
+                className={`h-12 text-base sm:text-base text-[16px] ${errors.phone ? 'border-red-500 focus:ring-red-500/20' : inputBorderClass} focus:ring-2 focus:ring-[#14532d]/20 focus:border-[#14532d] transition-all duration-200 rounded-lg ${inputBgClass}`}
                 placeholder="03-1234-5678"
                 autoFocus
               />
@@ -231,7 +266,7 @@ export function ContactSlidePanel({ isOpen, onClose }: ContactSlidePanelProps) {
             </div>
 
             <div className="space-y-2 sm:space-y-3">
-              <Label htmlFor="email" className="text-sm sm:text-base font-medium text-[#224F36] dark:text-[#A4C8A8]">
+              <Label htmlFor="email" className={`text-sm sm:text-base font-medium ${labelColorClass}`}>
                 メールアドレス <span className="text-red-500">*</span>
               </Label>
               <Input
@@ -239,7 +274,7 @@ export function ContactSlidePanel({ isOpen, onClose }: ContactSlidePanelProps) {
                 type="email"
                 value={formData.email}
                 onChange={(e) => handleInputChange('email', e.target.value)}
-                className={`h-12 text-base sm:text-base text-[16px] ${errors.email ? 'border-red-500 focus:ring-red-500/20' : 'border-neutral-light-300 dark:border-neutral-dark-600'} focus:ring-2 focus:ring-[#14532d]/20 focus:border-[#14532d] transition-all duration-200 rounded-lg`}
+                className={`h-12 text-base sm:text-base text-[16px] ${errors.email ? 'border-red-500 focus:ring-red-500/20' : inputBorderClass} focus:ring-2 focus:ring-[#14532d]/20 focus:border-[#14532d] transition-all duration-200 rounded-lg ${inputBgClass}`}
                 placeholder="example@company.com"
               />
               {errors.email && (
@@ -254,17 +289,17 @@ export function ContactSlidePanel({ isOpen, onClose }: ContactSlidePanelProps) {
           <div className="space-y-6">
             {/* サービス選択 - セレクトボックス風 */}
             <div className="space-y-3">
-              <Label className="text-base font-medium text-[#224F36] dark:text-[#A4C8A8]">
+              <Label className={`text-base font-medium ${labelColorClass}`}>
                 ご希望のサービス <span className="text-red-500">*</span>
               </Label>
               <div className="relative">
                 <select
                   value={formData.inquiryType}
                   onChange={(e) => handleInputChange('inquiryType', e.target.value)}
-                  className={`w-full h-12 text-base text-[16px] bg-[#F8FAF8] dark:bg-[#101411] border-2 rounded-lg px-4 pr-10 transition-all duration-200 appearance-none cursor-pointer ${
+                  className={`w-full h-12 text-base text-[16px] ${inputBgClass} border-2 rounded-lg px-4 pr-10 transition-all duration-200 appearance-none cursor-pointer ${
                     errors.inquiryType 
                       ? 'border-red-500 focus:ring-red-500/20' 
-                      : 'border-neutral-light-300 dark:border-neutral-dark-600'
+                      : inputBorderClass
                   } focus:ring-2 focus:ring-[#14532d]/20 focus:border-[#14532d] focus:outline-none`}
                 >
                   <option value="">サービスを選択してください</option>
@@ -275,7 +310,7 @@ export function ContactSlidePanel({ isOpen, onClose }: ContactSlidePanelProps) {
                 </select>
                 {/* ドロップダウン矢印 */}
                 <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                  <svg className="w-5 h-5 text-muted-foreground" fill="currentColor" viewBox="0 0 20 20">
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" style={{ color: getMutedTextColor() }}>
                     <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
                   </svg>
                 </div>
@@ -287,7 +322,7 @@ export function ContactSlidePanel({ isOpen, onClose }: ContactSlidePanelProps) {
 
             {/* 詳細内容 */}
             <div className="space-y-3">
-              <Label htmlFor="inquiryDetails" className="text-base font-medium text-[#224F36] dark:text-[#A4C8A8]">
+              <Label htmlFor="inquiryDetails" className={`text-base font-medium ${labelColorClass}`}>
                 詳細内容・ご要望
               </Label>
               <Textarea
@@ -296,12 +331,15 @@ export function ContactSlidePanel({ isOpen, onClose }: ContactSlidePanelProps) {
                 onChange={(e) => handleInputChange('inquiryDetails', e.target.value)}
                 placeholder="具体的なご要望やご質問がございましたら、お聞かせください。&#10;例：予算感、希望納期、機能要件など"
                 rows={6}
-                className="resize-none text-base text-[16px] border-neutral-light-300 dark:border-neutral-dark-600 focus:ring-2 focus:ring-[#14532d]/20 focus:border-[#14532d] transition-all duration-200 rounded-lg"
+                className={`resize-none text-base text-[16px] ${inputBorderClass} focus:ring-2 focus:ring-[#14532d]/20 focus:border-[#14532d] transition-all duration-200 rounded-lg ${inputBgClass}`}
               />
             </div>
             
-            <div className="bg-muted/30 p-4 rounded-lg">
-              <p className="text-sm text-muted-foreground">
+            <div 
+              className="p-4 rounded-lg"
+              style={{ backgroundColor: theme === 'dark' ? '#1C2A20' : '#F1F5F2' }}
+            >
+              <p className="text-sm" style={{ color: getMutedTextColor() }}>
                 💡 より詳細な情報をいただくことで、お客様に最適なご提案をさせていただけます。
               </p>
             </div>
@@ -311,28 +349,31 @@ export function ContactSlidePanel({ isOpen, onClose }: ContactSlidePanelProps) {
       case 4:
         return (
           <div className="space-y-6">
-            <div className="bg-muted/30 p-6 rounded-lg space-y-4">
+            <div 
+              className="p-6 rounded-lg space-y-4"
+              style={{ backgroundColor: theme === 'dark' ? '#1C2A20' : '#F1F5F2' }}
+            >
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <h4 className="font-medium text-[#224F36] dark:text-[#A4C8A8] mb-1">会社名</h4>
-                  <p className="text-sm text-muted-foreground">{formData.companyName}</p>
+                  <h4 className={`font-medium ${labelColorClass} mb-1`}>会社名</h4>
+                  <p className="text-sm" style={{ color: getMutedTextColor() }}>{formData.companyName}</p>
                 </div>
                 <div>
-                  <h4 className="font-medium text-[#224F36] dark:text-[#A4C8A8] mb-1">お名前</h4>
-                  <p className="text-sm text-muted-foreground">{formData.name}</p>
+                  <h4 className={`font-medium ${labelColorClass} mb-1`}>お名前</h4>
+                  <p className="text-sm" style={{ color: getMutedTextColor() }}>{formData.name}</p>
                 </div>
                 <div>
-                  <h4 className="font-medium text-[#224F36] dark:text-[#A4C8A8] mb-1">電話番号</h4>
-                  <p className="text-sm text-muted-foreground">{formData.phone}</p>
+                  <h4 className={`font-medium ${labelColorClass} mb-1`}>電話番号</h4>
+                  <p className="text-sm" style={{ color: getMutedTextColor() }}>{formData.phone}</p>
                 </div>
                 <div>
-                  <h4 className="font-medium text-[#224F36] dark:text-[#A4C8A8] mb-1">メールアドレス</h4>
-                  <p className="text-sm text-muted-foreground">{formData.email}</p>
+                  <h4 className={`font-medium ${labelColorClass} mb-1`}>メールアドレス</h4>
+                  <p className="text-sm" style={{ color: getMutedTextColor() }}>{formData.email}</p>
                 </div>
               </div>
               <div className="md:col-span-2">
-                <h4 className="font-medium text-[#224F36] dark:text-[#A4C8A8] mb-1">ご希望のサービス</h4>
-                <p className="text-sm text-muted-foreground">
+                <h4 className={`font-medium ${labelColorClass} mb-1`}>ご希望のサービス</h4>
+                <p className="text-sm" style={{ color: getMutedTextColor() }}>
                   {formData.inquiryType === 'website' && 'ウェブサイト制作'}
                   {formData.inquiryType === 'lp' && 'LP制作'}
                   {formData.inquiryType === 'system' && 'システム開発'}
@@ -341,13 +382,16 @@ export function ContactSlidePanel({ isOpen, onClose }: ContactSlidePanelProps) {
               </div>
               {formData.inquiryDetails && (
                 <div className="md:col-span-2">
-                  <h4 className="font-medium text-[#224F36] dark:text-[#A4C8A8] mb-1">詳細内容・ご要望</h4>
-                  <p className="text-sm text-muted-foreground whitespace-pre-wrap">{formData.inquiryDetails}</p>
+                  <h4 className={`font-medium ${labelColorClass} mb-1`}>詳細内容・ご要望</h4>
+                  <p className="text-sm whitespace-pre-wrap" style={{ color: getMutedTextColor() }}>{formData.inquiryDetails}</p>
                 </div>
               )}
             </div>
-            <div className="bg-[#14532d]/10 p-4 rounded-lg border border-[#14532d]/20">
-              <p className="text-sm text-[#224F36] dark:text-[#A4C8A8]">
+            <div className="p-4 rounded-lg border" style={{ 
+              backgroundColor: theme === 'dark' ? 'rgba(20, 83, 45, 0.1)' : 'rgba(20, 83, 45, 0.1)', 
+              borderColor: theme === 'dark' ? 'rgba(20, 83, 45, 0.2)' : 'rgba(20, 83, 45, 0.2)' 
+            }}>
+              <p className={`text-sm ${labelColorClass}`}>
                 📧 送信後、1営業日以内にご返信いたします。お急ぎの場合はお電話でもお気軽にお問い合わせください。
               </p>
             </div>
@@ -439,14 +483,34 @@ export function ContactSlidePanel({ isOpen, onClose }: ContactSlidePanelProps) {
         transition-transform duration-300 ease-out
         ${isOpen ? 'translate-x-0' : 'translate-x-full'}
       `}>
-        <div className="h-screen bg-[#FBFDFB] dark:bg-[#101411] border-l border-neutral-light-200 dark:border-neutral-dark-700 shadow-2xl relative">
+        <div 
+          className="h-screen border-l shadow-2xl relative"
+          style={{
+            backgroundColor: getBgColor(),
+            borderLeftColor: getBorderColor()
+          }}
+        >
           {/* ヘッダー - 閉じるボタンのみ */}
           <div className="absolute top-0 right-0 z-10 p-6">
             <Button 
               variant="ghost" 
               size="icon" 
               onClick={onClose}
-              className="text-muted-foreground hover:text-[#224F36] dark:hover:text-[#A4C8A8] hover:bg-[#F8FAF8]/80 dark:hover:bg-[#101411]/80 rounded-full h-10 w-10 shrink-0 transition-all duration-200"
+              className="rounded-full h-10 w-10 shrink-0 transition-all duration-200"
+              style={{
+                color: getMutedTextColor(),
+                backgroundColor: 'transparent'
+              }}
+              onMouseEnter={(e) => {
+                const target = e.currentTarget
+                target.style.color = getTextColor()
+                target.style.backgroundColor = theme === 'dark' ? 'rgba(16, 20, 17, 0.8)' : 'rgba(248, 250, 248, 0.8)'
+              }}
+              onMouseLeave={(e) => {
+                const target = e.currentTarget
+                target.style.color = getMutedTextColor()
+                target.style.backgroundColor = 'transparent'
+              }}
             >
               <X className="w-5 h-5" />
             </Button>
@@ -460,10 +524,10 @@ export function ContactSlidePanel({ isOpen, onClose }: ContactSlidePanelProps) {
                 
                 {/* ステップタイトルと説明 */}
                 <div className="text-center space-y-3">
-                  <h2 className="text-2xl font-bold text-[#224F36] dark:text-[#A4C8A8]">
+                  <h2 className="text-2xl font-bold" style={{ color: getTextColor() }}>
                     {getStepTitle()}
                   </h2>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
+                  <p className="text-sm leading-relaxed" style={{ color: getMutedTextColor() }}>
                     {getStepDescription()}
                   </p>
                 </div>
@@ -472,7 +536,7 @@ export function ContactSlidePanel({ isOpen, onClose }: ContactSlidePanelProps) {
                   {renderStep()}
                 </div>
                 
-                <div className="pt-6 border-t border-neutral-light-200 dark:border-neutral-dark-700">
+                <div className="pt-6 border-t" style={{ borderTopColor: getBorderColor() }}>
                   {renderButtons()}
                 </div>
               </div>

@@ -49,6 +49,13 @@ export const applyTheme = (mode: ThemeMode) => {
   const colors = themeColors[mode]
   const root = document.documentElement
   
+  // darkクラスの追加/削除
+  if (mode === 'dark') {
+    root.classList.add('dark')
+  } else {
+    root.classList.remove('dark')
+  }
+  
   Object.entries(colors).forEach(([key, value]) => {
     root.style.setProperty(`--${key}`, value)
   })

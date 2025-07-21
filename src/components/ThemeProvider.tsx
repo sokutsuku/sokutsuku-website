@@ -27,10 +27,15 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
   const [theme, setTheme] = useState<ThemeMode>('light')
 
   useEffect(() => {
-    // 強制的にライトモードを適用
-    setTheme('light')
-    applyTheme('light')
-    localStorage.setItem('theme-mode', 'light')
+    // localStorageから設定を読み込み
+    const savedTheme = localStorage.getItem('theme-mode') as ThemeMode | null
+    if (savedTheme) {
+      setTheme(savedTheme)
+      applyTheme(savedTheme)
+    } else {
+      // デフォルトテーマを適用
+      applyTheme('light')
+    }
   }, [])
 
   const handleSetTheme = (mode: ThemeMode) => {
