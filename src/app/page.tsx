@@ -17,8 +17,8 @@ export default function Home() {
   const visualContent = (
     <div className="w-full">
       <ThemeImage
-        lightSrc="/images/about/light.png"
-        darkSrc="/images/about/dark.png"
+        lightSrc="/images/about/less-is-more-light.png"
+        darkSrc="/images/about/less-is-more-dark.png"
         alt="Less is More - 最小の資源で最大の価値を"
         width={600}
         height={400}
@@ -118,8 +118,16 @@ export default function Home() {
         japaneseCatchCopy="強力なMEOツール"
         japaneseDescription={`「MapPop」は、AIでお客様の声を魅力的なクチコミ文章に自動変換するWebアプリケーションです.\n\n店舗のQRコードをスキャンするだけで、お客様は簡単に評価を入力できます。高評価の場合は、AIが自然で説得力のあるクチコミを生成し、Googleマップなどへの投稿をサポートします.\n\n飲食店、美容クリニック、ホテルなど多様な業界に対応しており、管理画面から評価項目やAIの応答を柔軟にカスタマイズ可能です.\n店舗のオンライン評価を高め、効果的なマーケティングと集客力強化を支援します.`}
         visualContent={(
-          <div className="w-full h-96 bg-muted rounded-lg flex items-center justify-center">
-            <p className="text-muted-foreground">（MapPop画像・動画）</p>
+          <div className="w-full">
+            <ThemeImage
+              lightSrc="/images/about/mappop-light.png"
+              darkSrc="/images/about/mappop-dark.png"
+              alt="MapPop - 強力なMEOツール"
+              width={600}
+              height={400}
+              className="rounded-lg shadow-lg w-full"
+              priority={false}
+            />
           </div>
         )}
         reverse={false}

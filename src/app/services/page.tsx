@@ -5,6 +5,7 @@ import { HeroHeader } from "@/components/sections/HeroHeader";
 import { SplitSection } from "@/components/sections/SplitSection";
 import { ContactSection } from "@/components/sections/ContactSection";
 import { CardGridSection } from "@/components/sections/CardGridSection";
+import { ThemeImage } from "@/components/common/ThemeImage";
 
 // サービスアイコンコンポーネント
 const WebsiteIcon = () => (
@@ -92,29 +93,34 @@ export default function ServicesPage() {
         title="BUSINESS, 
 ACCELERATED BY AI."
         subtitle="ビジネスをAIで再加速する。"
-        description={"美しいウェブサイト、便利なシステム。\nそれだけでは、もう勝てない時代です。\n私たちはあなたのビジネスのあらゆるプロセスにAIを統合し、競合が追いつけないほどの「速度」と「知性」を実装します。"}
+        description={"美しいウェブサイト、便利なシステム.\nそれだけでは、もう勝てない時代です。\n私たちはあなたのビジネスのあらゆるプロセスにAIを統合し、競合が追いつけないほどの「速度」と「知性」を実装します。"}
         onContactClick={toggleContactPanel}
       />
       {/* 新しいSplitSection */}
       <SplitSection
         tagline="for future"
-        englishCatchCopy="BEYOND\nAUTOMATION."
+        englishCatchCopy="BEYOND
+AUTOMATION."
         japaneseCatchCopy="AI時代に最適化された思考するシステムを。"
-        japaneseDescription=""
-        visualContent={(
-          <div className="w-full h-full flex items-start justify-center p-4">
-            <p className="font-noto-jp text-[12px] md:text-base text-muted-foreground text-left"
-              dangerouslySetInnerHTML={{
-                __html: `当面の目的は「事業をすぐに始めたい」「既存の課題を解決したい」
+        japaneseDescription={`当面の目的は「事業をすぐに始めたい」「既存の課題を解決したい」
 ということかもしれません。
 私たちの最終的なゴールはその先にあります。
 
 ビジネスそのものに「AIという名のエンジン」を組み込み、
 自律的に成長し、未来を予測する組織へと変革させること。
 RAG（検索拡張生成）などの最新アーキテクチャを前提とした、
-未来を見据えたソリューションを設計・開発します。`.replace(/\n/g, '<br />')
-              }}
-            ></p>
+未来を見据えたソリューションを設計・開発します。`}
+        visualContent={(
+          <div className="w-full">
+            <ThemeImage
+              lightSrc="/images/about/beyond-automation-light.jpeg"
+              darkSrc="/images/about/beyond-automation-dark.jpeg"
+              alt="BEYOND AUTOMATION"
+              width={600}
+              height={400}
+              className="rounded-lg shadow-lg w-full"
+              priority={false}
+            />
           </div>
         )}
         reverse={false}

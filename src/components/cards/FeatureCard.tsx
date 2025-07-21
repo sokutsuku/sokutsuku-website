@@ -26,7 +26,7 @@ export function FeatureCard({
   className 
 }: FeatureCardProps) {
   return (
-    <Card className={`h-full hover:shadow-lg transition-all hover:-translate-y-1 ${className}`}>
+    <Card className={`aspect-square hover:shadow-lg transition-all hover:-translate-y-1 flex flex-col ${className}`}>
       {/* 画像またはロゴ */}
       {variant === 'image' && image && (
         <div className="relative aspect-video overflow-hidden rounded-t-lg">
@@ -39,24 +39,26 @@ export function FeatureCard({
         </div>
       )}
       
-      {variant === 'logo' && logo && (
-        <div className="flex justify-center items-center p-6 pb-0">
-          <div className="w-16 h-16 flex items-center justify-center">
-            {logo}
+      <div className="flex-grow flex flex-col justify-center items-center text-center p-6">
+        {variant === 'logo' && logo && (
+          <div className="mb-4">
+            <div className="w-16 h-16 flex items-center justify-center">
+              {logo}
+            </div>
           </div>
-        </div>
-      )}
-      
-      <CardHeader className={variant === 'logo' ? 'pb-4' : ''}>
-        <CardTitle className="text-xl body-jp">{title}</CardTitle>
-        <CardDescription className="text-sm body-jp">
-          {description}
-        </CardDescription>
-      </CardHeader>
+        )}
+        
+        <CardHeader className="p-0">
+          <CardTitle className="text-xl body-jp mb-2">{title}</CardTitle>
+          <CardDescription className="text-sm body-jp">
+            {description}
+          </CardDescription>
+        </CardHeader>
+      </div>
       
       {/* CTAボタン */}
       {ctaText && onCtaClick && (
-        <CardContent>
+        <CardContent className="p-6 pt-0">
           <Button 
             onClick={onCtaClick}
             variant="outline" 

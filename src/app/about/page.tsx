@@ -37,8 +37,8 @@ export default function AboutPage() {
             visualContent={(
               <div className="w-full">
                 <ThemeImage
-                  lightSrc="/images/about/light.png"
-                  darkSrc="/images/about/dark.png"
+                  lightSrc="/images/about/less-is-more-light.png"
+                  darkSrc="/images/about/less-is-more-dark.png"
                   alt="Less is More - 最小の資源で最大の価値を"
                   width={600}
                   height={400}
