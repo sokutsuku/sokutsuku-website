@@ -42,7 +42,7 @@ export function MemberSection({ className }: MemberSectionProps) {
     {
       name: "森本 拓見",
       role: "プロジェクトマネージャー",
-      description: "ブロックチェーンを活用した事業企画として5年間従事。不動産AIのPMとして事業拡大。2025年8月からトレーダーとしての経験と生成AIの知見を活かし、プライム上場企業でのAI実装や金融事業の事業立ち上げ。",
+      description: "ブロックチェーン事業のPMとして5年間従事。不動産×AIの事業事業責任者。2025年8月から10年間のトレーダーとしての経験と生成AIの知見を活かし、プライム上場企業でAI実装と金融事業の事業立ち上げ。",
       image: "/images/placeholder-avatar.png",
       skills: ["機械学習", "NLP", "API統合"],
       experience: "6+ years",
