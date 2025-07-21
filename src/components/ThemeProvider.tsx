@@ -24,7 +24,7 @@ interface ThemeProviderProps {
 }
 
 export function ThemeProvider({ children }: ThemeProviderProps) {
-  const [theme, setTheme] = useState<ThemeMode>('light')
+  const [theme, setTheme] = useState<ThemeMode>('dark')
 
   useEffect(() => {
     // localStorageから設定を読み込み
@@ -34,7 +34,7 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
       applyTheme(savedTheme)
     } else {
       // デフォルトテーマを適用
-      applyTheme('light')
+      applyTheme('dark')
     }
   }, [])
 
