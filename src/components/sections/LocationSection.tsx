@@ -13,15 +13,13 @@ export function LocationSection({ className }: LocationSectionProps) {
   const locations = [
     {
       city: "Tokyo",
-      address: "東京都渋谷区神宮前6-19-20",
-      building: "第15荒井ビル 4階",
-      nearestStation: "明治神宮前駅 徒歩3分"
+      address: "東京都...",
+      
     },
     {
       city: "Osaka", 
-      address: "大阪府大阪市中央区本町3-4-5",
-      building: "本町ビジネスタワー 10階",
-      nearestStation: "本町駅 徒歩2分"
+      address: "大阪府...",
+      
     }
   ]
 
