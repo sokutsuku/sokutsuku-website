@@ -3,11 +3,14 @@
 import React, { useState } from 'react'
 import Image from 'next/image'
 import { User } from 'lucide-react'
+import { Twitter } from 'lucide-react'
 
 interface MemberCardProps {
   name: string
   role: string
+  description: string
   image: string
+  twitterUrl?: string
   onClick?: () => void
   className?: string
 }
@@ -15,7 +18,9 @@ interface MemberCardProps {
 export function MemberCard({ 
   name, 
   role, 
-  image, 
+  description,
+  image,
+  twitterUrl,
   onClick,
   className 
 }: MemberCardProps) {
@@ -47,9 +52,29 @@ export function MemberCard({
       </h3>
       
       {/* 仕事内容 */}
-      <p className="text-sm text-muted-foreground ui-en">
+      <p className="text-sm text-muted-foreground ui-en mb-3">
         {role}
       </p>
+      
+      {/* 自己紹介 */}
+      <p className="text-sm text-muted-foreground body-jp leading-relaxed mb-4">
+        {description}
+      </p>
+      
+      {/* SNSリンク */}
+      {twitterUrl && (
+        <div className="flex items-center space-x-2">
+          <a 
+            href={twitterUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center w-8 h-8 rounded-full bg-foreground text-background hover:bg-foreground/80 transition-colors duration-200"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <Twitter className="w-4 h-4" />
+          </a>
+        </div>
+      )}
     </div>
   )
 }

@@ -175,7 +175,7 @@ export function ContactSlidePanel({ isOpen, onClose }: ContactSlidePanelProps) {
         return (
           <div className="space-y-4 sm:space-y-6">
             <div className="space-y-2 sm:space-y-3">
-              <Label htmlFor="companyName" className="text-sm sm:text-base font-medium text-foreground">
+              <Label htmlFor="companyName" className="text-sm sm:text-base font-medium text-[#224F36] dark:text-[#A4C8A8]">
                 会社名 <span className="text-red-500">*</span>
               </Label>
               <Input
@@ -192,7 +192,7 @@ export function ContactSlidePanel({ isOpen, onClose }: ContactSlidePanelProps) {
             </div>
 
             <div className="space-y-2 sm:space-y-3">
-              <Label htmlFor="name" className="text-sm sm:text-base font-medium text-foreground">
+              <Label htmlFor="name" className="text-sm sm:text-base font-medium text-[#224F36] dark:text-[#A4C8A8]">
                 お名前 <span className="text-red-500">*</span>
               </Label>
               <Input
@@ -213,7 +213,7 @@ export function ContactSlidePanel({ isOpen, onClose }: ContactSlidePanelProps) {
         return (
           <div className="space-y-4 sm:space-y-6">
             <div className="space-y-2 sm:space-y-3">
-              <Label htmlFor="phone" className="text-sm sm:text-base font-medium text-foreground">
+              <Label htmlFor="phone" className="text-sm sm:text-base font-medium text-[#224F36] dark:text-[#A4C8A8]">
                 電話番号 <span className="text-red-500">*</span>
               </Label>
               <Input
@@ -231,7 +231,7 @@ export function ContactSlidePanel({ isOpen, onClose }: ContactSlidePanelProps) {
             </div>
 
             <div className="space-y-2 sm:space-y-3">
-              <Label htmlFor="email" className="text-sm sm:text-base font-medium text-foreground">
+              <Label htmlFor="email" className="text-sm sm:text-base font-medium text-[#224F36] dark:text-[#A4C8A8]">
                 メールアドレス <span className="text-red-500">*</span>
               </Label>
               <Input
@@ -254,14 +254,14 @@ export function ContactSlidePanel({ isOpen, onClose }: ContactSlidePanelProps) {
           <div className="space-y-6">
             {/* サービス選択 - セレクトボックス風 */}
             <div className="space-y-3">
-              <Label className="text-base font-medium text-foreground">
+              <Label className="text-base font-medium text-[#224F36] dark:text-[#A4C8A8]">
                 ご希望のサービス <span className="text-red-500">*</span>
               </Label>
               <div className="relative">
                 <select
                   value={formData.inquiryType}
                   onChange={(e) => handleInputChange('inquiryType', e.target.value)}
-                  className={`w-full h-12 text-base text-[16px] bg-white dark:bg-[#101411] border-2 rounded-lg px-4 pr-10 transition-all duration-200 appearance-none cursor-pointer ${
+                  className={`w-full h-12 text-base text-[16px] bg-[#F8FAF8] dark:bg-[#101411] border-2 rounded-lg px-4 pr-10 transition-all duration-200 appearance-none cursor-pointer ${
                     errors.inquiryType 
                       ? 'border-red-500 focus:ring-red-500/20' 
                       : 'border-neutral-light-300 dark:border-neutral-dark-600'
@@ -287,7 +287,7 @@ export function ContactSlidePanel({ isOpen, onClose }: ContactSlidePanelProps) {
 
             {/* 詳細内容 */}
             <div className="space-y-3">
-              <Label htmlFor="inquiryDetails" className="text-base font-medium text-foreground">
+              <Label htmlFor="inquiryDetails" className="text-base font-medium text-[#224F36] dark:text-[#A4C8A8]">
                 詳細内容・ご要望
               </Label>
               <Textarea
@@ -314,24 +314,24 @@ export function ContactSlidePanel({ isOpen, onClose }: ContactSlidePanelProps) {
             <div className="bg-muted/30 p-6 rounded-lg space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <h4 className="font-medium text-foreground mb-1">会社名</h4>
+                  <h4 className="font-medium text-[#224F36] dark:text-[#A4C8A8] mb-1">会社名</h4>
                   <p className="text-sm text-muted-foreground">{formData.companyName}</p>
                 </div>
                 <div>
-                  <h4 className="font-medium text-foreground mb-1">お名前</h4>
+                  <h4 className="font-medium text-[#224F36] dark:text-[#A4C8A8] mb-1">お名前</h4>
                   <p className="text-sm text-muted-foreground">{formData.name}</p>
                 </div>
                 <div>
-                  <h4 className="font-medium text-foreground mb-1">電話番号</h4>
+                  <h4 className="font-medium text-[#224F36] dark:text-[#A4C8A8] mb-1">電話番号</h4>
                   <p className="text-sm text-muted-foreground">{formData.phone}</p>
                 </div>
                 <div>
-                  <h4 className="font-medium text-foreground mb-1">メールアドレス</h4>
+                  <h4 className="font-medium text-[#224F36] dark:text-[#A4C8A8] mb-1">メールアドレス</h4>
                   <p className="text-sm text-muted-foreground">{formData.email}</p>
                 </div>
               </div>
               <div className="md:col-span-2">
-                <h4 className="font-medium text-foreground mb-1">ご希望のサービス</h4>
+                <h4 className="font-medium text-[#224F36] dark:text-[#A4C8A8] mb-1">ご希望のサービス</h4>
                 <p className="text-sm text-muted-foreground">
                   {formData.inquiryType === 'website' && 'ウェブサイト制作'}
                   {formData.inquiryType === 'lp' && 'LP制作'}
@@ -341,13 +341,13 @@ export function ContactSlidePanel({ isOpen, onClose }: ContactSlidePanelProps) {
               </div>
               {formData.inquiryDetails && (
                 <div className="md:col-span-2">
-                  <h4 className="font-medium text-foreground mb-1">詳細内容・ご要望</h4>
+                  <h4 className="font-medium text-[#224F36] dark:text-[#A4C8A8] mb-1">詳細内容・ご要望</h4>
                   <p className="text-sm text-muted-foreground whitespace-pre-wrap">{formData.inquiryDetails}</p>
                 </div>
               )}
             </div>
             <div className="bg-[#14532d]/10 p-4 rounded-lg border border-[#14532d]/20">
-              <p className="text-sm text-foreground">
+              <p className="text-sm text-[#224F36] dark:text-[#A4C8A8]">
                 📧 送信後、1営業日以内にご返信いたします。お急ぎの場合はお電話でもお気軽にお問い合わせください。
               </p>
             </div>
@@ -439,14 +439,14 @@ export function ContactSlidePanel({ isOpen, onClose }: ContactSlidePanelProps) {
         transition-transform duration-300 ease-out
         ${isOpen ? 'translate-x-0' : 'translate-x-full'}
       `}>
-        <div className="h-screen bg-white dark:bg-[#101411] border-l border-neutral-light-200 dark:border-neutral-dark-700 shadow-2xl relative">
+        <div className="h-screen bg-[#FBFDFB] dark:bg-[#101411] border-l border-neutral-light-200 dark:border-neutral-dark-700 shadow-2xl relative">
           {/* ヘッダー - 閉じるボタンのみ */}
           <div className="absolute top-0 right-0 z-10 p-6">
             <Button 
               variant="ghost" 
               size="icon" 
               onClick={onClose}
-              className="text-muted-foreground hover:text-foreground hover:bg-white/80 dark:hover:bg-[#101411]/80 rounded-full h-10 w-10 shrink-0 transition-all duration-200"
+              className="text-muted-foreground hover:text-[#224F36] dark:hover:text-[#A4C8A8] hover:bg-[#F8FAF8]/80 dark:hover:bg-[#101411]/80 rounded-full h-10 w-10 shrink-0 transition-all duration-200"
             >
               <X className="w-5 h-5" />
             </Button>
@@ -460,7 +460,7 @@ export function ContactSlidePanel({ isOpen, onClose }: ContactSlidePanelProps) {
                 
                 {/* ステップタイトルと説明 */}
                 <div className="text-center space-y-3">
-                  <h2 className="text-2xl font-bold text-foreground">
+                  <h2 className="text-2xl font-bold text-[#224F36] dark:text-[#A4C8A8]">
                     {getStepTitle()}
                   </h2>
                   <p className="text-sm text-muted-foreground leading-relaxed">

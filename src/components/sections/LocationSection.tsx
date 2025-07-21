@@ -14,12 +14,14 @@ export function LocationSection({ className }: LocationSectionProps) {
     {
       city: "Tokyo",
       address: "東京都...",
-      
+      building: "",
+      nearestStation: ""
     },
     {
       city: "Osaka", 
       address: "大阪府...",
-      
+      building: "",
+      nearestStation: ""
     }
   ]
 
@@ -63,12 +65,16 @@ export function LocationSection({ className }: LocationSectionProps) {
                 <p className="text-lg body-jp text-foreground font-medium text-center">
                   {location.address}
                 </p>
-                <p className="text-base body-jp text-foreground text-center">
-                  {location.building}
-                </p>
-                <p className="text-sm text-muted-foreground body-jp text-center">
-                  {location.nearestStation}
-                </p>
+                {location.building && (
+                  <p className="text-base body-jp text-foreground text-center">
+                    {location.building}
+                  </p>
+                )}
+                {location.nearestStation && (
+                  <p className="text-sm text-muted-foreground body-jp text-center">
+                    {location.nearestStation}
+                  </p>
+                )}
               </div>
             </div>
           ))}

@@ -24,18 +24,13 @@ interface ThemeProviderProps {
 }
 
 export function ThemeProvider({ children }: ThemeProviderProps) {
-  const [theme, setTheme] = useState<ThemeMode>('dark')
+  const [theme, setTheme] = useState<ThemeMode>('light')
 
   useEffect(() => {
-    // localStorageから設定を読み込み
-    const savedTheme = localStorage.getItem('theme-mode') as ThemeMode | null
-    if (savedTheme) {
-      setTheme(savedTheme)
-      applyTheme(savedTheme)
-    } else {
-      // デフォルトテーマを適用
-      applyTheme('dark')
-    }
+    // 強制的にライトモードを適用
+    setTheme('light')
+    applyTheme('light')
+    localStorage.setItem('theme-mode', 'light')
   }, [])
 
   const handleSetTheme = (mode: ThemeMode) => {

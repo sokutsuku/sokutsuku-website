@@ -12,6 +12,7 @@ interface Member {
   image: string
   skills: string[]
   experience: string
+  twitterUrl?: string
 }
 
 interface MemberSectionProps {
@@ -23,31 +24,34 @@ export function MemberSection({ className }: MemberSectionProps) {
     {
       name: "東 直樹",
       role: "エンジニア",
-      description: "10年以上のシステム開発経験を持ち、生成AI技術の早期採用によりプロジェクトの生産性を劇的に向上させてきました。「速度と品質の両立」をモットーに、チーム全体をリードしています。",
+      description: "エンジニア歴16年。ゲーム開発でUI/UXを、Web系では要件定義から運用まで担当。AIボットの個人開発経験も。顧客課題を可視化し、AIを含む最適解を提案・実装。幅広い受託開発に対応可能。",
       image: "/images/placeholder-avatar.png",
       skills: ["AI統合", "システム設計", "プロジェクト管理"],
-      experience: "10+ years"
+      experience: "10+ years",
+      twitterUrl: "https://x.com/yurukaeru"
     },
     {
       name: "熊谷 圭司",
       role: "セールス",
-      description: "フルスタック開発のエキスパートとして、Next.js、TypeScript、AIライブラリの統合において高い技術力を発揮。最新技術の導入と実装において中心的な役割を担っています。",
+      description: "大手事業会社でSaaS営業責任者として大手企業の課題を解消し、年間1億円の取引を拡大。個人では月間230万PVのメディアを統括し、データ解析からコンテンツ企画、PRまで行い成長を牽引。",
       image: "/images/placeholder-avatar.png",
       skills: ["Next.js", "TypeScript", "AI Integration"],
-      experience: "8+ years"
+      experience: "8+ years",
+      twitterUrl: ""
     },
     {
       name: "森本 拓見",
       role: "プロジェクトマネージャー",
-      description: "機械学習とNLP分野での深い専門知識を活かし、OpenAI APIやClaude APIなどの最新生成AIツールの効果的な活用を推進。ビジネス課題をAIで解決するアプローチを得意としています。",
+      description: "ブロックチェーンを活用した事業企画として5年間従事。不動産AIのPMとして事業拡大。2025年8月からトレーダーとしての経験と生成AIの知見を活かし、プライム上場企業でのAI実装や金融事業の事業立ち上げ。",
       image: "/images/placeholder-avatar.png",
       skills: ["機械学習", "NLP", "API統合"],
-      experience: "6+ years"
+      experience: "6+ years",
+      twitterUrl: "https://x.com/takumi_with_ai"
     }
   ]
 
   return (
-    <section className={cn('w-full py-16 md:py-24 px-4 md:px-8 xl:px-0', className)}>
+    <section className={cn('w-full min-h-screen py-16 md:py-24 px-4 md:px-8 xl:px-0', className)}>
       <div className="w-full max-w-content 2xl:max-w-content-wide mx-auto">
         {/* セクションタイトル */}
         <div className="text-center mb-16">
@@ -76,7 +80,9 @@ export function MemberSection({ className }: MemberSectionProps) {
               key={index}
               name={member.name}
               role={member.role}
+              description={member.description}
               image={member.image}
+              twitterUrl={member.twitterUrl}
               onClick={() => {
                 // 将来的にメンバー詳細モーダルを開く処理
                 console.log(`Show details for ${member.name}`)
