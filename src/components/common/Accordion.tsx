@@ -70,14 +70,9 @@ export function AccordionItem({
         isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
       )}>
         <div className="pb-6 px-6">
-          <BlurText
-            text={answer}
-            delay={100}
-            animateBy="words"
-            direction="top"
-            stepDuration={0.3}
-            startDelay={isOpen ? 200 : 0}
+          <div 
             className="text-xs md:text-sm text-muted-foreground leading-relaxed body-jp"
+            dangerouslySetInnerHTML={{ __html: answer }}
           />
         </div>
       </div>

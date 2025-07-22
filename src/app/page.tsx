@@ -10,6 +10,7 @@ import { ContactSection } from "@/components/sections/ContactSection";
 import { FAQSection } from "@/components/sections/FAQSection";
 import { ServicesSection } from "@/components/sections/ServicesSection";
 import { ThemeImage } from "@/components/common/ThemeImage";
+import { getMainFaqs } from "@/data/faq";
 
 export default function Home() {
   const router = useRouter();
@@ -28,29 +29,12 @@ export default function Home() {
     </div>
   );
 
-  // FAQ データ
-  const faqItems = [
-    {
-      question: "相談だけでも可能ですか？",
-      answer: "はい、もちろんです。まずはAIアシスタントとの対話を通じて、課題の整理をお手伝いします。費用は一切かかりませんので、お気軽にご相談ください。"
-    },
-    {
-      question: "料金はどのくらいですか？",
-      answer: "料金はプロジェクトの規模や内容によって異なります。最小限のLP制作はXX万円から、カスタムシステム開発はXX万円から承っております。まずはお気軽にご相談ください。"
-    },
-    {
-      question: "どのような業種が得意ですか？",
-      answer: "業種は問いません。私たちは特定の業界知識に依存せず、AIを活用した課題解決のプロセスを専門としています。どんなビジネスでも、私たちのアプローチでサポート可能です。"
-    },
-    {
-      question: "まだ質問がありますか？",
-      answer: "お気軽にご連絡ください。私たちがあなたの疑問にお答えします。AIとの対話を通じて、最適な解決策を見つけましょう。"
-    },
-    {
-      question: "さらに質問がありますか？",
-      answer: "私たちは常にお客様の声に耳を傾けています。どんな小さな疑問でも構いませんので、お気軽にお問い合わせください。あなたのビジネスをサポートするために、全力を尽くします。"
-    }
-  ];
+  // FAQ データ（一元化されたデータから取得）
+  const mainFaqs = getMainFaqs();
+  const faqItems = mainFaqs.map(faq => ({
+    question: faq.question,
+    answer: faq.answer
+  }));
 
   
 

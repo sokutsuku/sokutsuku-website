@@ -22,7 +22,7 @@ export const faqs: FAQ[] = [
   {
     id: 'about-service-4',
     question: '料金はどのくらい？',
-    answer: '料金はプロジェクトの内容によって異なります。最小限のLP制作はXX万円から、カスタムシステム開発はXX万円から承ります。まずはお気軽にご相談ください。',
+    answer: '料金はプロジェクトの内容によって異なり、最低価格は下記です。<br/>- ウェブサイト・LP制作：6万円<br/>- システム・アプリ開発：70万円<br/>※ ウェブサイト・LP制作の制作は全て生成AIに任せて開発する場合です。デザイナーをアサインする場合は価格が異なります。システム・アプリ開発の金額はMVP（必要最小限の機能）開発の金額です。複雑なシステムやAIを組み込む場合は価格が異なります。',
     category: 'about SERVICE'
   },
   {
@@ -34,7 +34,7 @@ export const faqs: FAQ[] = [
   {
     id: 'about-price-1',
     question: '料金はどのくらい？',
-    answer: '料金はプロジェクトの内容や規模によって異なります。最小限のランディングページ制作はXX万円から、カスタムシステム開発はXX万円から承っています。まずはお気軽にご相談ください。',
+    answer: '料金はプロジェクトの内容によって異なり、最低価格は下記です。<br/>- ウェブサイト・LP制作：6万円<br/>- システム・アプリ開発：70万円<br/>※ ウェブサイト・LP制作の制作は全て生成AIに任せて開発する場合です。デザイナーをアサインする場合は価格が異なります。システム・アプリ開発の金額はMVP（必要最小限の機能）開発の金額です。複雑なシステムやAIを組み込む場合は価格が異なります。',
     category: 'about price'
   },
   {
@@ -122,3 +122,14 @@ export const faqs: FAQ[] = [
     category: 'other'
   }
 ]
+
+// ルートページ用の主要なFAQを取得する関数
+export function getMainFaqs() {
+  return [
+    faqs.find(faq => faq.id === 'about-service-1'), // 相談だけでも可能ですか？
+    faqs.find(faq => faq.id === 'about-service-4'), // 料金はどのくらい？
+    faqs.find(faq => faq.id === 'about-tech-1'),    // 得意な業種は？
+    faqs.find(faq => faq.id === 'about-price-2'),   // NDAは締結できますか？
+    faqs.find(faq => faq.id === 'about-price-5')    // 地方からの依頼は？
+  ].filter(Boolean) as FAQ[]
+}
