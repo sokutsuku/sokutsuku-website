@@ -3,7 +3,7 @@
 import React, { useState } from 'react'
 import Image from 'next/image'
 import { User } from 'lucide-react'
-import { Twitter } from 'lucide-react'
+import { Twitter, Facebook } from 'lucide-react'
 
 interface MemberCardProps {
   name: string
@@ -11,6 +11,7 @@ interface MemberCardProps {
   description: string
   image: string
   twitterUrl?: string
+  facebookUrl?: string
   onClick?: () => void
   className?: string
 }
@@ -21,6 +22,7 @@ export function MemberCard({
   description,
   image,
   twitterUrl,
+  facebookUrl,
   onClick,
   className 
 }: MemberCardProps) {
@@ -62,17 +64,30 @@ export function MemberCard({
       </p>
       
       {/* SNSリンク */}
-      {twitterUrl && (
+      {(twitterUrl || facebookUrl) && (
         <div className="flex items-center space-x-2">
-          <a 
-            href={twitterUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center justify-center w-8 h-8 rounded-full bg-foreground text-background hover:bg-foreground/80 transition-colors duration-200"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <Twitter className="w-4 h-4" />
-          </a>
+          {twitterUrl && (
+            <a 
+              href={twitterUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center w-8 h-8 rounded-full bg-foreground text-background hover:bg-foreground/80 transition-colors duration-200"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <Twitter className="w-4 h-4" />
+            </a>
+          )}
+          {facebookUrl && (
+            <a 
+              href={facebookUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center w-8 h-8 rounded-full bg-foreground text-background hover:bg-foreground/80 transition-colors duration-200"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <Facebook className="w-4 h-4" />
+            </a>
+          )}
         </div>
       )}
     </div>
