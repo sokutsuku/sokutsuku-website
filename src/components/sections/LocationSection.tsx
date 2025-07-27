@@ -13,13 +13,13 @@ export function LocationSection({ className }: LocationSectionProps) {
   const locations = [
     {
       city: "Tokyo",
-      address: "東京都...",
+      address: "coming soon ...",
       building: "",
       nearestStation: ""
     },
     {
       city: "Osaka", 
-      address: "大阪府...",
+      address: "大阪府大阪市淀川区十三本町1-9-19",
       building: "",
       nearestStation: ""
     }
