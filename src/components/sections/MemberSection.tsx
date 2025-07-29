@@ -12,7 +12,6 @@ interface Member {
   image: string
   skills: string[]
   experience: string
-  twitterUrl?: string
   facebookUrl?: string
 }
 
@@ -29,7 +28,6 @@ export function MemberSection({ className }: MemberSectionProps) {
       image: "/images/placeholder-avatar.png",
       skills: ["AI統合", "システム設計", "プロジェクト管理"],
       experience: "10+ years",
-      twitterUrl: "https://x.com/yurukaeru",
       facebookUrl: "https://www.facebook.com/profile.php?id=61578823615902"
     },
     {
@@ -39,7 +37,6 @@ export function MemberSection({ className }: MemberSectionProps) {
       image: "/images/placeholder-avatar.png",
       skills: ["Next.js", "TypeScript", "AI Integration"],
       experience: "8+ years",
-      twitterUrl: "",
       facebookUrl: "https://www.facebook.com/keiji.kumagai"
     },
     {
@@ -49,7 +46,6 @@ export function MemberSection({ className }: MemberSectionProps) {
       image: "/images/placeholder-avatar.png",
       skills: ["機械学習", "NLP", "API統合"],
       experience: "6+ years",
-      twitterUrl: "https://x.com/takumi_with_ai",
       facebookUrl: "https://www.facebook.com/yakumo.takumi.morimoto/"
     }
   ]
@@ -86,7 +82,6 @@ export function MemberSection({ className }: MemberSectionProps) {
               role={member.role}
               description={member.description}
               image={member.image}
-              twitterUrl={member.twitterUrl}
               facebookUrl={member.facebookUrl}
               onClick={() => {
                 // 将来的にメンバー詳細モーダルを開く処理
