@@ -50,7 +50,11 @@ export default function ServicesPage() {
       variant: 'logo' as const,
       logo: <WebsiteIcon />,
       title: 'ウェブサイト制作',
-      description: '対話型AIチャットを組み込むことで、ユーザーとのインタラクションを強化します。また、AIO/SEO戦略を駆使し、検索エンジンでの可視性を向上させます。',
+      description: `企業の顔となるウェブサイトを、静的な情報発信ツールから、未来の検索エンジンに対応する「戦略的デジタル資産」へと昇華させます。
+
+従来のSEO対策はもちろん、AIO（AI Optimization）を見据えた構造設計とコンテンツ戦略を導入。
+
+AIが情報を理解しやすいサイトを構築することで、将来にわたる検索優位性を確保し、ビジネスの持続的な成長基盤を築きます。`,
       ctaText: 'もっと詳しく見たい！',
       onCtaClick: () => console.log('ウェブサイト制作の詳細')
     },
@@ -59,7 +63,11 @@ export default function ServicesPage() {
       variant: 'logo' as const,
       logo: <LPIcon />,
       title: 'LP制作',
-      description: '対話型AIチャットを組み込むことで、ユーザーとのインタラクションを強化します。また、AIO/SEO戦略を駆使し、検索エンジンでの可視性を向上させます。',
+      description: `コンバージョンを最大化する「一点突破型」のLPを制作します。
+
+A/Bテストの高速化、ヒートマップ分析、そしてAIによるリアルタイムなコピー最適化で、ターゲットの心に響くメッセージを届けます。
+
+一瞬でユーザーを惹きつけ、最短ルートで成果へと導くLPで、広告効果を最大化させましょう。`,
       ctaText: 'もっと詳しく見たい！',
       onCtaClick: () => console.log('LP制作の詳細')
     },
@@ -68,7 +76,11 @@ export default function ServicesPage() {
       variant: 'logo' as const,
       logo: <SystemIcon />,
       title: 'システム開発',
-      description: '対話型AIチャットを組み込むことで、ユーザーとのインタラクションを強化します。また、AIO/SEO戦略を駆使し、検索エンジンでの可視性を向上させます。',
+      description: `既存の業務フローにAIを統合し、非効率なプロセスを根本から改善するカスタムシステムを開発します。
+
+RAG（検索拡張生成）アーキテクチャを活用し、社内ナレッジを最大限に引き出す「思考する業務システム」を構築。
+
+単純作業の自動化に留まらず、データに基づいた意思決定を支援し、組織全体の生産性を飛躍的に向上させます。`,
       ctaText: 'もっと詳しく見たい！',
       onCtaClick: () => console.log('システム開発の詳細')
     },
@@ -77,7 +89,11 @@ export default function ServicesPage() {
       variant: 'logo' as const,
       logo: <AppIcon />,
       title: 'アプリ開発',
-      description: '対話型AIチャットを組み込むことで、ユーザーとのインタラクションを強化します。また、AIO/SEO戦略を駆使し、検索エンジンでの可視性を向上させます。',
+      description: `アイデアを最速で市場に届ける、AIネイティブなアプリ開発を提供します。
+
+ユーザーの心をつかむ直感的なUI/UX設計はもちろん、画像生成AIや音声認識などの機能を組み込み、これまでにない体験価値を創造。
+
+高速プロトタイピングと反復的な改善サイクルにより、ビジネスの成長を加速させるアプリケーションを共に創り上げます。`,
       ctaText: 'もっと詳しく見たい！',
       onCtaClick: () => console.log('アプリ開発の詳細')
     }

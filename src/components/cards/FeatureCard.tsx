@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 
 interface FeatureCardProps {
@@ -26,39 +26,41 @@ export function FeatureCard({
   className 
 }: FeatureCardProps) {
   return (
-    <Card className={`aspect-square hover:shadow-lg transition-all hover:-translate-y-1 flex flex-col ${className}`}>
-      {/* 画像またはロゴ */}
-      {variant === 'image' && image && (
-        <div className="relative aspect-video overflow-hidden rounded-t-lg">
-          <Image
-            src={image}
-            alt={title}
-            fill
-            className="object-cover"
-          />
-        </div>
-      )}
-      
-      <div className="flex-grow flex flex-col justify-center items-center text-center p-6">
-        {variant === 'logo' && logo && (
-          <div className="mb-4">
-            <div className="w-16 h-16 flex items-center justify-center">
-              {logo}
-            </div>
+    <div className={`flex flex-col ${className}`}>
+      <Card className="aspect-[4/3] hover:shadow-lg transition-all hover:-translate-y-1 flex flex-col">
+        {/* 画像またはロゴ */}
+        {variant === 'image' && image && (
+          <div className="relative aspect-video overflow-hidden rounded-t-lg">
+            <Image
+              src={image}
+              alt={title}
+              fill
+              className="object-cover"
+            />
           </div>
         )}
         
-        <CardHeader className="p-0">
-          <CardTitle className="text-xl body-jp mb-2">{title}</CardTitle>
-          <CardDescription className="text-sm body-jp">
-            {description}
-          </CardDescription>
-        </CardHeader>
-      </div>
+        <div className="flex-grow flex flex-col justify-center text-left p-6">
+          {variant === 'logo' && logo && (
+            <div className="mb-4">
+              <div className="w-16 h-16 flex items-center justify-start">
+                {logo}
+              </div>
+            </div>
+          )}
+          
+          <CardHeader className="p-0">
+            <CardTitle className="text-xl body-jp mb-2">{title}</CardTitle>
+            <CardDescription className="text-sm body-jp whitespace-pre-line">
+              {description}
+            </CardDescription>
+          </CardHeader>
+        </div>
+      </Card>
       
-      {/* CTAボタン */}
+      {/* CTAボタン - カードの下に配置 */}
       {ctaText && onCtaClick && (
-        <CardContent className="p-6 pt-0">
+        <div className="mt-4">
           <Button 
             onClick={onCtaClick}
             variant="outline" 
@@ -66,8 +68,8 @@ export function FeatureCard({
           >
             {ctaText}
           </Button>
-        </CardContent>
+        </div>
       )}
-    </Card>
+    </div>
   )
 }

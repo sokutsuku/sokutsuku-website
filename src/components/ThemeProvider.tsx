@@ -33,8 +33,10 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
       setTheme(savedTheme)
       applyTheme(savedTheme)
     } else {
-      // デフォルトテーマを適用
+      // デフォルトテーマを適用（ダークモード）
+      setTheme('dark')
       applyTheme('dark')
+      localStorage.setItem('theme-mode', 'dark')
     }
   }, [])
 
