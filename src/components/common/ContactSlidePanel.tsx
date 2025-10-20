@@ -5,8 +5,9 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
-import { X, ArrowLeft, ArrowRight, Check } from 'lucide-react'
+import { X, ArrowLeft, ArrowRight, Check, Loader2 } from 'lucide-react'
 import { useTheme } from '@/components/ThemeProvider'
+import type { ContactApiResponse } from '@/types/contact'
 
 interface ContactSlidePanelProps {
   isOpen: boolean
@@ -39,12 +40,16 @@ export function ContactSlidePanel({ isOpen, onClose }: ContactSlidePanelProps) {
   })
 
   const [errors, setErrors] = useState<Partial<FormData>>({})
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitError, setSubmitError] = useState<string | null>(null)
 
   // パネルが閉じた時にステップをリセット
   useEffect(() => {
     if (!isOpen) {
       setCurrentStep(1)
       setErrors({})
+      setIsSubmitting(false)
+      setSubmitError(null)
     }
   }, [isOpen])
 
@@ -110,11 +115,53 @@ export function ContactSlidePanel({ isOpen, onClose }: ContactSlidePanelProps) {
     }
   }
 
-  const handleSubmit = () => {
-    console.log('フォームデータ:', formData)
-    // TODO: フォーム送信処理
-    localStorage.removeItem('contactFormData')
-    onClose()
+  const handleSubmit = async () => {
+    setIsSubmitting(true)
+    setSubmitError(null)
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          company: formData.companyName,
+          message: `【サービス】${formData.inquiryType === 'website' ? 'ウェブサイト制作' : formData.inquiryType === 'lp' ? 'LP制作' : formData.inquiryType === 'system' ? 'システム開発' : formData.inquiryType === 'app' ? 'アプリ開発' : formData.inquiryType}\n【電話番号】${formData.phone}\n【詳細】\n${formData.inquiryDetails || '（詳細なし）'}`
+        })
+      })
+
+      const result: ContactApiResponse = await response.json()
+
+      if (!response.ok || !result.success) {
+        throw new Error(result.error || 'お問い合わせの送信に失敗しました')
+      }
+
+      // 送信成功
+      localStorage.removeItem('contactFormData')
+
+      // フォームをリセット
+      setFormData({
+        companyName: '',
+        name: '',
+        phone: '',
+        email: '',
+        inquiryType: '',
+        inquiryDetails: ''
+      })
+
+      // 成功メッセージを表示（アラート）
+      alert('お問い合わせを受け付けました。\n担当者より1営業日以内にご連絡いたします。')
+
+      onClose()
+    } catch (error) {
+      console.error('送信エラー:', error)
+      setSubmitError(error instanceof Error ? error.message : 'お問い合わせの送信に失敗しました')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const getStepTitle = () => {
@@ -387,14 +434,19 @@ export function ContactSlidePanel({ isOpen, onClose }: ContactSlidePanelProps) {
                 </div>
               )}
             </div>
-            <div className="p-4 rounded-lg border" style={{ 
-              backgroundColor: theme === 'dark' ? 'rgba(20, 83, 45, 0.1)' : 'rgba(20, 83, 45, 0.1)', 
-              borderColor: theme === 'dark' ? 'rgba(20, 83, 45, 0.2)' : 'rgba(20, 83, 45, 0.2)' 
+            <div className="p-4 rounded-lg border" style={{
+              backgroundColor: theme === 'dark' ? 'rgba(20, 83, 45, 0.1)' : 'rgba(20, 83, 45, 0.1)',
+              borderColor: theme === 'dark' ? 'rgba(20, 83, 45, 0.2)' : 'rgba(20, 83, 45, 0.2)'
             }}>
               <p className={`text-sm ${labelColorClass}`}>
                 📧 送信後、1営業日以内にご返信いたします。お急ぎの場合はお電話でもお気軽にお問い合わせください。
               </p>
             </div>
+            {submitError && (
+              <div className="p-4 rounded-lg border border-red-500 bg-red-500/10">
+                <p className="text-sm text-red-500">{submitError}</p>
+              </div>
+            )}
           </div>
         )
 
@@ -416,12 +468,22 @@ export function ContactSlidePanel({ isOpen, onClose }: ContactSlidePanelProps) {
             <ArrowLeft className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
             修正する
           </Button>
-          <Button 
+          <Button
             onClick={handleSubmit}
-            className="flex-1 h-12 sm:h-14 bg-[#14532d] hover:bg-[#15803d] text-white font-semibold text-sm sm:text-base rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-[1.02]"
+            disabled={isSubmitting}
+            className="flex-1 h-12 sm:h-14 bg-[#14532d] hover:bg-[#15803d] text-white font-semibold text-sm sm:text-base rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
           >
-            <Check className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
-            送信する
+            {isSubmitting ? (
+              <>
+                <Loader2 className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2 animate-spin" />
+                送信中...
+              </>
+            ) : (
+              <>
+                <Check className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+                送信する
+              </>
+            )}
           </Button>
         </div>
       )
