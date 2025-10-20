@@ -27,7 +27,7 @@
 ## 命名規則
 
 ```
-sokutsuku-company-profile-2025.pdf
+yakumo-company-profile-2025.pdf
 service-pricing-202501.pdf
 api-specification-v1.0.pdf
 ```
@@ -35,8 +35,8 @@ api-specification-v1.0.pdf
 ## 使用例
 
 ```tsx
-<a 
-  href="/documents/sokutsuku-company-profile.pdf"
+<a
+  href="/documents/yakumo-company-profile.pdf"
   download
   className="btn-primary"
 >

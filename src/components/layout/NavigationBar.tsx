@@ -84,7 +84,7 @@ export function NavigationBar({ onContactClick }: NavigationBarProps) {
           <div className="flex items-center justify-between">
             {/* ロゴ */}
             <AnimatedLink href="/" className={`text-xl md:text-xl font-bold transition-colors ${getTextStyles()}`}>
-              <span className="text-en tracking-wider">SOKUTSUKU</span>
+              <span className="text-en tracking-wider">YAKUMO</span>
             </AnimatedLink>
 
             {/* ナビゲーションメニュー（デスクトップ） */}

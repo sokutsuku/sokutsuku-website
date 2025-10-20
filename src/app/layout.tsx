@@ -22,7 +22,7 @@ const notoSansJP = Noto_Sans_JP({
 });
 
 export const metadata: Metadata = {
-  title: "SOKUTSUKU",
+  title: "YAKUMO",
   description: "アイデアを10倍速で実装しビジネスを加速させる生成AIフル活用の次世代受託開発事業",
 };
 

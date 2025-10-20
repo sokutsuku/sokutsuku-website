@@ -1,6 +1,6 @@
 # DESIGN-RULE.md
 
-このファイルは、SOKUTSUKUサイトのデザインシステムとルールを定義します。
+このファイルは、YAKUMOサイトのデザインシステムとルールを定義します。
 開発時は必ずこのファイルを参照してください。
 
 ## 📋 目次
@@ -123,9 +123,9 @@ fonts:
     
   # 使用例
   examples:
-    - 'SOKUTSUKU: Bebas Neue'
-    - 'SERVICES/WORKS/ABOUT: DM Sans'  
-    - '（速創）: Noto Sans JP'
+    - 'YAKUMO: Bebas Neue'
+    - 'SERVICES/WORKS/ABOUT: DM Sans'
+    - '（八雲）: Noto Sans JP'
     - 'お問い合わせ: Noto Sans JP'
     
   # CSS変数
@@ -300,7 +300,7 @@ grid:
 - **AI Native**: 生成AIネイティブな開発チーム
 
 ### キーワード
-- 速創（SOKUTSUKU）
+- 八雲（YAKUMO）
 - 生成AI
 - 機会損失との戦い
 - 本質的価値創造

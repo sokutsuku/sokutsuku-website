@@ -18,7 +18,7 @@ export default function AboutPage() {
             variant="about"
             title={`BEYOND HUMAN,\nWITH HUMAN.`}
             subtitle="創造性を次の次元へ。"
-            description={"私たちはAIを人間の「作業」を代替するものから人間の「思考」と「創造」を増幅させるパートナーへ昇華した。\nSOKUTSUKUのミッションは人間とAIの共創によって誰もが最速でかたちにできる世界を創ることです。"}
+            description={"私たちはAIを人間の「作業」を代替するものから人間の「思考」と「創造」を増幅させるパートナーへ昇華した。\nYAKUMOのミッションは人間とAIの共創によって誰もが最速でかたちにできる世界を創ることです。"}
           />
           {/* 新しいSplitSection */}
           <SplitSection

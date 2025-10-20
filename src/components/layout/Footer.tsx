@@ -8,11 +8,11 @@ export function Footer() {
       <div className="container mx-auto px-4 md:px-8 xl:px-0 max-w-content 2xl:max-w-content-wide w-full">
         {/* ナビゲーションリンク */}
         <div className="flex flex-col md:flex-row items-start md:justify-start gap-4 md:gap-8 mb-12">
-          <AnimatedLink 
-            href="/" 
+          <AnimatedLink
+            href="/"
             className="text-sm md:text-base text-muted-foreground hover:text-foreground transition-colors body-jp"
           >
-            sokutsuku
+            yakumo
           </AnimatedLink>
           <AnimatedLink 
             href="/services" 
@@ -40,13 +40,13 @@ export function Footer() {
           </AnimatedLink>
         </div>
 
-        {/* SOKUTSUKUロゴ */}
+        {/* YAKUMOロゴ */}
         <div className="text-left mb-12 w-full overflow-hidden">
-          <h2 
-            className="text-[60px] sm:text-[80px] md:text-[120px] lg:text-[120px] 2xl:text-[160px] leading-none hero-en font-normal whitespace-nowrap" 
+          <h2
+            className="text-[60px] sm:text-[80px] md:text-[120px] lg:text-[120px] 2xl:text-[160px] leading-none hero-en font-normal whitespace-nowrap"
             style={{ letterSpacing: '0.02em', color: '#14532d' }}
           >
-            SOKUTSUKU
+            YAKUMO
           </h2>
         </div>
 

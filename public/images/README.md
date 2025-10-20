@@ -1,6 +1,6 @@
 # Images Directory
 
-このディレクトリには、SOKUTSUKUウェブサイトで使用する画像ファイルを保管します。
+このディレクトリには、YAKUMOウェブサイトで使用する画像ファイルを保管します。
 
 ## ディレクトリ構成
 
@@ -30,7 +30,7 @@
 
 ### 📁 `logos/`
 - ロゴファイル
-- SOKUTSUKUロゴ、パートナー企業ロゴなど
+- YAKUMOロゴ、パートナー企業ロゴなど
 
 ## 画像ファイル命名規則
 
@@ -88,7 +88,7 @@ import Image from 'next/image'
 
 <Image
   src="/images/hero/main-visual.jpg"
-  alt="SOKUTSUKUのメインビジュアル"
+  alt="YAKUMOのメインビジュアル"
   width={1920}
   height={1080}
   priority // ヒーロー画像の場合

@@ -23,7 +23,7 @@ export function MemberSection({ className }: MemberSectionProps) {
   const members: Member[] = [
     {
       name: "東 直樹",
-      role: "エンジニア",
+      role: "CTO / エンジニア",
       description: "エンジニア歴16年。ゲーム開発でUI/UXを、Web系では要件定義から運用まで担当。AIボットの個人開発経験も。顧客課題を可視化し、AIを含む最適解を提案・実装。幅広い受託開発に対応可能。",
       image: "/images/placeholder-avatar.png",
       skills: ["AI統合", "システム設計", "プロジェクト管理"],
@@ -31,18 +31,9 @@ export function MemberSection({ className }: MemberSectionProps) {
       facebookUrl: "https://www.facebook.com/profile.php?id=61578823615902"
     },
     {
-      name: "熊谷 圭司",
-      role: "セールス",
-      description: "大手事業会社でSaaS営業責任者として大手企業の課題を解消し、年間1億円の取引を拡大。個人では月間230万PVのメディアを統括し、データ解析からコンテンツ企画、PRまで行い成長を牽引。",
-      image: "/images/placeholder-avatar.png",
-      skills: ["Next.js", "TypeScript", "AI Integration"],
-      experience: "8+ years",
-      facebookUrl: "https://www.facebook.com/keiji.kumagai"
-    },
-    {
       name: "森本 拓見",
-      role: "プロジェクトマネージャー",
-      description: "ブロックチェーン事業のPMとして5年間従事。不動産×AIの事業事業責任者。2025年8月から10年間のトレーダーとしての経験と生成AIの知見を活かし、プライム上場企業でAI実装と金融事業の事業立ち上げ。",
+      role: "CEO / プロジェクトマネージャー",
+      description: "ブロックチェーン事業のPMとして5年間従事。不動産×AIの事業事業責任者。2025年8月から東証プライム上場企業で生成AIの社内実装責任者と金融事業の子会社立ち上げに従事。",
       image: "/images/placeholder-avatar.png",
       skills: ["機械学習", "NLP", "API統合"],
       experience: "6+ years",

@@ -51,7 +51,7 @@ export default function Home() {
         variant="home"
         title={`VISION TO REALITY,\n10x FASTER.`}
         subtitle="アイデアを10倍速でかたちに。"
-        description={`AIで加速する現代、ビジネスの勝敗は「時間」で決まる.\n私たちSOKUTSUKUは生成AIネイティブな開発チームです.\n従来の10倍の速度であなたのアイデアを市場に届け、勝利へと導きます.`}
+        description={`AIで加速する現代、ビジネスの勝敗は「時間」で決まる.\n私たちYAKUMOは生成AIネイティブな開発チームです.\n従来の10倍の速度であなたのアイデアを市場に届け、勝利へと導きます.`}
       />
 
       {/* SplitSection */}
